@@ -7,6 +7,7 @@ Player::Player()
 	m_rect.setPosition(m_position);
 	m_moving = false;
 
+	//Load in the textures, and assign them to each animation.
 	if (LoadTexture())
 	{
 		m_playerDownAnimation.setSpriteSheet(m_pDownTexture);
