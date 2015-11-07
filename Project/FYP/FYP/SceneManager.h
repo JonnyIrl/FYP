@@ -12,6 +12,10 @@ public:
 	byte m_currentScene;
 	void Draw(sf::RenderWindow& window);
 	void ChangeBackground(sf::Time time);
+	sf::RectangleShape GetPlayRectangle();
+	sf::RectangleShape GetOptionsRectangle();
+	sf::RectangleShape GetCreditsRectangle();
+	void AnimationToPlay(int animation);
 
 private:
 	sf::Texture m_mainMenuTexture;
@@ -22,6 +26,9 @@ private:
 	sf::Texture m_blankDoorTexture;
 	sf::RectangleShape m_sceneRect;
 	sf::RectangleShape m_playRect;
+	sf::RectangleShape m_optionsRect;
+	sf::RectangleShape m_creditsRect;
+	int m_animtionToPlay;
 
 
 	Animation m_playGameAnimation;

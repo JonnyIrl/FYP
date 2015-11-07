@@ -120,6 +120,11 @@ void Player::updateTex(sf::Texture texture)
 	m_rect.setTexture(&texture); //actually takes the address of your texture 
 }
 
+sf::RectangleShape Player::GetShape()
+{
+	return m_rect;
+}
+
 //Destructor
 Player::~Player()
 {

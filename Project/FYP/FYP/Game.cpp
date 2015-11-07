@@ -1,6 +1,7 @@
 #include "ExtraIncludes.h"
 #include "Player.h"
 #include "SceneManager.h"
+#include "CollisionManager.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -18,7 +19,11 @@ int main()
 
 	//Create the Player.
 	Player player = Player();
+	//Create the SceneManager
 	SceneManager sceneManager = SceneManager();
+	//Create the Collision Manager
+	CollisionManager collisionManager = CollisionManager();
+	
 
 
 	// Start game loop 
@@ -35,6 +40,22 @@ int main()
 				sceneManager.ChangeBackground(frameTime);
 				player.Update(frameTime);
 				player.Draw(window);
+
+
+				//Collision Checks
+				//Check the player off of the play game door
+				if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetPlayRectangle()))
+					sceneManager.AnimationToPlay(1);
+
+				//Check the player off the options door
+				else if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetOptionsRectangle()))
+					sceneManager.AnimationToPlay(2);
+
+				//Check the player off the Credits door
+				else if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetCreditsRectangle()))
+					sceneManager.AnimationToPlay(3);
+
+
 				// Finally, display rendered frame on screen 
 				window.display();
 			}
