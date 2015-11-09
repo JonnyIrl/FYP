@@ -10,9 +10,13 @@ SceneManager::SceneManager()
 		m_currentScene = MENU;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
-		m_sceneRect.setTexture(&m_mainMenuTexture);
-		cout << "SceneManager Constructor Finished" << endl;
+		m_sceneRect.setTexture(&m_mainMenuTexture);		
 		m_animtionToPlay = 0;
+
+		//Collision Rectangle to go to Play Game Menu scene.
+		m_collisionPlayRect.setSize(sf::Vector2f(80, 40));
+		m_collisionPlayRect.setPosition(sf::Vector2f(450, 250));
+
 
 		//Play Game Rectangle
 		m_playRect.setSize(sf::Vector2f(95, 80));
@@ -54,6 +58,8 @@ SceneManager::SceneManager()
 
 		m_doorAnimation = AnimatedSprite(sf::seconds(0.5f), false, false, true);
 		//m_doorAnimation.setAnimation(m_playGameAnimation);
+
+		cout << "SceneManager Constructor Finished" << endl;
 
 	}
 }
@@ -145,6 +151,7 @@ void SceneManager::Draw(sf::RenderWindow &window)
 	window.draw(m_optionsRect);
 	window.draw(m_creditsRect);
 	window.draw(m_doorAnimation);
+	//window.draw(m_collisionPlayRect);
 }
 
 //Getters and Setters
@@ -217,3 +224,9 @@ sf::RectangleShape SceneManager::GetOptionsRectangle()
 {
 	return m_optionsRect;
 }
+
+sf::RectangleShape SceneManager::GetCollisionPlayRect()
+{
+	return m_collisionPlayRect;
+}
+

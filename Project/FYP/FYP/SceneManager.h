@@ -15,6 +15,7 @@ public:
 	sf::RectangleShape GetPlayRectangle();
 	sf::RectangleShape GetOptionsRectangle();
 	sf::RectangleShape GetCreditsRectangle();
+	sf::RectangleShape GetCollisionPlayRect();
 	void AnimationToPlay(int animation);
 
 private:
@@ -28,6 +29,7 @@ private:
 	sf::RectangleShape m_playRect;
 	sf::RectangleShape m_optionsRect;
 	sf::RectangleShape m_creditsRect;
+	sf::RectangleShape m_collisionPlayRect;
 	int m_animtionToPlay;
 
 

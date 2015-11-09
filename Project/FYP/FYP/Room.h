@@ -8,6 +8,15 @@ public:
 	void CreateMiddleRooms();
 	void CreateRightRooms();
 	bool LoadTextures();
+	void Draw(sf::RenderWindow& window);
+	void LoadCollisionRectangles();
+	void CheckToGoToNextRoom(sf::RectangleShape playerRectangle);
+	enum CURRENTROOM : byte{ ROOM1, ROOM2, ROOM3, ROOM4, ROOM5, ROOM6, ROOM7, ROOM8, ROOM9 };
+	sf::RectangleShape GetBottomRectangle();
+	sf::RectangleShape GetTopRectangle();
+	sf::RectangleShape GetLeftRectangle();
+	sf::RectangleShape GetRightRectangle();
+	byte m_currentRoom;
 
 private:
 	//Each Room Rectangle
@@ -23,6 +32,12 @@ private:
 	sf::RectangleShape m_middleRightRect;
 	sf::RectangleShape m_bottomRightRect;
 
+	//Each door rectangle
+	sf::RectangleShape m_collisionBottomDoor;
+	sf::RectangleShape m_collisionTopDoor;
+	sf::RectangleShape m_collisionLeftDoor;
+	sf::RectangleShape m_collisionRightDoor;
+
 	//Each room texture
 	sf::Texture m_topLeftTexture;
 	sf::Texture m_topMiddleTexture;
@@ -35,4 +50,6 @@ private:
 	sf::Texture m_middleLeftTexture;
 	sf::Texture m_middleTexture;
 	sf::Texture m_middleRightTexture;
+
+	bool m_loadedRoom1, m_loadedRoom2, m_loadedRoom3, m_loadedRoom4, m_loadedRoom5, m_loadedRoom6, m_loadedRoom7, m_loadedRoom8, m_loadedRoom9;
 };

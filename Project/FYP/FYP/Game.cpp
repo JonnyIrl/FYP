@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "SceneManager.h"
 #include "CollisionManager.h"
+#include "Room.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -23,6 +24,8 @@ int main()
 	SceneManager sceneManager = SceneManager();
 	//Create the Collision Manager
 	CollisionManager collisionManager = CollisionManager();
+	//Create the Room
+	Room room = Room();
 	
 
 
@@ -54,6 +57,10 @@ int main()
 				//Check the player off the Credits door
 				else if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetCreditsRectangle()))
 					sceneManager.AnimationToPlay(3);
+
+				//Check if the player collides with the play game rectangle
+				if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetCollisionPlayRect()))
+					sceneManager.m_currentScene = sceneManager.PLAY_GAME;
 
 
 				// Finally, display rendered frame on screen 
@@ -89,8 +96,10 @@ int main()
 				window.clear();
 
 				//draw frame items
+				room.Draw(window);				
 				player.Update(frameTime);
-				player.Draw(window);
+				room.CheckToGoToNextRoom(player.GetShape());
+				player.Draw(window);				
 
 
 				// Finally, display rendered frame on screen 
