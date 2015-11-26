@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	m_position = sf::Vector2f(50, 100);
+	m_position = sf::Vector2f(500, 500);
 	m_rect.setSize(sf::Vector2f(46, 50));
 	m_rect.setPosition(m_position);
 	m_moving = false;
@@ -43,10 +43,10 @@ bool Player::LoadTexture()
 	if (!m_pUpTexture.loadFromFile("Assets/Player/pUp.png"))
 		return false;
 
-	if (!m_pRightTexture.loadFromFile("Assets/Player/pRight.png"))
+	if (!m_pRightTexture.loadFromFile("Assets/Player/pRightTest.png"))
 		return false;
 
-	if (!m_pLeftTexture.loadFromFile("Assets/Player/pLeft.png"))
+	if (!m_pLeftTexture.loadFromFile("Assets/Player/pLeftTest.png"))
 		return false;
 
 	else
@@ -56,56 +56,57 @@ bool Player::LoadTexture()
 void Player::Update(sf::Time time)
 {	
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		if (m_playerAnimation.getAnimation() != &m_playerUpAnimation)
 		{
 			m_playerAnimation.setAnimation(m_playerUpAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_velocity.y = -0.05f;
+		//m_velocity.y = -0.05f;
+		m_position.y -= 0.05f;
 	}
 	
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		if (m_playerAnimation.getAnimation() != &m_playerDownAnimation)
 		{
 			m_playerAnimation.setAnimation(m_playerDownAnimation);			
 		}
 		m_playerAnimation.update(time);
-		m_velocity.y = 0.05f;
+		m_position.y += 0.05f;
 	}
 
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		if (m_playerAnimation.getAnimation() != &m_playerLeftAnimation)
 		{
 			m_playerAnimation.setAnimation(m_playerLeftAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_velocity.x = -0.05f;
+		m_position.x -= 0.05f;
 	}
 
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		if (m_playerAnimation.getAnimation() != &m_playerRightAnimation)
 		{
 			m_playerAnimation.setAnimation(m_playerRightAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_velocity.x = 0.05f;
+		m_position.x += 0.05f;
 	}
 
 	
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		m_velocity.x = 0;
-		m_velocity.y = 0;
+		//m_velocity.x = 0;
+		//m_velocity.y = 0;
 	}
 
-	m_position += m_velocity;
+	//m_position += m_velocity;	
+	m_playerAnimation.setPosition(m_position);
 	m_rect.setPosition(m_position);
-	m_playerAnimation.setPosition(m_rect.getPosition());	
 
 }
 
@@ -123,6 +124,16 @@ void Player::updateTex(sf::Texture texture)
 sf::RectangleShape Player::GetShape()
 {
 	return m_rect;
+}
+
+sf::Vector2f Player::GetPosition()
+{
+	return m_position;
+}
+
+void Player::SetPosition(sf::Vector2f position)
+{
+	m_position = position;
 }
 
 //Destructor

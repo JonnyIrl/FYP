@@ -10,13 +10,20 @@ public:
 	bool LoadTextures();
 	void Draw(sf::RenderWindow& window);
 	void LoadCollisionRectangles();
-	void CheckToGoToNextRoom(sf::RectangleShape playerRectangle);
+	bool CheckToGoToNextRoom(sf::RectangleShape playerRectangle);
 	enum CURRENTROOM : byte{ ROOM1, ROOM2, ROOM3, ROOM4, ROOM5, ROOM6, ROOM7, ROOM8, ROOM9 };
 	sf::RectangleShape GetBottomRectangle();
 	sf::RectangleShape GetTopRectangle();
 	sf::RectangleShape GetLeftRectangle();
 	sf::RectangleShape GetRightRectangle();
 	byte m_currentRoom;
+
+
+	int checkDoor;
+	sf::Vector2f SetTopDoor();
+	sf::Vector2f SetBottomDoor();
+	sf::Vector2f SetLeftDoor();
+	sf::Vector2f SetRightDoor();
 
 private:
 	//Each Room Rectangle

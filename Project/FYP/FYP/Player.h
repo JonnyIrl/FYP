@@ -9,6 +9,8 @@ public:
 	~Player();
 	void Update(sf::Time time);
 	sf::RectangleShape GetShape();
+	sf::Vector2f GetPosition();
+	void SetPosition(sf::Vector2f position);
 	void updateTex(sf::Texture texture);
 	bool LoadTexture();
 	void Draw(sf::RenderWindow& window);

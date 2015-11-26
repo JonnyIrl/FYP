@@ -98,7 +98,17 @@ int main()
 				//draw frame items
 				room.Draw(window);				
 				player.Update(frameTime);
-				room.CheckToGoToNextRoom(player.GetShape());
+
+
+				//1 = top door i.e player walked through the bottom door.
+				if (room.CheckToGoToNextRoom(player.GetShape()))
+				{
+					if(room.checkDoor == 1) player.SetPosition(room.SetTopDoor());
+					if(room.checkDoor == 2) player.SetPosition(room.SetBottomDoor());
+					if(room.checkDoor == 3) player.SetPosition(room.SetLeftDoor());
+					if(room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
+				}
+
 				player.Draw(window);				
 
 
