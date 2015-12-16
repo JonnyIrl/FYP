@@ -55,11 +55,59 @@ SceneManager::SceneManager()
 		m_creditsAnimation.addFrame(sf::IntRect(0, 192, 95, 80));
 		m_creditsAnimation.addFrame(sf::IntRect(0, 288, 95, 80));
 
-
 		m_doorAnimation = AnimatedSprite(sf::seconds(0.5f), false, false, true);
 		//m_doorAnimation.setAnimation(m_playGameAnimation);
 
+		//Game Settings Window
+		m_gameSettingRect.setSize(sf::Vector2f(500, 500));
+		m_gameSettingRect.setTexture(&m_gameSettingTexture);
+		m_gameSettingRect.setPosition(sf::Vector2f(400, 100));
+
+		currentMaster = 4;
+		currentSfx = 4;
+
+		//Load all the volume rectangles etc.
+		sfxVolume1.setSize(sf::Vector2f(25, 40));
+		sfxVolume1.setTexture(&volumeBarTexture);
+		sfxVolume2 = sfxVolume1;
+		sfxVolume3 = sfxVolume1;
+		sfxVolume4 = sfxVolume1;
+
+		masterVolume1.setSize(sf::Vector2f(25, 40));
+		masterVolume1.setTexture(&volumeBarTexture);
+		masterVolume2 = masterVolume1;
+		masterVolume3 = masterVolume1;
+		masterVolume4 = masterVolume1;
+
+		sfxVolume1.setPosition(sf::Vector2f(605, 368));
+		sfxVolume2.setPosition(sf::Vector2f(635, 368));
+		sfxVolume3.setPosition(sf::Vector2f(665, 368));
+		sfxVolume4.setPosition(sf::Vector2f(695, 368));
+
+		masterVolume1.setPosition(sf::Vector2f(605, 297));
+		masterVolume2.setPosition(sf::Vector2f(635, 297));
+		masterVolume3.setPosition(sf::Vector2f(665, 297));
+		masterVolume4.setPosition(sf::Vector2f(695, 297));
+
+		confirmButton.setSize(sf::Vector2f(120, 40));
+		confirmButton.setPosition(sf::Vector2f(590, 425));
+
+		//Load plus and minus buttons
+		sfxPlusRect.setSize(sf::Vector2f(40, 40));
+		sfxPlusRect.setPosition(sf::Vector2f(735, 368));
+
+		sfxMinusRect.setSize(sf::Vector2f(40, 40));
+		sfxMinusRect.setPosition(sf::Vector2f(560, 368));
+
+		masterPlusRect.setSize(sf::Vector2f(40, 40));
+		masterPlusRect.setPosition(sf::Vector2f(735, 297));
+
+		masterMinusRect.setSize(sf::Vector2f(40, 40));
+		masterMinusRect.setPosition(sf::Vector2f(560, 297));
+
+
 		cout << "SceneManager Constructor Finished" << endl;
+
 
 	}
 }
@@ -92,11 +140,14 @@ void SceneManager::ChangeBackground(sf::Time time)
 		{
 			if (m_sceneRect.getTexture() != &m_optionsTexture)
 				m_sceneRect.setTexture(&m_optionsTexture);
+
+			
 		}
 		break;
 
 		case PLAY_GAME:
 		{
+
 		}
 		break;
 	}
@@ -140,19 +191,106 @@ bool SceneManager::LoadTexture()
 		return false;
 	}
 
+	//Game Settings Texture
+	if (!m_gameSettingTexture.loadFromFile("Assets/Menu/gameSettings.png"))
+	{
+		std::cout << "Couldn't load game settings texture" << std::endl;
+		return false;
+	}
+
+	//Audio Volume Bars
+	if (!volumeBarTexture.loadFromFile("Assets/Menu/volumeBar.png"))
+	{
+		std::cout << "Couldn't load volume bar texture" << std::endl;
+		return false;
+	}
+
 	else
 		return true;
 }
 
 void SceneManager::Draw(sf::RenderWindow &window)
 {
-	window.draw(m_sceneRect);
-	window.draw(m_playRect);
-	window.draw(m_optionsRect);
-	window.draw(m_creditsRect);
-	window.draw(m_doorAnimation);
-	//window.draw(m_collisionPlayRect);
+	switch (m_currentScene)
+	{
+	case MENU:
+	{
+		window.draw(m_sceneRect);
+		window.draw(m_playRect);
+		window.draw(m_optionsRect);
+		window.draw(m_creditsRect);
+		window.draw(m_doorAnimation);
+	}
+	break;
+
+	case OPTIONS:
+	{
+		window.draw(m_sceneRect);
+		window.draw(m_gameSettingRect);
+
+		if (currentMaster == 4)
+		{
+			window.draw(masterVolume1);
+			window.draw(masterVolume2);
+			window.draw(masterVolume3);
+			window.draw(masterVolume4);
+		}
+
+		if (currentMaster == 3)
+		{
+			window.draw(masterVolume1);
+			window.draw(masterVolume2);
+			window.draw(masterVolume3);
+		}
+
+		if (currentMaster == 2)
+		{
+			window.draw(masterVolume1);
+			window.draw(masterVolume2);
+		}
+
+		if (currentMaster == 1)
+		{
+			window.draw(masterVolume1);
+		}
+
+		if (currentSfx == 4)
+		{
+			window.draw(sfxVolume1);
+			window.draw(sfxVolume2);
+			window.draw(sfxVolume3);
+			window.draw(sfxVolume4);
+		}
+
+		if (currentSfx == 3)
+		{
+			window.draw(sfxVolume1);
+			window.draw(sfxVolume2);
+			window.draw(sfxVolume3);
+		}
+
+		if (currentSfx == 2)
+		{
+			window.draw(sfxVolume1);
+			window.draw(sfxVolume2);
+		}
+
+		if (currentSfx == 1)
+		{
+			window.draw(sfxVolume1);
+		}
+	}
+	break;
+
+	case PLAY_GAME:
+	{
+	}
+	break;
+	}
+	
 }
+
+
 
 //Getters and Setters
 void SceneManager::AnimationToPlay(int animation)
@@ -224,9 +362,28 @@ sf::RectangleShape SceneManager::GetOptionsRectangle()
 {
 	return m_optionsRect;
 }
-
 sf::RectangleShape SceneManager::GetCollisionPlayRect()
 {
 	return m_collisionPlayRect;
+}
+sf::RectangleShape SceneManager::GetSFXPlusRect()
+{
+	return sfxPlusRect;
+}
+sf::RectangleShape SceneManager::GetSFXMinusRect()
+{
+	return sfxMinusRect;
+}
+sf::RectangleShape SceneManager::GetMasterPlusRect()
+{
+	return masterPlusRect;
+}
+sf::RectangleShape SceneManager::GetMasterMinusRect()
+{
+	return masterMinusRect;
+}
+sf::RectangleShape SceneManager::GetConfirmRectangle()
+{
+	return confirmButton;
 }
 

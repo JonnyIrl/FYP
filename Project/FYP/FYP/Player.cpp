@@ -63,7 +63,6 @@ void Player::Update(sf::Time time)
 			m_playerAnimation.setAnimation(m_playerUpAnimation);
 		}
 		m_playerAnimation.update(time);
-		//m_velocity.y = -0.05f;
 		m_position.y -= 0.05f;
 	}
 	

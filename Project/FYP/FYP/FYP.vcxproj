@@ -84,23 +84,29 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="WeaponManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.hpp" />
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ExtraIncludes.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="WeaponManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
