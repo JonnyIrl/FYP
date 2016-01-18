@@ -7,7 +7,7 @@ SceneManager::SceneManager()
 {
 	if (LoadTexture())
 	{
-		m_currentScene = MENU;
+		m_currentScene = PLAY_GAME;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
 		m_sceneRect.setTexture(&m_mainMenuTexture);		

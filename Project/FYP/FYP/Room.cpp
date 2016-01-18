@@ -12,6 +12,7 @@ Room::Room()
 		m_currentRoom = ROOM1;
 		checkDoor = 0;
 		m_loadedRoom1 = m_loadedRoom2 = m_loadedRoom3 = m_loadedRoom4 = m_loadedRoom5 = m_loadedRoom6 = m_loadedRoom7 = m_loadedRoom8 = m_loadedRoom9 = false;
+		InitCollisionRectangles();
 		cout << "Finished Room Constructor" << endl;
 	}
 }
@@ -454,6 +455,39 @@ bool Room::LoadTextures()
 
 	return true;
 }
+bool Room::CheckBoundingCollisions(sf::RectangleShape playerRect)
+{
+	if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+	{
+		std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
+		checkWall = 2;
+		return true;
+	}
+
+	if (m_fullTopRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+	{
+		std::cout << "PLAYER HIT TOP WALL" << std::endl;
+		checkWall = 1;
+		return true;
+	}
+
+	if (m_fullLeftRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+	{
+		std::cout << "PLAYER HIT LEFT WALL" << std::endl;
+		checkWall = 3;
+		return true;
+	}
+
+	if (m_fullRightRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+	{
+		std::cout << "PLAYER HIT RIGHT WALL" << std::endl;
+		checkWall = 4;
+		return true;
+	}
+
+
+	return false;
+}
 
 void Room::CreateLeftRooms()
 {
@@ -511,6 +545,11 @@ void Room::Draw(sf::RenderWindow &window)
 			window.draw(m_topLeftRect);
 			/*window.draw(m_collisionBottomDoor);
 			window.draw(m_collisionRightDoor);*/
+
+			window.draw(m_fullBottomRectangle);
+			window.draw(m_fullLeftRectangle);
+			window.draw(m_fullRightRectangle);
+			window.draw(m_fullTopRectangle);
 		}
 		break;
 
@@ -623,6 +662,39 @@ void Room::Draw(sf::RenderWindow &window)
 	}
 }
 
+
+void Room::InitCollisionRectangles()
+{
+	//Full Sized Collision Rectangles
+	m_fullTopRectangle.setSize(sf::Vector2f(1280, 50));
+	m_fullLeftRectangle.setSize(sf::Vector2f(50, 720));
+	m_fullRightRectangle.setSize(sf::Vector2f(50, 720));
+	m_fullBottomRectangle.setSize(sf::Vector2f(1280, 50));
+
+	m_fullTopRectangle.setPosition(sf::Vector2f(0, 16));
+	m_fullLeftRectangle.setPosition(sf::Vector2f(16, 0));
+	m_fullRightRectangle.setPosition(sf::Vector2f(1216, 0));
+	m_fullBottomRectangle.setPosition(sf::Vector2f(0, 655));
+	//m_halfTopRect1.setSize(sf::Vector2f(1280, 50));
+	//m_halfTopRect2
+	//m_halfLeftRect1
+	//m_halfLeftRect2
+	//m_halfBottomRect1
+	//m_halfBottomRect2
+	//m_halfRightRect1
+	//m_halfRightRect2
+
+	std::cout << "Initialised Room Collision Rectangles" << std::endl;
+}
+
+
+
+
+
+
+
+
+
 sf::Vector2f Room::SetTopDoor()
 {
 	return sf::Vector2f(620, 50);
@@ -638,6 +710,23 @@ sf::Vector2f Room::SetLeftDoor()
 sf::Vector2f Room::SetRightDoor()
 {
 	return sf::Vector2f(1180, 330);
+}
+
+sf::Vector2f Room::SetLeftWall()
+{
+	return sf::Vector2f(66, 0);
+}
+sf::Vector2f Room::SetRightWall()
+{
+	return sf::Vector2f(1170, 0);
+}
+sf::Vector2f Room::SetTopWall()
+{
+	return sf::Vector2f(0, 66);
+}
+sf::Vector2f Room::SetBottomWall()
+{
+	return sf::Vector2f(0, 605);
 }
 
 sf::RectangleShape Room::GetBottomRectangle()

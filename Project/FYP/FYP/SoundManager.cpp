@@ -9,6 +9,7 @@ SoundManager::SoundManager()
 		mainMenuSound.setBuffer(mainMenuBuffer);
 		mainMenuSoundPlaying = false;
 		CheckAudio(savedMasterVolume);
+		newMasterVolume = 0;
 		//CheckAudio(savedCurrentSFXVolume + 4);
 
 	}
@@ -142,6 +143,14 @@ void SoundManager::LoadTextFile(std::string name)
 			count++;
 		}
 	}
+}
+
+void SoundManager::WriteToTextFile()
+{
+	std::ofstream myfile;
+	myfile.open("Assets/Settings/settings.txt");
+	myfile << newMasterVolume << "\n" << savedCurrentSFXVolume;
+	myfile.close();
 }
 
 std::vector<std::string> SoundManager::LoadFromTextFile(std::string name)

@@ -15,8 +15,10 @@ public:
 	void CheckAudio(int number);
 	static std::vector<std::string> LoadFromTextFile(std::string name);
 	void LoadTextFile(std::string name);
+	void WriteToTextFile();
 	float MasterVolume();
 	float SFXVolume();
+	float newMasterVolume;
 
 private:
 	sf::SoundBuffer mainMenuBuffer;

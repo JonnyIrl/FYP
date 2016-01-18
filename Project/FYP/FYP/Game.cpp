@@ -122,6 +122,7 @@ int main()
 						if (sceneManager.currentMaster != 4 && sceneManager.currentMaster < 4)
 						{
 							sceneManager.currentMaster++;
+							soundManager.newMasterVolume = sceneManager.currentMaster;
 							soundManager.CheckAudio(sceneManager.currentMaster);
 						}
 						std::cout << "CLICKED ON THE MASTER PLUS" << std::endl;
@@ -132,6 +133,7 @@ int main()
 						if (sceneManager.currentMaster != 1 && sceneManager.currentMaster > 0)
 						{
 							sceneManager.currentMaster--;
+							soundManager.newMasterVolume = sceneManager.currentMaster;
 							soundManager.CheckAudio(sceneManager.currentMaster);
 						}
 						std::cout << "CLICKED ON THE MASTER MINUS" << std::endl;
@@ -139,8 +141,14 @@ int main()
 
 					if (collisionManager.CheckRectangleCollision(sceneManager.GetConfirmRectangle(), mouseRect))
 					{
-						std::cout << "CLICKED ON THE MASTER MINUS" << std::endl;
-						player.SetPosition(sf::Vector2f(640, 330));
+						std::cout << "CLICKED ON THE CONFIRMED" << std::endl;
+						soundManager.WriteToTextFile();
+						player.SetPosition(sf::Vector2f(640, 330));		
+						if (soundManager.newMasterVolume != 1 || soundManager.newMasterVolume != 2 || soundManager.newMasterVolume != 3 || soundManager.newMasterVolume != 4)
+						{
+							soundManager.newMasterVolume = soundManager.MasterVolume();
+						}
+						soundManager.LoadTextFile("Assets/Settings/settings.txt");
 						sceneManager.m_currentScene = sceneManager.MENU;
 					}
 					
@@ -174,7 +182,6 @@ int main()
 				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 				{
 					// left click...
-
 					sf::Vector2i mousepos = sf::Mouse::getPosition(window);
 					sf::Vector2f converted = window.mapPixelToCoords(mousepos);
 					b = new Bullet(sf::Vector2f(player.GetPosition().x + 25, player.GetPosition().y + 25), converted);
@@ -220,9 +227,18 @@ int main()
 					if(room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
 				}
 
+				if (room.CheckBoundingCollisions(player.GetShape()))
+				{
+					//1 = top || 2 = bottom || 3 = left || 4 = right
+					if (room.checkWall == 1) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetTopWall().y));
+					if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
+					if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
+					if(room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
+				}
+
+
+
 				player.Draw(window);				
-
-
 				// Finally, display rendered frame on screen 
 				window.display();
 			}
