@@ -2,6 +2,9 @@
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
 #include <SFML/Audio.hpp>
+#include <list>
+
+using namespace std;
 
 class SceneManager
 {
@@ -9,7 +12,7 @@ public:
 	SceneManager();
 	byte GetCurrentScene();
 	bool LoadTexture();
-	enum GAMESTATE : byte{ MENU, PLAY_GAME, GAME_OVER, OPTIONS, CREDITS, PLAYEROPTIONS };
+	enum GAMESTATE : byte{ MENU, PLAY_GAME, GAME_OVER, OPTIONS, CREDITS, PLAYEROPTIONS, LOBBY };
 	byte m_currentScene;
 	void Draw(sf::RenderWindow& window);
 	void ChangeBackground(sf::Time time);
@@ -22,6 +25,10 @@ public:
 	sf::RectangleShape GetSFXMinusRect();
 	sf::RectangleShape GetMasterMinusRect();
 	sf::RectangleShape GetConfirmRectangle();
+	sf::RectangleShape GetSendRectangle();
+	void SetChatMessage(string message);
+	void ResetText();
+	void UpdateChatWindow();
 	void AnimationToPlay(int animation);
 	int currentSfx;
 	int currentMaster;
@@ -34,6 +41,7 @@ private:
 	sf::Texture m_doorTexture;
 	sf::Texture m_blankDoorTexture;
 	sf::Texture m_gameSettingTexture;
+	sf::Texture m_chatLobbyTexture;
 
 	sf::RectangleShape m_sceneRect;
 	sf::RectangleShape m_playRect;
@@ -41,7 +49,9 @@ private:
 	sf::RectangleShape m_creditsRect;
 	sf::RectangleShape m_collisionPlayRect;
 	sf::RectangleShape m_gameSettingRect;
-	int m_animtionToPlay;
+	sf::RectangleShape m_chatLobbyRect;
+	sf::RectangleShape m_sendRect;
+
 
 	//Volume Indicators
 	//Slight hack for now until I get some better code to get it working more efficiently.
@@ -65,4 +75,14 @@ private:
 	Animation m_optionsAnimation;
 	Animation m_creditsAnimation;
 	AnimatedSprite m_doorAnimation;
+
+	//Pre Game Lobby Variables
+	sf::Font m_font;
+	sf::Text m_text;
+	string m_currentMessage;
+	int messagesSent;
+	list<string> historyMessages;
+
+
+	int m_animtionToPlay;
 };

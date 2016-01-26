@@ -7,7 +7,7 @@ SceneManager::SceneManager()
 {
 	if (LoadTexture())
 	{
-		m_currentScene = PLAY_GAME;
+		m_currentScene = MENU;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
 		m_sceneRect.setTexture(&m_mainMenuTexture);		
@@ -105,6 +105,21 @@ SceneManager::SceneManager()
 		masterMinusRect.setSize(sf::Vector2f(40, 40));
 		masterMinusRect.setPosition(sf::Vector2f(560, 297));
 
+		//Pre Game Lobby Main Texture + Send Rectangle
+		m_chatLobbyRect.setTexture(&m_chatLobbyTexture);
+		m_chatLobbyRect.setPosition(sf::Vector2f(0, 0));
+		m_chatLobbyRect.setSize(sf::Vector2f(1280, 720));
+
+		m_sendRect.setPosition(925, 602);
+		m_sendRect.setSize(sf::Vector2f(260, 35));
+
+		m_text.setPosition(sf::Vector2f(100, 600));
+		m_text.setFont(m_font);
+		m_text.setColor(sf::Color::White);
+
+		m_currentMessage = "";
+		messagesSent = 0;
+
 
 		cout << "SceneManager Constructor Finished" << endl;
 
@@ -148,6 +163,13 @@ void SceneManager::ChangeBackground(sf::Time time)
 		case PLAY_GAME:
 		{
 
+		}
+		break;
+
+		case LOBBY:
+		{
+			if (m_chatLobbyRect.getTexture() != &m_chatLobbyTexture)
+				m_sceneRect.setTexture(&m_chatLobbyTexture);
 		}
 		break;
 	}
@@ -204,6 +226,19 @@ bool SceneManager::LoadTexture()
 		std::cout << "Couldn't load volume bar texture" << std::endl;
 		return false;
 	}
+
+	if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/chatLobby.png"))
+	{
+		std::cout << "Couldn't load chat lobby png" << std::endl;
+		return false;
+	}
+
+	if (!m_font.loadFromFile("Assets/Pregame/font.ttf"))
+	{
+		std::cout << "Couldn't load FONT" << std::endl;
+		return false;
+	}
+
 
 	else
 		return true;
@@ -286,6 +321,15 @@ void SceneManager::Draw(sf::RenderWindow &window)
 	{
 	}
 	break;
+
+	case LOBBY:
+	{
+		window.draw(m_chatLobbyRect);
+		window.draw(m_text);
+		//Draw Chat String
+	}
+	break;
+
 	}
 	
 }
@@ -346,10 +390,12 @@ void SceneManager::AnimationToPlay(int animation)
 			m_doorAnimation.play();
 	}
 }
+
 byte SceneManager::GetCurrentScene()
 {
 	return m_currentScene;
 }
+
 sf::RectangleShape SceneManager::GetCreditsRectangle()
 {
 	return m_creditsRect;
@@ -385,5 +431,21 @@ sf::RectangleShape SceneManager::GetMasterMinusRect()
 sf::RectangleShape SceneManager::GetConfirmRectangle()
 {
 	return confirmButton;
+}
+sf::RectangleShape SceneManager::GetSendRectangle()
+{
+	return m_sendRect;
+}
+void SceneManager::SetChatMessage(string message)
+{
+	m_currentMessage += message;
+	m_text.setString(m_currentMessage);
+}
+void SceneManager::ResetText()
+{
+	historyMessages.push_back(m_currentMessage);
+	m_currentMessage = "";
+	SetChatMessage("");
+	messagesSent++;
 }
 

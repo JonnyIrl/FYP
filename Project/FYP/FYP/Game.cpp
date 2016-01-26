@@ -94,7 +94,7 @@ int main()
 					sf::RectangleShape mouseRect;
 					mouseRect.setSize(sf::Vector2f(1, 1));
 					mouseRect.setPosition(converted);
-					
+
 
 
 					//Check Collision with the SOUND EFFECTS PLUS RECTANGLE
@@ -103,7 +103,7 @@ int main()
 						if (sceneManager.currentSfx != 4 && sceneManager.currentSfx < 4)
 						{
 							sceneManager.currentSfx++;
-						
+
 						}
 						std::cout << "CLICKED ON THE SFX PLUS" << std::endl;
 					}
@@ -143,7 +143,7 @@ int main()
 					{
 						std::cout << "CLICKED ON THE CONFIRMED" << std::endl;
 						soundManager.WriteToTextFile();
-						player.SetPosition(sf::Vector2f(640, 330));		
+						player.SetPosition(sf::Vector2f(640, 330));
 						if (soundManager.newMasterVolume != 1 || soundManager.newMasterVolume != 2 || soundManager.newMasterVolume != 3 || soundManager.newMasterVolume != 4)
 						{
 							soundManager.newMasterVolume = soundManager.MasterVolume();
@@ -151,9 +151,9 @@ int main()
 						soundManager.LoadTextFile("Assets/Settings/settings.txt");
 						sceneManager.m_currentScene = sceneManager.MENU;
 					}
-					
 
-				}				
+
+				}
 			}
 			//prepare frame
 			window.clear();
@@ -190,60 +190,123 @@ int main()
 
 
 
-				}
+			}
 
-				//prepare frame
-				window.clear();
+			//prepare frame
+			window.clear();
 
-				//draw frame items
-				room.Draw(window);				
-				player.Update(frameTime);
-				hud.Draw(window);
-				
+			//draw frame items
+			room.Draw(window);
+			player.Update(frameTime);
+			hud.Draw(window);
 
-				for each (Bullet* bullet in bullets)
+
+			for each (Bullet* bullet in bullets)
+			{
+				bullet->Update();
+				bullet->Draw(window);
+
+				if (!bullet->Alive())
 				{
-					bullet->Update();
-					bullet->Draw(window);
+					bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
+					delete bullet;
+					std::cout << "Bullet Deleted" << std::endl;
+					break;
 
-					if (!bullet->Alive())
-					{	
-						bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
-						delete bullet;
-						std::cout << "Bullet Deleted" << std::endl;
-						break;
-											
+				}
+			}
+
+
+			//1 = top door i.e player walked through the bottom door.
+			//Used to check which room to go into next.
+			if (room.CheckToGoToNextRoom(player.GetShape()))
+			{
+				if (room.checkDoor == 1) player.SetPosition(room.SetTopDoor());
+				if (room.checkDoor == 2) player.SetPosition(room.SetBottomDoor());
+				if (room.checkDoor == 3) player.SetPosition(room.SetLeftDoor());
+				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
+			}
+
+			if (room.CheckBoundingCollisions(player.GetShape()))
+			{
+				//1 = top || 2 = bottom || 3 = left || 4 = right
+				if (room.checkWall == 1) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetTopWall().y));
+				if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
+				if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
+				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
+			}
+
+
+
+			player.Draw(window);
+			// Finally, display rendered frame on screen 
+			window.display();
+		}
+
+		break;
+
+		case sceneManager.LOBBY:
+		{
+			frameTime = frameClock.restart();
+			// Process events 
+			sf::Event Event;
+			while (window.pollEvent(Event))
+			{
+				//Detect when text is entered
+				if (Event.type == sf::Event::TextEntered)
+				{
+					if (Event.text.unicode < 128)
+					{
+						string charEntered;
+						charEntered = static_cast<char>(Event.text.unicode);
+						sceneManager.SetChatMessage(charEntered);
 					}
 				}
 
+				// Close window : exit 
+				if (Event.type == sf::Event::Closed)
+					window.close();
 
-				//1 = top door i.e player walked through the bottom door.
-				//Used to check which room to go into next.
-				if (room.CheckToGoToNextRoom(player.GetShape()))
+				// Escape key : exit 
+				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+					window.close();
+
+				//If the player presses enter send the message
+				if (Event.key.code == sf::Keyboard::Return)
 				{
-					if(room.checkDoor == 1) player.SetPosition(room.SetTopDoor());
-					if(room.checkDoor == 2) player.SetPosition(room.SetBottomDoor());
-					if(room.checkDoor == 3) player.SetPosition(room.SetLeftDoor());
-					if(room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
+					sceneManager.ResetText();
 				}
 
-				if (room.CheckBoundingCollisions(player.GetShape()))
+				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 				{
-					//1 = top || 2 = bottom || 3 = left || 4 = right
-					if (room.checkWall == 1) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetTopWall().y));
-					if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
-					if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
-					if(room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
+					// left click...
+					sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+					sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+					sf::RectangleShape mouseRect;
+					mouseRect.setSize(sf::Vector2f(1, 1));
+					mouseRect.setPosition(converted);
+
+					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSendRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW
+						sceneManager.ResetText();
+					}
+
 				}
 
 
-
-				player.Draw(window);				
-				// Finally, display rendered frame on screen 
-				window.display();
 			}
-			
-			break;
+
+			//prepare frame
+			window.clear();
+
+			sceneManager.Draw(window);
+
+			// Finally, display rendered frame on screen 
+			window.display();
+		}
+
+		break;
 		}
 
 
