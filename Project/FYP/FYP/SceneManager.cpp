@@ -477,29 +477,43 @@ void SceneManager::ResetText()
 //Network code
 void SceneManager::ConnectToServer()
 {
-
+	if (!connected)
+	{
+		cout << "Not Connected.. Attempting to connect.." << endl;
+		sf::IpAddress ip = "127.0.0.1";
+		string name = "Jonny";
+		sf::Packet packet;
+		packet << INITIAL_CONNECT_DATA << ip.toString() << name;
+		sf::Socket::Status status = socket.send(packet, recipient, port);
+		if (status == sf::Socket::Done)
+		{
+			cout << "Connected successfully" << endl;
+			connected = true;
+		}
+	}
 }
 void SceneManager::SendPacket()
 {
+	string name = "Jonny";
 	cout << "Sending Packet..." << endl;
 	string message = m_currentMessage;
 	sf::Packet packet;
-	packet << GENERAL_MSG << message;
+	packet << GENERAL_MSG << message << name;
 
-	sf::Socket::Status status = socket.send(packet,recipient, port);
+	sf::Socket::Status status = socket.send(packet, recipient, port);
 	switch (status)
 	{
 	case sf::Socket::Done:
 		PacketType type;
 		packet >> type;
-		if (type == INITIAL_NAME_DATA)
+		if (type == INITIAL_CONNECT_DATA)
 		{
 
 		}
 		else if (type == GENERAL_MSG)
 		{
 			std::string msg;
-			packet >> msg;
+			packet >> msg >> name;
 			std::cout << "Jonny: " << msg << "\n";
 			packet.clear();
 		}
