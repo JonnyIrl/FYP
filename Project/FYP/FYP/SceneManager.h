@@ -2,6 +2,7 @@
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
 #include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 #include <list>
 
 using namespace std;
@@ -26,12 +27,18 @@ public:
 	sf::RectangleShape GetMasterMinusRect();
 	sf::RectangleShape GetConfirmRectangle();
 	sf::RectangleShape GetSendRectangle();
+	sf::RectangleShape GetConnectRectangle();
+	string GetTypedMessage();
 	void SetChatMessage(string message);
 	void ResetText();
 	void UpdateChatWindow();
 	void AnimationToPlay(int animation);
+	void ConnectToServer();
+	void SendPacket();
 	int currentSfx;
 	int currentMaster;
+	int messageLength;
+
 
 private:
 	sf::Texture m_mainMenuTexture;
@@ -51,6 +58,7 @@ private:
 	sf::RectangleShape m_gameSettingRect;
 	sf::RectangleShape m_chatLobbyRect;
 	sf::RectangleShape m_sendRect;
+	sf::RectangleShape m_connectRect;
 
 
 	//Volume Indicators
@@ -82,6 +90,10 @@ private:
 	string m_currentMessage;
 	int messagesSent;
 	list<string> historyMessages;
+	sf::IpAddress recipient;
+	sf::UdpSocket socket;
+	unsigned short port;
+	bool connected;
 
 
 	int m_animtionToPlay;

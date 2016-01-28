@@ -103,6 +103,7 @@
     <ClInclude Include="ExtraIncludes.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="PacketType.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />

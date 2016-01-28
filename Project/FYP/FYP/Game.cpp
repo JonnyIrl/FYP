@@ -257,9 +257,9 @@ int main()
 				{
 					if (Event.text.unicode < 128)
 					{
-						string charEntered;
-						charEntered = static_cast<char>(Event.text.unicode);
-						sceneManager.SetChatMessage(charEntered);
+							string charEntered;
+							charEntered = static_cast<char>(Event.text.unicode);
+							sceneManager.SetChatMessage(charEntered);				
 					}
 				}
 
@@ -289,12 +289,16 @@ int main()
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSendRectangle()))
 					{
 						//SEND MESSAGE INTO CHAT WINDOW
-						sceneManager.ResetText();
+						sceneManager.SendPacket();
+						sceneManager.ResetText();						
 					}
 
+					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetConnectRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW
+						sceneManager.ConnectToServer();
+					}
 				}
-
-
 			}
 
 			//prepare frame

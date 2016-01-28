@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "PacketType.h"
 
 using namespace std;
 
@@ -7,7 +8,7 @@ SceneManager::SceneManager()
 {
 	if (LoadTexture())
 	{
-		m_currentScene = MENU;
+		m_currentScene = LOBBY;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
 		m_sceneRect.setTexture(&m_mainMenuTexture);		
@@ -113,16 +114,22 @@ SceneManager::SceneManager()
 		m_sendRect.setPosition(925, 602);
 		m_sendRect.setSize(sf::Vector2f(260, 35));
 
+		m_connectRect.setPosition(925, 545);
+		m_connectRect.setSize(sf::Vector2f(260, 35));
+
 		m_text.setPosition(sf::Vector2f(100, 600));
 		m_text.setFont(m_font);
 		m_text.setColor(sf::Color::White);
 
 		m_currentMessage = "";
 		messagesSent = 0;
-
+		connected = false;
 
 		cout << "SceneManager Constructor Finished" << endl;
 
+		recipient = "127.0.0.1";
+		port = 5300;
+		messageLength = 0;
 
 	}
 }
@@ -227,11 +234,16 @@ bool SceneManager::LoadTexture()
 		return false;
 	}
 
-	if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/chatLobby.png"))
+	if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/connect.png"))
 	{
 		std::cout << "Couldn't load chat lobby png" << std::endl;
 		return false;
 	}
+	/*if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/chatLobby.png"))
+	{
+		std::cout << "Couldn't load chat lobby png" << std::endl;
+		return false;
+	}*/
 
 	if (!m_font.loadFromFile("Assets/Pregame/font.ttf"))
 	{
@@ -325,6 +337,7 @@ void SceneManager::Draw(sf::RenderWindow &window)
 	case LOBBY:
 	{
 		window.draw(m_chatLobbyRect);
+		window.draw(m_connectRect);
 		window.draw(m_text);
 		//Draw Chat String
 	}
@@ -436,16 +449,70 @@ sf::RectangleShape SceneManager::GetSendRectangle()
 {
 	return m_sendRect;
 }
+sf::RectangleShape SceneManager::GetConnectRectangle()
+{
+	return m_connectRect;
+}
+string SceneManager::GetTypedMessage()
+{
+	return m_currentMessage;
+}
 void SceneManager::SetChatMessage(string message)
 {
+	messageLength++;
 	m_currentMessage += message;
 	m_text.setString(m_currentMessage);
+	cout << "CHAT MESSAGE = " << m_currentMessage << endl;
 }
 void SceneManager::ResetText()
 {
+	messageLength = 0;
 	historyMessages.push_back(m_currentMessage);
 	m_currentMessage = "";
 	SetChatMessage("");
 	messagesSent++;
+}
+
+
+//Network code
+void SceneManager::ConnectToServer()
+{
+
+}
+void SceneManager::SendPacket()
+{
+	cout << "Sending Packet..." << endl;
+	string message = m_currentMessage;
+	sf::Packet packet;
+	packet << GENERAL_MSG << message;
+
+	sf::Socket::Status status = socket.send(packet,recipient, port);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		PacketType type;
+		packet >> type;
+		if (type == INITIAL_NAME_DATA)
+		{
+
+		}
+		else if (type == GENERAL_MSG)
+		{
+			std::string msg;
+			packet >> msg;
+			std::cout << "Jonny: " << msg << "\n";
+			packet.clear();
+		}
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+	//packet.clear();
+
 }
 
