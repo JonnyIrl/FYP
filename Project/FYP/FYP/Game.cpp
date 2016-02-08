@@ -6,6 +6,7 @@
 #include "HUD.h"
 #include "Bullet.h"
 #include "SoundManager.h"
+#include "Netcode.h"
 
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
@@ -33,6 +34,10 @@ int main()
 	Bullet* b;
 	std::vector<Bullet *> bullets;
 	SoundManager soundManager = SoundManager();
+
+	//Network 
+	Netcode netcode = Netcode();
+	netcode.PLAYERNAME = player.GetName();
 
 	// Start game loop 
 	while (window.isOpen())
@@ -255,11 +260,21 @@ int main()
 				//Detect when text is entered
 				if (Event.type == sf::Event::TextEntered)
 				{
-					if (Event.text.unicode < 128)
+					if (Event.text.unicode != 13)
 					{
+						if (Event.text.unicode < 128)
+						{
 							string charEntered;
 							charEntered = static_cast<char>(Event.text.unicode);
-							sceneManager.SetChatMessage(charEntered);				
+							netcode.SetChatMessage(charEntered);
+						}
+					}
+
+					//If the player presses Enter key
+					else if (Event.text.unicode == 13)
+					{
+						netcode.SendPacket();
+						netcode.ResetText();
 					}
 				}
 
@@ -271,11 +286,6 @@ int main()
 				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 					window.close();
 
-				//If the player presses enter send the message
-				if (Event.key.code == sf::Keyboard::Return)
-				{
-					sceneManager.ResetText();
-				}
 
 				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 				{
@@ -289,14 +299,14 @@ int main()
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSendRectangle()))
 					{
 						//SEND MESSAGE INTO CHAT WINDOW
-						sceneManager.SendPacket();
-						sceneManager.ResetText();						
+						netcode.SendPacket();
+						netcode.ResetText();
 					}
 
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetConnectRectangle()))
 					{
 						//SEND MESSAGE INTO CHAT WINDOW
-						sceneManager.ConnectToServer();
+						netcode.ConnectToServer();
 					}
 				}
 			}
@@ -304,7 +314,9 @@ int main()
 			//prepare frame
 			window.clear();
 
+			netcode.Update();
 			sceneManager.Draw(window);
+			netcode.Draw(window);
 
 			// Finally, display rendered frame on screen 
 			window.display();

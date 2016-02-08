@@ -28,16 +28,9 @@ public:
 	sf::RectangleShape GetConfirmRectangle();
 	sf::RectangleShape GetSendRectangle();
 	sf::RectangleShape GetConnectRectangle();
-	string GetTypedMessage();
-	void SetChatMessage(string message);
-	void ResetText();
-	void UpdateChatWindow();
 	void AnimationToPlay(int animation);
-	void ConnectToServer();
-	void SendPacket();
 	int currentSfx;
 	int currentMaster;
-	int messageLength;
 
 
 private:
@@ -83,18 +76,6 @@ private:
 	Animation m_optionsAnimation;
 	Animation m_creditsAnimation;
 	AnimatedSprite m_doorAnimation;
-
-	//Pre Game Lobby Variables
-	sf::Font m_font;
-	sf::Text m_text;
-	string m_currentMessage;
-	int messagesSent;
-	list<string> historyMessages;
-	sf::IpAddress recipient;
-	sf::UdpSocket socket;
-	unsigned short port;
-	bool connected;
-
 
 	int m_animtionToPlay;
 };

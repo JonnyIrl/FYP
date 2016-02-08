@@ -1,6 +1,11 @@
 #include "ExtraIncludes.h"
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
+#include <fstream>
+#include <iostream> 
+#include <vector>
+#include <string>
+using namespace std;
 
 class Player
 {
@@ -14,10 +19,13 @@ public:
 	void updateTex(sf::Texture texture);
 	bool LoadTexture();
 	void Draw(sf::RenderWindow& window);
+	void LoadTextFile(string name);
+	string GetName(){ return m_Name; }
 
 private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
+	string m_Name;
 	bool m_alive;
 	bool m_moving;
 	sf::Sprite m_spr;

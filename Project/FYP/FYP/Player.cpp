@@ -1,5 +1,6 @@
 #include "Player.h"
 
+
 Player::Player()
 {
 	m_position = sf::Vector2f(500, 500);
@@ -32,6 +33,12 @@ Player::Player()
 
 		m_playerAnimation = AnimatedSprite(sf::seconds(0.15f));
 		m_playerAnimation.setAnimation(m_playerDownAnimation);
+
+		LoadTextFile("Assets/Settings/name.txt");
+		if (m_Name.size() <= 0)
+		{
+			m_Name = "PLAYER1";
+		}
 	}
 }
 
@@ -51,6 +58,16 @@ bool Player::LoadTexture()
 
 	else
 	return true;
+}
+
+void Player::LoadTextFile(string name)
+{
+	ifstream file(name);
+	string str;
+	while (getline(file, str))
+	{
+		m_Name = str;
+	}
 }
 
 void Player::Update(sf::Time time)
