@@ -23,9 +23,9 @@ Netcode::Netcode()
 		m_connected = false;
 
 
-		m_ServerIPAddress = "127.0.0.1";
+		m_ServerIPAddress = "192.168.0.50";
 		m_serverPort = 5300;
-		m_personalPort = 5300;
+		m_personalPort = 5301;
 
 		//PLAYERNAME = playerName;
 
@@ -58,7 +58,7 @@ void Netcode::ConnectToServer()
 	if (!m_connected)
 	{
 		cout << "Not Connected.. Attempting to connect.." << endl;
-		sf::IpAddress ip = "127.0.0.1";
+		sf::IpAddress ip = "192.168.0.50";
 		sf::Packet packet;
 
 		//Send the initial connection details that the server needs
@@ -81,14 +81,13 @@ void Netcode::ConnectToServer()
 	}
 }
 
-
 void Netcode::SendPacket()
 {
 	m_receivedReply = false;
 	string message = m_currentMessage;
 
 	sf::Packet packet;
-	packet << GENERAL_MSG << message << PLAYERNAME;
+	packet << GENERAL_MSG << m_ipAddress.toString() << message << PLAYERNAME;
 
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
