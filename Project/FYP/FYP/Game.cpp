@@ -38,7 +38,7 @@ int main()
 	//Network 
 	Netcode netcode = Netcode();
 	netcode.PLAYERNAME = player.GetName();
-
+	window.setFramerateLimit(60);
 	// Start game loop 
 	while (window.isOpen())
 	{
@@ -52,31 +52,11 @@ int main()
 			//prepare frame
 			window.clear();
 			sceneManager.Draw(window);
-			sceneManager.ChangeBackground(frameTime);
-			player.Update(frameTime);
-			player.Draw(window);
-
-
-			//Collision Checks
-			//Check the player off of the play game door
-			if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetPlayRectangle()))
-				sceneManager.AnimationToPlay(1);
-
-			//Check the player off the options door
-			else if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetOptionsRectangle()))
+			sf::Event Event;
+			while (window.pollEvent(Event))
 			{
-				sceneManager.AnimationToPlay(2);
-				sceneManager.m_currentScene = sceneManager.OPTIONS;
+				sceneManager.ChangeBackground(Event, frameTime);
 			}
-
-			//Check the player off the Credits door
-			else if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetCreditsRectangle()))
-				sceneManager.AnimationToPlay(3);
-
-			//Check if the player collides with the play game rectangle
-			if (collisionManager.CheckRectangleCollision(player.GetShape(), sceneManager.GetCollisionPlayRect()))
-				sceneManager.m_currentScene = sceneManager.PLAY_GAME;
-
 
 			// Finally, display rendered frame on screen 
 			window.display();
@@ -163,7 +143,7 @@ int main()
 			//prepare frame
 			window.clear();
 			sceneManager.Draw(window);
-			sceneManager.ChangeBackground(frameTime);
+			sceneManager.ChangeBackground(Event,frameTime);
 			// Finally, display rendered frame on screen 
 			window.display();
 		}

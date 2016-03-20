@@ -8,56 +8,14 @@ SceneManager::SceneManager()
 {
 	if (LoadTexture())
 	{
-		m_currentScene = LOBBY;
+		m_currentScene = MENU;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
 		m_sceneRect.setTexture(&m_mainMenuTexture);		
-		m_animtionToPlay = 0;
 
 		//Collision Rectangle to go to Play Game Menu scene.
 		m_collisionPlayRect.setSize(sf::Vector2f(80, 40));
 		m_collisionPlayRect.setPosition(sf::Vector2f(450, 250));
-
-
-		//Play Game Rectangle
-		m_playRect.setSize(sf::Vector2f(95, 80));
-		m_playRect.setPosition(sf::Vector2f(440, 240));
-		m_playRect.setTexture(&m_blankDoorTexture);
-
-		//Options Rectangle
-		m_optionsRect.setSize(sf::Vector2f(95, 80));
-		m_optionsRect.setPosition(sf::Vector2f(622, 240));
-		m_optionsRect.setTexture(&m_blankDoorTexture);
-
-		//Credits Rectangle
-		m_creditsRect.setSize(sf::Vector2f(95, 80));
-		m_creditsRect.setPosition(sf::Vector2f(803, 240));
-		m_creditsRect.setTexture(&m_blankDoorTexture);
-
-
-		//Play Game Door Animation.
-		m_playGameAnimation.setSpriteSheet(m_doorTexture);
-		m_playGameAnimation.addFrame(sf::IntRect(0, 0, 95, 80));
-		m_playGameAnimation.addFrame(sf::IntRect(0, 96, 95, 80));
-		m_playGameAnimation.addFrame(sf::IntRect(0, 192, 95, 80));
-		m_playGameAnimation.addFrame(sf::IntRect(0, 288, 95, 80));
-
-		//Options Door Animation
-		m_optionsAnimation.setSpriteSheet(m_doorTexture);
-		m_optionsAnimation.addFrame(sf::IntRect(0, 0, 95, 80));
-		m_optionsAnimation.addFrame(sf::IntRect(0, 96, 95, 80));
-		m_optionsAnimation.addFrame(sf::IntRect(0, 192, 95, 80));
-		m_optionsAnimation.addFrame(sf::IntRect(0, 288, 95, 80));
-
-		//Credits Door Animation
-		m_creditsAnimation.setSpriteSheet(m_doorTexture);
-		m_creditsAnimation.addFrame(sf::IntRect(0, 0, 95, 80));
-		m_creditsAnimation.addFrame(sf::IntRect(0, 96, 95, 80));
-		m_creditsAnimation.addFrame(sf::IntRect(0, 192, 95, 80));
-		m_creditsAnimation.addFrame(sf::IntRect(0, 288, 95, 80));
-
-		m_doorAnimation = AnimatedSprite(sf::seconds(0.5f), false, false, true);
-		//m_doorAnimation.setAnimation(m_playGameAnimation);
 
 		//Game Settings Window
 		m_gameSettingRect.setSize(sf::Vector2f(500, 500));
@@ -117,30 +75,86 @@ SceneManager::SceneManager()
 		m_connectRect.setPosition(925, 545);
 		m_connectRect.setSize(sf::Vector2f(260, 35));
 
+		//Main Menu Buttons
+		m_PlayGameButtonRect.setPosition(480, 150);
+		m_PlayGameButtonRect.setSize(sf::Vector2f(332, 68));
+		m_PlayGameButtonRect.setTexture(&m_playGameText);
+
+		m_OptionsButtonRect.setPosition(480, 250);
+		m_OptionsButtonRect.setSize(sf::Vector2f(332, 68));
+		m_OptionsButtonRect.setTexture(&m_optionsText);
+
+		m_CreditsButtonRect.setPosition(480, 350);
+		m_CreditsButtonRect.setSize(sf::Vector2f(332, 68));
+		m_CreditsButtonRect.setTexture(&m_creditsText);
+
+		m_QuitButtonRect.setPosition(480, 450);
+		m_QuitButtonRect.setSize(sf::Vector2f(332, 68));
+		m_QuitButtonRect.setTexture(&m_quitText);
+
+		//MAIN MENU SELECT BUTTONS
+		m_SelectPlayGameButtonRect.setPosition(480, 150);
+		m_SelectPlayGameButtonRect.setSize(sf::Vector2f(332, 68));
+		m_SelectPlayGameButtonRect.setTexture(&m_playGameSelectText);
+
+		m_SelectOptionsButtonRect.setPosition(480, 250);
+		m_SelectOptionsButtonRect.setSize(sf::Vector2f(332, 68));
+		m_SelectOptionsButtonRect.setTexture(&m_optionsSelectText);
+
+		m_SelectCreditsButtonRect.setPosition(480, 350);
+		m_SelectCreditsButtonRect.setSize(sf::Vector2f(332, 68));
+		m_SelectCreditsButtonRect.setTexture(&m_creditsSelectText);
+
+		m_SelectQuitButtonRect.setPosition(480, 450);
+		m_SelectQuitButtonRect.setSize(sf::Vector2f(332, 68));
+		m_SelectQuitButtonRect.setTexture(&m_quitSelectText);
+
+		//Mouse Rect
+		m_mouseRect.setPosition(0, 0);
+		m_mouseRect.setSize(sf::Vector2f(1, 1));
+		
+
 		cout << "SceneManager Constructor Finished" << endl;
 	}
 }
 
-void SceneManager::ChangeBackground(sf::Time time)
+void SceneManager::ChangeBackground(sf::Event Event, sf::Time time)
 {
 	switch (m_currentScene)
 	{
 		case MENU:
 		{			
+
 			if (m_sceneRect.getTexture() != &m_mainMenuTexture)
 				m_sceneRect.setTexture(&m_mainMenuTexture);
 
+			//Check Mouse rectangle with the play button
+			if (m_mouseRect.getGlobalBounds().intersects(m_PlayGameButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				m_currentScene = PLAY_GAME;
+			}
 
-			if (m_doorAnimation.getAnimation() == &m_playGameAnimation)
-			m_doorAnimation.setPosition(m_playRect.getPosition());
 
-			else if (m_doorAnimation.getAnimation() == &m_optionsAnimation)
-				m_doorAnimation.setPosition(m_optionsRect.getPosition());
+			//Check Mouse rectangle with the options button
+			else if (m_mouseRect.getGlobalBounds().intersects(m_OptionsButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				m_currentScene = OPTIONS;
+			}
 
-			else if (m_doorAnimation.getAnimation() == &m_creditsAnimation)
-				m_doorAnimation.setPosition(m_creditsRect.getPosition());
 
-			m_doorAnimation.update(time);
+
+			//Check Mouse rectangle with the credits button
+			else if (m_mouseRect.getGlobalBounds().intersects(m_CreditsButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				m_currentScene = CREDITS;
+			}
+
+			//Check Mouse rectangle with the quit button
+			else if (m_mouseRect.getGlobalBounds().intersects(m_QuitButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				m_quitGame = true;
+			}
+
 				
 		}
 		break;
@@ -183,7 +197,7 @@ bool SceneManager::LoadTexture()
 		return false;
 	}
 
-	if (!m_mainMenuTexture.loadFromFile("Assets/Menu/mainScreen.png"))
+	if (!m_mainMenuTexture.loadFromFile("Assets/Menu/mainMenu.png"))
 	{
 		std::cout << "Couldn't load Main Menu texture" << std::endl;
 		return false;
@@ -192,18 +206,6 @@ bool SceneManager::LoadTexture()
 	if (!m_optionsTexture.loadFromFile("Assets/Menu/optionsScreen.png"))
 	{
 		std::cout << "Couldn't load options texture" << std::endl;
-		return false;
-	}
-
-	if (!m_doorTexture.loadFromFile("Assets/Door/doorAnimation.png"))
-	{
-		std::cout << "Couldn't load door texture" << std::endl;
-		return false;
-	}
-
-	if (!m_blankDoorTexture.loadFromFile("Assets/Door/doorblank.png"))
-	{
-		std::cout << "Couldn't load door texture" << std::endl;
 		return false;
 	}
 
@@ -226,6 +228,56 @@ bool SceneManager::LoadTexture()
 		std::cout << "Couldn't load chat lobby png" << std::endl;
 		return false;
 	}
+
+	//BUTTONS TEXTURE
+	if (!m_playGameText.loadFromFile("Assets/Buttons/playgame.png"))
+	{
+		std::cout << "Couldn't load PLAY GAME png" << std::endl;
+		return false;
+	}
+
+	if (!m_optionsText.loadFromFile("Assets/Buttons/options.png"))
+	{
+		std::cout << "Couldn't load options button png" << std::endl;
+		return false;
+	}
+	if (!m_creditsText.loadFromFile("Assets/Buttons/credits.png"))
+	{
+		std::cout << "Couldn't load credits png" << std::endl;
+		return false;
+	}
+
+	if (!m_quitText.loadFromFile("Assets/Buttons/quit.png"))
+	{
+		std::cout << "Couldn't load quit png" << std::endl;
+		return false;
+	}
+
+	//SELECT TEXTURES BUTTONS
+	if (!m_playGameSelectText.loadFromFile("Assets/Buttons/selectPlayGame.png"))
+	{
+		std::cout << "Couldn't load PLAY GAME Select png" << std::endl;
+		return false;
+	}
+
+	if (!m_optionsSelectText.loadFromFile("Assets/Buttons/selectOptions.png"))
+	{
+		std::cout << "Couldn't load options Select button png" << std::endl;
+		return false;
+	}
+	if (!m_creditsSelectText.loadFromFile("Assets/Buttons/selectCredits.png"))
+	{
+		std::cout << "Couldn't load credits Select png" << std::endl;
+		return false;
+	}
+
+	if (!m_quitSelectText.loadFromFile("Assets/Buttons/selectQuit.png"))
+	{
+		std::cout << "Couldn't load quit Select png" << std::endl;
+		return false;
+	}
+
+
 	/*if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/chatLobby.png"))
 	{
 		std::cout << "Couldn't load chat lobby png" << std::endl;
@@ -243,11 +295,57 @@ void SceneManager::Draw(sf::RenderWindow &window)
 	{
 	case MENU:
 	{
+		sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+		sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+		m_mouseRect.setPosition(converted);
 		window.draw(m_sceneRect);
-		window.draw(m_playRect);
-		window.draw(m_optionsRect);
-		window.draw(m_creditsRect);
-		window.draw(m_doorAnimation);
+
+		if (m_quitGame)
+			window.close();
+
+		//Check Mouse rectangle with the play button
+		if (m_mouseRect.getGlobalBounds().intersects(m_PlayGameButtonRect.getGlobalBounds()))
+		{
+			window.draw(m_SelectPlayGameButtonRect);
+		}
+
+		else
+		{
+			window.draw(m_PlayGameButtonRect);
+		}
+
+		//Check Mouse rectangle with the options button
+		if (m_mouseRect.getGlobalBounds().intersects(m_OptionsButtonRect.getGlobalBounds()))
+		{
+			window.draw(m_SelectOptionsButtonRect);
+		}
+
+		else
+		{
+			window.draw(m_OptionsButtonRect);
+		}
+
+		//Check Mouse rectangle with the credits button
+		if (m_mouseRect.getGlobalBounds().intersects(m_CreditsButtonRect.getGlobalBounds()))
+		{
+			window.draw(m_SelectCreditsButtonRect);
+		}
+
+		else
+		{
+			window.draw(m_CreditsButtonRect);
+		}
+
+		//Check Mouse rectangle with the quit button
+		if (m_mouseRect.getGlobalBounds().intersects(m_QuitButtonRect.getGlobalBounds()))
+		{
+			window.draw(m_SelectQuitButtonRect);
+		}
+
+		else
+		{
+			window.draw(m_QuitButtonRect);
+		}
 	}
 	break;
 
@@ -325,63 +423,6 @@ void SceneManager::Draw(sf::RenderWindow &window)
 
 	}
 	
-}
-
-
-
-//Getters and Setters
-void SceneManager::AnimationToPlay(int animation)
-{
-	//1 = Play Game Door Animation
-	if (animation == 1)
-	{
-		if (m_doorAnimation.getAnimation() != &m_playGameAnimation)
-		{
-			m_doorAnimation.setAnimation(m_playGameAnimation);
-
-			if (!m_doorAnimation.isPlaying())
-			{
-				m_doorAnimation.play();
-			}
-		}
-
-		else
-			m_doorAnimation.play();
-	}
-
-	//2 = Options Door Animation
-	if (animation == 2)
-	{
-		if (m_doorAnimation.getAnimation() != &m_optionsAnimation)
-		{
-			m_doorAnimation.setAnimation(m_optionsAnimation);
-
-			if (!m_doorAnimation.isPlaying())
-			{
-				m_doorAnimation.play();
-			}
-		}
-
-		else
-			m_doorAnimation.play();
-	}
-
-	//3 = Credits Door Animation
-	if (animation == 3)
-	{
-		if (m_doorAnimation.getAnimation() != &m_creditsAnimation)
-		{
-			m_doorAnimation.setAnimation(m_creditsAnimation);
-
-			if (!m_doorAnimation.isPlaying())
-			{
-				m_doorAnimation.play();
-			}
-		}
-
-		else
-			m_doorAnimation.play();
-	}
 }
 
 byte SceneManager::GetCurrentScene()

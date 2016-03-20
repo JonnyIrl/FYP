@@ -22,6 +22,7 @@ Bullet::Bullet(sf::Vector2f playerPos, sf::Vector2f mousePos)
 		m_alive = true;
 		m_position = playerPos;
 		m_bulletRectangle.setPosition(playerPos);
+		m_bulletSpeed = 8;
 	}
 }
 
@@ -48,8 +49,9 @@ void Bullet::Update()
 
 	if (m_alive)
 	{
-		m_position.x += std::cos(m_bulletAngle * (M_PI / 180) )* 0.2f;
-		m_position.y += std::sin(m_bulletAngle * (M_PI / 180) )* 0.2f;
+		/*m_position.x += std::cos(m_bulletAngle * (M_PI / 180) )* 0.2f;*/
+		m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
+		m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
 		m_bulletRectangle.setPosition(m_position);
 	}
 

@@ -17,5 +17,6 @@ private:
 	sf::Vector2f m_position;
 	bool m_alive;
 	float m_bulletAngle;
+	float m_bulletSpeed;
 
 };

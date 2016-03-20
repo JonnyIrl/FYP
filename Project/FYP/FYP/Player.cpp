@@ -39,6 +39,8 @@ Player::Player()
 		{
 			m_Name = "PLAYER1";
 		}
+
+		m_speed = 5;
 	}
 }
 
@@ -80,7 +82,8 @@ void Player::Update(sf::Time time)
 			m_playerAnimation.setAnimation(m_playerUpAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_position.y -= 0.05f;
+		//m_position.y -= 0.05f;
+		m_position.y -= m_speed;
 	}
 	
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -90,7 +93,7 @@ void Player::Update(sf::Time time)
 			m_playerAnimation.setAnimation(m_playerDownAnimation);			
 		}
 		m_playerAnimation.update(time);
-		m_position.y += 0.05f;
+		m_position.y += m_speed;
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -100,7 +103,7 @@ void Player::Update(sf::Time time)
 			m_playerAnimation.setAnimation(m_playerLeftAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_position.x -= 0.05f;
+		m_position.x -= m_speed;
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -110,7 +113,7 @@ void Player::Update(sf::Time time)
 			m_playerAnimation.setAnimation(m_playerRightAnimation);
 		}
 		m_playerAnimation.update(time);
-		m_position.x += 0.05f;
+		m_position.x += m_speed;
 	}
 
 	

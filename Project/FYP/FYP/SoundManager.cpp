@@ -143,10 +143,19 @@ void SoundManager::LoadTextFile(std::string name)
 			count++;
 		}
 	}
+
+	if (savedMasterVolume != 1 || savedMasterVolume != 2 || savedMasterVolume != 3 || savedMasterVolume != 4)
+		savedMasterVolume = 1;
 }
 
 void SoundManager::WriteToTextFile()
 {
+	if (newMasterVolume != 1 || newMasterVolume != 2 || newMasterVolume != 3 || newMasterVolume != 4)
+		newMasterVolume = 1;
+
+	if (savedCurrentSFXVolume != 1 || savedCurrentSFXVolume != 2 || savedCurrentSFXVolume != 3 || savedCurrentSFXVolume != 4)
+		savedCurrentSFXVolume = 1;
+	
 	std::ofstream myfile;
 	myfile.open("Assets/Settings/settings.txt");
 	myfile << newMasterVolume << "\n" << savedCurrentSFXVolume;
@@ -167,7 +176,6 @@ std::vector<std::string> SoundManager::LoadFromTextFile(std::string name)
 
 	myfile.close();
 	return mystringvector;
-
 	return std::vector<std::string>();
 }
 

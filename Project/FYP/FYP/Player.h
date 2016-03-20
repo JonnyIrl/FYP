@@ -28,6 +28,7 @@ private:
 	string m_Name;
 	bool m_alive;
 	bool m_moving;
+	float m_speed;
 	sf::Sprite m_spr;
 	sf::RectangleShape m_rect;
 	sf::Texture m_pDownTexture;

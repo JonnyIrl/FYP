@@ -16,7 +16,7 @@ public:
 	enum GAMESTATE : byte{ MENU, PLAY_GAME, GAME_OVER, OPTIONS, CREDITS, PLAYEROPTIONS, LOBBY };
 	byte m_currentScene;
 	void Draw(sf::RenderWindow& window);
-	void ChangeBackground(sf::Time time);
+	void ChangeBackground(sf::Event Event, sf::Time time);
 	sf::RectangleShape GetPlayRectangle();
 	sf::RectangleShape GetOptionsRectangle();
 	sf::RectangleShape GetCreditsRectangle();
@@ -28,7 +28,6 @@ public:
 	sf::RectangleShape GetConfirmRectangle();
 	sf::RectangleShape GetSendRectangle();
 	sf::RectangleShape GetConnectRectangle();
-	void AnimationToPlay(int animation);
 	int currentSfx;
 	int currentMaster;
 
@@ -38,15 +37,29 @@ private:
 	sf::Texture m_gameOverTexture;
 	sf::Texture m_optionsTexture;
 	sf::Texture m_creditsTexture;
-	sf::Texture m_doorTexture;
-	sf::Texture m_blankDoorTexture;
 	sf::Texture m_gameSettingTexture;
 	sf::Texture m_chatLobbyTexture;
+
+	//Buttons Textures
+	sf::Texture m_optionsText, m_optionsSelectText;
+	sf::Texture m_creditsText, m_creditsSelectText;
+	sf::Texture m_playGameText, m_playGameSelectText;
+	sf::Texture m_quitText, m_quitSelectText;
+
+	//Buttons Rectangles
+	sf::RectangleShape m_PlayGameButtonRect, m_SelectPlayGameButtonRect;
+	sf::RectangleShape m_OptionsButtonRect, m_SelectOptionsButtonRect;
+	sf::RectangleShape m_CreditsButtonRect, m_SelectCreditsButtonRect;
+	sf::RectangleShape m_QuitButtonRect, m_SelectQuitButtonRect;
+
+	//Mouse Rectangle
+	sf::RectangleShape m_mouseRect;
 
 	sf::RectangleShape m_sceneRect;
 	sf::RectangleShape m_playRect;
 	sf::RectangleShape m_optionsRect;
 	sf::RectangleShape m_creditsRect;
+	sf::RectangleShape m_quitRect;
 	sf::RectangleShape m_collisionPlayRect;
 	sf::RectangleShape m_gameSettingRect;
 	sf::RectangleShape m_chatLobbyRect;
@@ -71,11 +84,6 @@ private:
 	sf::RectangleShape masterPlusRect;
 	sf::RectangleShape masterMinusRect;
 	sf::RectangleShape confirmButton;
-	//Animations
-	Animation m_playGameAnimation;
-	Animation m_optionsAnimation;
-	Animation m_creditsAnimation;
-	AnimatedSprite m_doorAnimation;
 
-	int m_animtionToPlay;
+	bool m_quitGame = false;
 };
