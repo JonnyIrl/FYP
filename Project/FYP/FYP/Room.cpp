@@ -457,35 +457,492 @@ bool Room::LoadTextures()
 }
 bool Room::CheckBoundingCollisions(sf::RectangleShape playerRect)
 {
-	if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+	switch (m_currentRoom)
 	{
-		std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
-		checkWall = 2;
-		return true;
-	}
-
-	if (m_fullTopRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		//Top Left Room
+	case ROOM1:
 	{
-		std::cout << "PLAYER HIT TOP WALL" << std::endl;
-		checkWall = 1;
-		return true;
-	}
+		/*if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}*/
 
-	if (m_fullLeftRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		if (m_fullTopRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT TOP WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_fullLeftRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+	}
+	break;
+
+	//Top Middle Room
+	case ROOM2:
 	{
-		std::cout << "PLAYER HIT LEFT WALL" << std::endl;
-		checkWall = 3;
-		return true;
-	}
+		if (m_fullTopRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT TOP WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
 
-	if (m_fullRightRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+
+	//Top Right Room
+	case ROOM3:
 	{
-		std::cout << "PLAYER HIT RIGHT WALL" << std::endl;
-		checkWall = 4;
-		return true;
+		if (m_fullTopRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT TOP WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_fullRightRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
 	}
+	break;
+
+	//Middle Left Room
+	case ROOM4:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_fullLeftRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
 
 
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+
+	//Middle Room
+	case ROOM5:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+
+	//Middle Right Room
+	case ROOM6:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_fullRightRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+
+		if (m_halfBottomRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1ST BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+		if (m_halfBottomRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2ND BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+
+	//Bottom Left Room
+	case ROOM7:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_fullLeftRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+
+		if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+
+	}
+	break;
+
+	//Bottom Middle Room
+	case ROOM8:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+
+		if (m_halfRightRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_halfRightRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+
+		if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+
+	//Bottom Right Room
+	case ROOM9:
+	{
+		if (m_halfTopRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfTopRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd WALL" << std::endl;
+			checkWall = 1;
+			return true;
+		}
+
+		if (m_halfLeftRect1.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 1st LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+		if (m_halfLeftRect2.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT 2nd LEFT WALL" << std::endl;
+			checkWall = 3;
+			return true;
+		}
+
+
+		if (m_fullRightRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT RIGHT WALL" << std::endl;
+			checkWall = 4;
+			return true;
+		}
+
+		if (m_fullBottomRectangle.getGlobalBounds().intersects(playerRect.getGlobalBounds()))
+		{
+			//std::cout << "PLAYER HIT BOTTOM WALL" << std::endl;
+			checkWall = 2;
+			return true;
+		}
+	}
+	break;
+	}
+	
 	return false;
 }
 
@@ -543,13 +1000,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_topLeftRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionRightDoor);*/
 
-			window.draw(m_fullBottomRectangle);
-			window.draw(m_fullLeftRectangle);
-			window.draw(m_fullRightRectangle);
-			window.draw(m_fullTopRectangle);
 		}
 		break;
 
@@ -560,9 +1011,8 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_topMiddleRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionRightDoor);
-			window.draw(m_collisionLeftDoor);*/
+			
+
 		}
 		break;
 
@@ -573,8 +1023,8 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_topRightRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionLeftDoor);*/
+
+		
 		}
 		break;
 
@@ -585,10 +1035,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_middleLeftRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionRightDoor);
-			window.draw(m_collisionTopDoor);*/
-			
+
 		}
 		break;
 
@@ -599,11 +1046,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_middleRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionRightDoor);
-			window.draw(m_collisionTopDoor);
-			window.draw(m_collisionLeftDoor);*/
-			
+
 		}
 		break;
 
@@ -614,10 +1057,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_middleRightRect);
-			/*window.draw(m_collisionBottomDoor);
-			window.draw(m_collisionTopDoor);
-			window.draw(m_collisionLeftDoor);*/
-			
+
 		}
 		break;
 
@@ -628,8 +1068,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_bottomLeftRect);
-			/*window.draw(m_collisionRightDoor);
-			window.draw(m_collisionTopDoor);			*/
+
 		}
 		break;
 
@@ -640,10 +1079,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_bottomMiddleRect);
-			/*window.draw(m_collisionRightDoor);
-			window.draw(m_collisionTopDoor);
-			window.draw(m_collisionLeftDoor);*/
-		
+
 		}
 		break;
 
@@ -654,8 +1090,7 @@ void Room::Draw(sf::RenderWindow &window)
 				LoadCollisionRectangles();
 
 			window.draw(m_bottomRightRect);
-			/*window.draw(m_collisionTopDoor);
-			window.draw(m_collisionLeftDoor);		*/
+
 		}
 		break;
 
@@ -675,25 +1110,31 @@ void Room::InitCollisionRectangles()
 	m_fullLeftRectangle.setPosition(sf::Vector2f(16, 0));
 	m_fullRightRectangle.setPosition(sf::Vector2f(1216, 0));
 	m_fullBottomRectangle.setPosition(sf::Vector2f(0, 655));
-	//m_halfTopRect1.setSize(sf::Vector2f(1280, 50));
-	//m_halfTopRect2
-	//m_halfLeftRect1
-	//m_halfLeftRect2
-	//m_halfBottomRect1
-	//m_halfBottomRect2
-	//m_halfRightRect1
-	//m_halfRightRect2
+	
+	
+	m_halfTopRect1.setSize(sf::Vector2f(590, 50));
+	m_halfTopRect2.setSize(sf::Vector2f(590, 50));
+	m_halfTopRect1.setPosition(sf::Vector2f(0, 16));
+	m_halfTopRect2.setPosition(sf::Vector2f(690, 16));
+
+	m_halfLeftRect1.setSize(sf::Vector2f(50, 310));
+	m_halfLeftRect2.setSize(sf::Vector2f(50, 310));
+	m_halfLeftRect1.setPosition(sf::Vector2f(16, 0));
+	m_halfLeftRect2.setPosition(sf::Vector2f(16, 410));
+
+
+	m_halfBottomRect1.setSize(sf::Vector2f(590, 50));
+	m_halfBottomRect2.setSize(sf::Vector2f(590, 50));
+	m_halfBottomRect1.setPosition(sf::Vector2f(0, 655));
+	m_halfBottomRect2.setPosition(sf::Vector2f(690, 655));
+
+	m_halfRightRect1.setSize(sf::Vector2f(50, 310));
+	m_halfRightRect2.setSize(sf::Vector2f(50, 300));
+	m_halfRightRect1.setPosition(sf::Vector2f(1216, 0));
+	m_halfRightRect2.setPosition(sf::Vector2f(1216, 410));
 
 	std::cout << "Initialised Room Collision Rectangles" << std::endl;
 }
-
-
-
-
-
-
-
-
 
 sf::Vector2f Room::SetTopDoor()
 {
@@ -705,7 +1146,7 @@ sf::Vector2f Room::SetBottomDoor()
 }
 sf::Vector2f Room::SetLeftDoor()
 {
-	return sf::Vector2f(50, 345);
+	return sf::Vector2f(50, 330);
 }
 sf::Vector2f Room::SetRightDoor()
 {

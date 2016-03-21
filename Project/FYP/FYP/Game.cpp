@@ -201,6 +201,14 @@ int main()
 				}
 			}
 
+			if (room.CheckBoundingCollisions(player.GetShape()))
+			{
+				//1 = top || 2 = bottom || 3 = left || 4 = right
+				if (room.checkWall == 1) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetTopWall().y));
+				if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
+				if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
+				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
+			}
 
 			//1 = top door i.e player walked through the bottom door.
 			//Used to check which room to go into next.
@@ -210,15 +218,6 @@ int main()
 				if (room.checkDoor == 2) player.SetPosition(room.SetBottomDoor());
 				if (room.checkDoor == 3) player.SetPosition(room.SetLeftDoor());
 				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
-			}
-
-			if (room.CheckBoundingCollisions(player.GetShape()))
-			{
-				//1 = top || 2 = bottom || 3 = left || 4 = right
-				if (room.checkWall == 1) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetTopWall().y));
-				if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
-				if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
-				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
 			}
 
 
