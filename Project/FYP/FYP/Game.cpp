@@ -7,7 +7,7 @@
 #include "Bullet.h"
 #include "SoundManager.h"
 #include "Netcode.h"
-
+#include "RandomLootManager.h"
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
 //////////////////////////////////////////////////////////// 
@@ -39,6 +39,9 @@ int main()
 	Netcode netcode = Netcode();
 	netcode.PLAYERNAME = player.GetName();
 	window.setFramerateLimit(60);
+
+	RandomLootManager::GetInstance()->GenerateAllRoomsLoot();
+	//Chest chest = Chest(sf::Vector2f(300, 300), 3);
 	// Start game loop 
 	while (window.isOpen())
 	{
@@ -169,26 +172,465 @@ int main()
 					// left click...
 					sf::Vector2i mousepos = sf::Mouse::getPosition(window);
 					sf::Vector2f converted = window.mapPixelToCoords(mousepos);
-					b = new Bullet(sf::Vector2f(player.GetPosition().x + 25, player.GetPosition().y + 25), converted);
-					bullets.push_back(b);
+
+					//SNIPER
+					if (player.GetWeapon() == 3)
+					{
+						
+						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+
+						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+					}
+
+					//MINIGUN
+					if (player.GetWeapon() == 4)
+					{
+
+						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+
+						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+					}
 				}
 
 
+				switch (room.m_currentRoom)
+				{
+					//Top Left Room
+				case room.ROOM1:
+				{
 
-			}
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 0; i < 2; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+				}
+				break;
+
+				//Top Middle Room
+				case room.ROOM2:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 2; i < 4; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+				}
+				break;
+
+				//Top Right Room
+				case room.ROOM3:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 4; i < 6; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+				}
+				break;
+
+				//Middle Left Room
+				case room.ROOM4:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 6; i < 8; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}				
+				}
+				break;
+
+				//Middle Room
+				case room.ROOM5:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 8; i < 10; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+
+				}
+				break;
+
+				//Middle Right Room
+				case room.ROOM6:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 10; i < 12; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+
+				}
+				break;
+
+				//Bottom Left Room
+				case room.ROOM7:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 12; i < 14; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+
+					}
+
+				}
+				break;
+
+				//Bottom Middle Room
+				case room.ROOM8:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 14; i < 16; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+
+				}
+				break;
+
+				//Bottom Right Room
+				case room.ROOM9:
+				{
+					if (Event.key.code == sf::Keyboard::E)
+					{
+						for (int i = 16; i < 18; i++)
+						{
+							if (RandomLootManager::GetInstance()->randomChests.at(i)->CheckInRange(player.GetShape()))
+							{
+								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
+								{
+									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+								}
+
+								else
+								{
+									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
+									{
+										//assign the player the new weapon
+										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
+										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
+									}
+
+
+								}
+							}
+						}
+					}
+
+				}
+				break;
+				}
+			
+			}//END KEYBOARD EVENTS
 
 			//prepare frame
 			window.clear();
 
-			//draw frame items
+			//draw frame items			
 			room.Draw(window);
+			//RandomLootManager::GetInstance()->Draw(window);
+			//RandomLootManager::GetInstance()->Update(frameTime);
 			player.Update(frameTime);
 			hud.Draw(window);
+
+			switch (room.m_currentRoom)
+			{
+				//Top Left Room
+			case room.ROOM1:
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+			}
+			break;
+
+			//Top Middle Room
+			case room.ROOM2:
+			{
+				for (int i = 2; i < 4; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+			}
+			break;
+
+			//Top Right Room
+			case room.ROOM3:
+			{
+				for (int i = 4; i < 6; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+			}
+			break;
+
+			//Middle Left Room
+			case room.ROOM4:
+			{
+				for (int i = 6; i < 8; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+
+			//Middle Room
+			case room.ROOM5:
+			{
+				for (int i = 8; i < 10; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+
+			//Middle Right Room
+			case room.ROOM6:
+			{
+				for (int i = 10; i < 12; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+
+			//Bottom Left Room
+			case room.ROOM7:
+			{
+				for (int i = 12; i < 14; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+
+			//Bottom Middle Room
+			case room.ROOM8:
+			{
+				for (int i = 14; i < 16; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+
+			//Bottom Right Room
+			case room.ROOM9:
+			{
+				for (int i = 16; i < 18; i++)
+				{
+					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
+					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+			}
+			break;
+			}
 
 
 			for each (Bullet* bullet in bullets)
 			{
-				bullet->Update();
+				bullet->Update(frameTime);
 				bullet->Draw(window);
 
 				if (!bullet->Alive())
@@ -220,6 +662,9 @@ int main()
 				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
 			}
 
+
+			//chest.Draw(window);
+			//chest.Update(frameTime);
 
 
 			player.Draw(window);

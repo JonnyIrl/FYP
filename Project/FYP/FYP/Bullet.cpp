@@ -7,7 +7,7 @@ Bullet::Bullet()
 	m_alive = false;
 }
 
-Bullet::Bullet(sf::Vector2f playerPos, sf::Vector2f mousePos)
+Bullet::Bullet(sf::Vector2f playerPos, sf::Vector2f mousePos, int currentWeapon)
 {
 	if (LoadTexture())
 	{
@@ -23,6 +23,9 @@ Bullet::Bullet(sf::Vector2f playerPos, sf::Vector2f mousePos)
 		m_position = playerPos;
 		m_bulletRectangle.setPosition(playerPos);
 		m_bulletSpeed = 8;
+		m_sniperBulletSpeed = 11;
+		m_currentWeapon = currentWeapon;
+		AssignBullets();
 	}
 }
 
@@ -31,7 +34,69 @@ bool Bullet::LoadTexture()
 	if (!m_bulletTexture.loadFromFile("Assets/Bullet/assaultRifleBullet.png"))
 		return false;
 
+	if (!m_sniperTexture.loadFromFile("Assets/Bullet/Sniper/bullet.png"))
+	{
+		std::cout << "Cant load sniper animation" << std::endl;
+	}
+
+	if (!m_miniGunTexture.loadFromFile("Assets/Bullet/MiniGun/bullet.png"))
+	{
+		std::cout << "Cant load minigun animation" << std::endl;
+	}
+
 	return true;
+}
+
+void Bullet::AssignBullets()
+{
+	m_sniperRectangle.setSize(sf::Vector2f(24, 29));
+	m_sniperRectangle.setTexture(&m_sniperTexture);
+
+	m_sniperBulletAnimated.setSpriteSheet(m_sniperTexture);
+
+	//Using width and height makes changing images sizes easy
+	int width = 24; int height = 29;
+
+	//Add the 12 frames
+	m_sniperBulletAnimated.addFrame(sf::IntRect(0, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 2, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 3, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 4, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 5, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 6, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 7, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 8, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 9, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 10, 0, width, height));
+	m_sniperBulletAnimated.addFrame(sf::IntRect(width * 11, 0, width, height));
+
+	m_sniperAnimation = AnimatedSprite(sf::seconds(0.03f));
+	m_sniperAnimation.setAnimation(m_sniperBulletAnimated);
+
+	//MINIGUN
+	m_miniGunBulletAnimated.setSpriteSheet(m_miniGunTexture);
+
+	width = 40; height = 40;
+	//Add the 12 frames
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(0, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 2, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 3, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 4, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 5, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 6, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 7, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 8, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 9, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 10, 0, width, height));
+	m_miniGunBulletAnimated.addFrame(sf::IntRect(width * 11, 0, width, height));
+
+	m_miniGunAnimation = AnimatedSprite(sf::seconds(0.01f));
+	m_miniGunAnimation.setAnimation(m_miniGunBulletAnimated);
+	m_miniGunAnimation.setPosition(sf::Vector2f(m_miniGunRectangle.getPosition().x, m_miniGunRectangle.getPosition().y));
+
+
 }
 
 void Bullet::CheckDeadBullets()
@@ -42,17 +107,47 @@ void Bullet::CheckDeadBullets()
 	}
 }
 
-void Bullet::Update()
+void Bullet::Update(sf::Time time)
 {
-	
+
 	CheckBoundaryCollisions();
 
 	if (m_alive)
 	{
-		/*m_position.x += std::cos(m_bulletAngle * (M_PI / 180) )* 0.2f;*/
-		m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
-		m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
-		m_bulletRectangle.setPosition(m_position);
+		if (m_currentWeapon == SNIPER)
+		{
+			if (m_bulletRectangle.getTexture() != &m_sniperTexture)
+			{
+				m_bulletRectangle.setTexture(&m_sniperTexture);
+				m_bulletRectangle.setSize(sf::Vector2f(24, 29));
+			}
+
+			m_sniperAnimation.update(time);
+			m_sniperAnimation.setPosition(m_bulletRectangle.getPosition());
+
+			m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_sniperBulletSpeed;
+			m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_sniperBulletSpeed;
+			m_bulletRectangle.setPosition(m_position);
+
+		}
+
+		else if (m_currentWeapon == MINIGUN)
+		{
+			if (m_bulletRectangle.getTexture() != &m_miniGunTexture)
+			{
+				m_bulletRectangle.setTexture(&m_miniGunTexture);
+				m_bulletRectangle.setSize(sf::Vector2f(40, 40));
+			}
+
+			m_miniGunAnimation.update(time);
+			m_miniGunAnimation.setPosition(m_bulletRectangle.getPosition());
+
+			m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
+			m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
+			m_bulletRectangle.setPosition(m_position);
+
+		}
+
 	}
 
 }
@@ -60,7 +155,19 @@ void Bullet::Update()
 void Bullet::Draw(sf::RenderWindow &window)
 {
 	if (m_alive)
-	window.draw(m_bulletRectangle);
+	{
+		//window.draw(m_bulletRectangle);
+
+		if (m_currentWeapon == SNIPER)
+		{
+			window.draw(m_sniperAnimation);
+		}
+
+		if (m_currentWeapon == MINIGUN)
+		{
+			window.draw(m_miniGunAnimation);
+		}
+	}
 }
 
 bool Bullet::Alive()
