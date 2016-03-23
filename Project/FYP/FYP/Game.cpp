@@ -206,6 +206,43 @@ int main()
 							bullets.push_back(b);
 						}
 					}
+
+					//DEAGLE
+					if (player.GetWeapon() == 2)
+					{
+
+						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+
+						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
+						}
+					}
+
+					//AK47
+					if (player.GetWeapon() == 6)
+					{
+
+						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								bullets.push_back(b);
+						}
+
+						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								bullets.push_back(b);
+						}
+					}
+
+
 				}
 
 

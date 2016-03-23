@@ -37,11 +37,19 @@ bool Bullet::LoadTexture()
 	if (!m_sniperTexture.loadFromFile("Assets/Bullet/Sniper/bullet.png"))
 	{
 		std::cout << "Cant load sniper animation" << std::endl;
+		return false;
 	}
 
 	if (!m_miniGunTexture.loadFromFile("Assets/Bullet/MiniGun/bullet.png"))
 	{
 		std::cout << "Cant load minigun animation" << std::endl;
+		return false;
+	}
+
+	if (!m_deagleTexture.loadFromFile("Assets/Bullet/Deagle/bullet.png"))
+	{
+		std::cout << "Cant load deagle bullet" << std::endl;
+		return false;
 	}
 
 	return true;
@@ -148,6 +156,34 @@ void Bullet::Update(sf::Time time)
 
 		}
 
+		else if (m_currentWeapon == DEAGLE)
+		{
+			if (m_bulletRectangle.getTexture() != &m_deagleTexture)
+			{
+				m_bulletRectangle.setSize(sf::Vector2f(14, 15));
+				m_bulletRectangle.setTexture(&m_deagleTexture);			
+			}
+
+			m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_sniperBulletSpeed;
+			m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_sniperBulletSpeed;
+			m_bulletRectangle.setPosition(m_position);
+
+		}
+
+		else if (m_currentWeapon == AK)
+		{
+			if (m_bulletRectangle.getTexture() != &m_deagleTexture)
+			{
+				m_bulletRectangle.setSize(sf::Vector2f(14, 15));
+				m_bulletRectangle.setTexture(&m_deagleTexture);
+			}
+
+			m_position.x += std::cos(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
+			m_position.y += std::sin(m_bulletAngle * (M_PI / 180))* m_bulletSpeed;
+			m_bulletRectangle.setPosition(m_position);
+
+		}
+
 	}
 
 }
@@ -166,6 +202,11 @@ void Bullet::Draw(sf::RenderWindow &window)
 		if (m_currentWeapon == MINIGUN)
 		{
 			window.draw(m_miniGunAnimation);
+		}
+
+		if (m_currentWeapon == DEAGLE || m_currentWeapon == AK)
+		{
+			window.draw(m_bulletRectangle);
 		}
 	}
 }

@@ -66,6 +66,12 @@ void Player::AssignGunRectangles()
 	m_miniGunRightRectangle.setTexture(&m_miniGunRightTexture);
 	m_miniGunLeftRectangle.setSize(sf::Vector2f(55, 23));
 	m_miniGunLeftRectangle.setTexture(&m_miniGunLeftTexture);
+
+	//AK47
+	m_AK47RightRectangle.setSize(sf::Vector2f(47, 15));
+	m_AK47RightRectangle.setTexture(&m_AK47RightTexture);
+	m_AK47LeftRectangle.setSize(sf::Vector2f(47, 15));
+	m_AK47LeftRectangle.setTexture(&m_AK47LeftTexture);
 }
 
 bool Player::LoadTexture()
@@ -116,6 +122,18 @@ bool Player::LoadTexture()
 	if (!m_miniGunRightTexture.loadFromFile("Assets/Guns/MiniGun/rightMiniGun.png"))
 	{
 		std::cout << "Couldnt load MiniGun Texture" << endl;
+		return false;
+	}
+
+	if (!m_AK47LeftTexture.loadFromFile("Assets/Guns/AK/leftAK.png"))
+	{
+		std::cout << "Couldnt load AK Texture" << endl;
+		return false;
+	}
+
+	if (!m_AK47RightTexture.loadFromFile("Assets/Guns/AK/rightAK.png"))
+	{
+		std::cout << "Couldnt load AK Texture" << endl;
 		return false;
 	}
 
@@ -241,6 +259,21 @@ void Player::Draw(sf::RenderWindow &window)
 		{
 			m_miniGunLeftRectangle.setPosition(sf::Vector2f((m_position.x - 27), m_position.y + 20));
 			window.draw(m_miniGunLeftRectangle);
+		}
+	}
+
+	else if (currentWeapon == AK47)
+	{
+		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		{
+			m_AK47RightRectangle.setPosition(sf::Vector2f((m_position.x + 14), m_position.y + 28));
+			window.draw(m_AK47RightRectangle);
+		}
+
+		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		{
+			m_AK47LeftRectangle.setPosition(sf::Vector2f((m_position.x - 18), m_position.y + 28));
+			window.draw(m_AK47LeftRectangle);
 		}
 	}
 

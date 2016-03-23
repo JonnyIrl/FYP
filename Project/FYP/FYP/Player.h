@@ -53,15 +53,17 @@ private:
 	sf::Texture m_deagleLeftTexture, m_deagleRightTexture;
 	sf::Texture m_sniperLeftTexture, m_sniperRightTexture;
 	sf::Texture m_miniGunLeftTexture, m_miniGunRightTexture;
+	sf::Texture m_AK47LeftTexture, m_AK47RightTexture;
 
 	sf::RectangleShape m_deagleLeftRectangle, m_deagleRightRectangle;
 	sf::RectangleShape m_sniperLeftRectangle, m_sniperRightRectangle;
 	sf::RectangleShape m_miniGunLeftRectangle, m_miniGunRightRectangle;
+	sf::RectangleShape m_AK47LeftRectangle, m_AK47RightRectangle;
 	//End Guns
 
 	//Each Gun Variable
-	int currentWeapon = 3;
-	const int M16 = 1;  int DEAGLE = 2; int SNIPER = 3; int MINIGUN = 4; int TRAP = 5; int AK = 6; int BOMB = 7;
+	int currentWeapon = 6;
+	const int M16 = 1;  int DEAGLE = 2; int SNIPER = 3; int MINIGUN = 4; int TRAP = 5; int AK47 = 6; int BOMB = 7;
 	
 
 

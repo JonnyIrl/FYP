@@ -25,8 +25,8 @@ private:
 	float m_sniperBulletSpeed;
 
 	//Different Gun Bullets
-	sf::Texture m_sniperTexture, m_miniGunTexture, m_deagleTexture;
-	sf::RectangleShape m_sniperRectangle, m_miniGunRectangle, m_deagleRectangle;
+	sf::Texture m_sniperTexture, m_miniGunTexture, m_deagleTexture, m_akTexture;
+	sf::RectangleShape m_sniperRectangle, m_miniGunRectangle, m_deagleRectangle, m_akRectangle;
 	AnimatedSprite m_sniperAnimation, m_miniGunAnimation;
 	Animation m_sniperBulletAnimated, m_miniGunBulletAnimated;
 
