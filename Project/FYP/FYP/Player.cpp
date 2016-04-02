@@ -7,6 +7,7 @@ Player::Player()
 	m_rect.setSize(sf::Vector2f(46, 50));
 	m_rect.setPosition(m_position);
 	m_moving = false;
+	m_health = 100;
 
 	//Load in the textures, and assign them to each animation.
 	if (LoadTexture())
@@ -43,6 +44,9 @@ Player::Player()
 		m_speed = 5;
 
 		AssignGunRectangles();
+
+		countDownTrap = false;
+		trapCoolDown = 10.0f;
 	}
 }
 
@@ -72,6 +76,17 @@ void Player::AssignGunRectangles()
 	m_AK47RightRectangle.setTexture(&m_AK47RightTexture);
 	m_AK47LeftRectangle.setSize(sf::Vector2f(47, 15));
 	m_AK47LeftRectangle.setTexture(&m_AK47LeftTexture);
+
+	//Trap
+	m_trapRectangle.setSize(sf::Vector2f(35, 25));
+	m_trapRectangle.setTexture(&m_trapTexture);
+
+	//Assign font etc.
+	trapCDText.setFont(trapFont);
+	trapCDText.setCharacterSize(35);
+	trapCDText.setColor(sf::Color::White);
+	trapCDText.setPosition(sf::Vector2f(243, 670));
+
 }
 
 bool Player::LoadTexture()
@@ -137,6 +152,16 @@ bool Player::LoadTexture()
 		return false;
 	}
 
+	if (!m_trapTexture.loadFromFile("Assets/Guns/Trap/trap.png"))
+	{
+		std::cout << "Couldnt load Trap Texture" << endl;
+		return false;
+	}
+
+	if (!trapFont.loadFromFile("Assets/Font/font.ttf")) {
+		std::cout << "No font file found!" << std::endl;
+	}
+
 	else
 	return true;
 }
@@ -151,8 +176,29 @@ void Player::LoadTextFile(string name)
 	}
 }
 
+void Player::AddNewTrap(sf::Vector2f position)
+{
+	m_trapRectangle.setPosition(position);
+	m_TrapRectangles.push_back(m_trapRectangle);
+}
+
 void Player::Update(sf::Time time)
 {	
+	int timer = trapClock.getElapsedTime().asSeconds();
+	if (countDownTrap && timer > 0)
+	{
+		trapCoolDown--;
+		trapCDText.setString(std::to_string(trapCoolDown));
+		//If the trap hits Zero, then allow another trap to be placed.
+		if (trapCoolDown <= 0)
+		{
+			trapCoolDown = 10;
+			countDownTrap = false;
+		}
+		trapClock.restart();
+	}
+
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -275,6 +321,35 @@ void Player::Draw(sf::RenderWindow &window)
 			m_AK47LeftRectangle.setPosition(sf::Vector2f((m_position.x - 18), m_position.y + 28));
 			window.draw(m_AK47LeftRectangle);
 		}
+	}
+
+	else if (currentWeapon == TRAP)
+	{
+		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		{
+			m_trapRectangle.setPosition(sf::Vector2f((m_position.x + 14), m_position.y + 28));
+			window.draw(m_trapRectangle);
+		}
+
+		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		{
+			m_trapRectangle.setPosition(sf::Vector2f((m_position.x - 18), m_position.y + 28));
+			window.draw(m_trapRectangle);
+		}
+	}
+
+
+	if (m_TrapRectangles.size() > 0)
+	{
+		for each (sf::RectangleShape rect in m_TrapRectangles)
+		{
+			window.draw(rect);
+		}
+	}
+
+	if (countDownTrap)
+	{		
+		window.draw(trapCDText);
 	}
 
 }

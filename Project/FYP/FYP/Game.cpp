@@ -167,6 +167,53 @@ int main()
 				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 					window.close();
 
+				//AK
+				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num1))
+				{
+					hud.SetHighlight(1);
+					player.SetWeapon(6);
+				}
+
+				//DEAGLE
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num2))
+				{
+					hud.SetHighlight(2);
+					player.SetWeapon(2);
+				}
+
+				//SNIPER
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num3))
+				{
+					hud.SetHighlight(3);
+					player.SetWeapon(3);
+				}
+
+				//MINIGUN
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num4))
+				{
+					hud.SetHighlight(4);
+					player.SetWeapon(4);
+				}
+
+				//TRAP
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num5))
+				{
+					hud.SetHighlight(5);
+					player.SetWeapon(5);
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num6))
+				{
+					hud.SetHighlight(6);
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num7))
+				{
+					player.SetHealth(false, 10);
+					hud.SetHealth(player.GetHealth());
+					break;
+				}
+
 				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 				{
 					// left click...
@@ -176,7 +223,7 @@ int main()
 					//SNIPER
 					if (player.GetWeapon() == 3)
 					{
-						
+						player.SetEnergy(true, 15);
 						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 						{
 							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -193,7 +240,7 @@ int main()
 					//MINIGUN
 					if (player.GetWeapon() == 4)
 					{
-
+						player.SetEnergy(true, 2);
 						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 						{
 							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -210,7 +257,7 @@ int main()
 					//DEAGLE
 					if (player.GetWeapon() == 2)
 					{
-
+						player.SetEnergy(true, 8);
 						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 						{
 							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -224,24 +271,38 @@ int main()
 						}
 					}
 
-					//AK47
+					//TRAP
+					if (player.GetWeapon() == 5)
+					{
+						//If the trap is not on cool down..
+						if (!player.GetTrapCoolDown())
+						{
+							player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+							player.SetTrapCoolDown(true);
+						}
+					}
+
+					//AK
 					if (player.GetWeapon() == 6)
 					{
-
+						player.SetEnergy(true, 4);
 						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 						{
-								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-								bullets.push_back(b);
+							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
 						}
 
 						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 						{
 
-								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-								bullets.push_back(b);
+							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+							bullets.push_back(b);
 						}
 					}
 
+
+					//Update visual representation
+					hud.SetEnergy(player.GetEnergy());
 
 				}
 
@@ -703,6 +764,7 @@ int main()
 			//chest.Draw(window);
 			//chest.Update(frameTime);
 
+			hud.countDown = player.GetTrapCoolDown();
 
 			player.Draw(window);
 			// Finally, display rendered frame on screen 
