@@ -32,7 +32,15 @@ int main()
 	Room room = Room();
 	HUD hud = HUD();
 	Bullet* b;
-	std::vector<Bullet *> bullets;
+	std::vector<Bullet *> Room1Bullets;
+	std::vector<Bullet *> Room2Bullets;
+	std::vector<Bullet *> Room3Bullets;
+	std::vector<Bullet *> Room4Bullets;
+	std::vector<Bullet *> Room5Bullets;
+	std::vector<Bullet *> Room6Bullets;
+	std::vector<Bullet *> Room7Bullets;
+	std::vector<Bullet *> Room8Bullets;
+	std::vector<Bullet *> Room9Bullets;
 	SoundManager soundManager = SoundManager();
 
 	//Network 
@@ -214,99 +222,846 @@ int main()
 					break;
 				}
 
-				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+				//Key Presses for each room, creating bullets etc.
+				switch (room.m_currentRoom)
 				{
-					// left click...
-					sf::Vector2i mousepos = sf::Mouse::getPosition(window);
-					sf::Vector2f converted = window.mapPixelToCoords(mousepos);
-
-					//SNIPER
-					if (player.GetWeapon() == 3)
+					#pragma region ROOM 1 KEY PRESS
+					//Top Left Room
+				case room.ROOM1:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
-						player.SetEnergy(true, 15);
-						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
 						}
 
-						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						//MINIGUN
+						if (player.GetWeapon() == 4)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+							}
 						}
 					}
+				}break;
 
-					//MINIGUN
-					if (player.GetWeapon() == 4)
+#pragma endregion ROOM 1 KEY PRESS
+
+					#pragma region ROOM 2 KEY PRESS
+				case room.ROOM2:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
-						player.SetEnergy(true, 2);
-						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
 						}
 
-						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						//MINIGUN
+						if (player.GetWeapon() == 4)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+							}
 						}
 					}
+				}break;
+#pragma endregion ROOM 2 KEY PRESS
 
-					//DEAGLE
-					if (player.GetWeapon() == 2)
+					#pragma region ROOM 3 KEY PRESS
+				case room.ROOM3:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
-						player.SetEnergy(true, 8);
-						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
 						}
 
-						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						//MINIGUN
+						if (player.GetWeapon() == 4)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+							}
 						}
 					}
+				}break;
+#pragma endregion ROOM 3 KEY PRESS
 
-					//TRAP
-					if (player.GetWeapon() == 5)
+					#pragma region ROOM 4 KEY PRESS
+				case room.ROOM4:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
-						//If the trap is not on cool down..
-						if (!player.GetTrapCoolDown())
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
 						{
-							player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
-							player.SetTrapCoolDown(true);
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+						}
+
+						//MINIGUN
+						if (player.GetWeapon() == 4)
+						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+							}
 						}
 					}
+				}break;
+#pragma endregion ROOM 4 KEY PRESS
 
-					//AK
-					if (player.GetWeapon() == 6)
+					#pragma region ROOM 5 KEY PRESS
+				case room.ROOM5:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
-						player.SetEnergy(true, 4);
-						if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
 						{
-							b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
 						}
 
-						else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+						//MINIGUN
+						if (player.GetWeapon() == 4)
 						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
 
-							b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-							bullets.push_back(b);
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+							}
 						}
 					}
+				}break;
+#pragma endregion ROOM 5 KEY PRESS
 
+					#pragma region ROOM 6 KEY PRESS
+				case room.ROOM6:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+					{
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
+						{
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+						}
+
+						//MINIGUN
+						if (player.GetWeapon() == 4)
+						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+							}
+						}
+					}
+				}break;
+#pragma endregion ROOM 6 KEY PRESS
+
+					#pragma region ROOM 7 KEY PRESS
+				case room.ROOM7:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+					{
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
+						{
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+						}
+
+						//MINIGUN
+						if (player.GetWeapon() == 4)
+						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+							}
+						}
+					}
+				}break;
+#pragma endregion ROOM 7 KEY PRESS
+
+					#pragma region ROOM 8 KEY PRESS
+				case room.ROOM8:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+					{
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
+						{
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+						}
+
+						//MINIGUN
+						if (player.GetWeapon() == 4)
+						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+							}
+						}
+					}
+				}break;
+#pragma endregion ROOM 8 KEY PRESS
+
+					#pragma region ROOM 9 KEY PRESS
+				case room.ROOM9:
+				{
+					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+					{
+						// left click...
+						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+
+						//SNIPER
+						if (player.GetWeapon() == 3)
+						{
+							player.SetEnergy(true, 15);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+						}
+
+						//MINIGUN
+						if (player.GetWeapon() == 4)
+						{
+							player.SetEnergy(true, 2);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+						}
+
+						//DEAGLE
+						if (player.GetWeapon() == 2)
+						{
+							player.SetEnergy(true, 8);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+						}
+
+						//TRAP
+						if (player.GetWeapon() == 5)
+						{
+							//If the trap is not on cool down..
+							if (!player.GetTrapCoolDown())
+							{
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								player.SetTrapCoolDown(true);
+							}
+						}
+
+						//AK
+						if (player.GetWeapon() == 6)
+						{
+							player.SetEnergy(true, 4);
+							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+
+							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
+							{
+
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+							}
+						}
+					}
+				}break;
+#pragma endregion ROOM 9 KEY PRESS
+				}
 
 					//Update visual representation
 					hud.SetEnergy(player.GetEnergy());
 
-				}
+				
 
-
+				#pragma region UPDATE FOR EVERY ROOM
 				switch (room.m_currentRoom)
 				{
 					//Top Left Room
@@ -604,6 +1359,8 @@ int main()
 				}
 				break;
 				}
+				#pragma endregion UPDATE FOR EVERY ROOM
+
 			
 			}//END KEYBOARD EVENTS
 
@@ -612,11 +1369,11 @@ int main()
 
 			//draw frame items			
 			room.Draw(window);
-			//RandomLootManager::GetInstance()->Draw(window);
-			//RandomLootManager::GetInstance()->Update(frameTime);
 			player.Update(frameTime);
 			hud.Draw(window);
 
+
+			#pragma region CHEST + BULLET DRAW SWITCH STATEMENT
 			switch (room.m_currentRoom)
 			{
 				//Top Left Room
@@ -626,6 +1383,11 @@ int main()
 				{
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+				for each (Bullet* bullet in Room1Bullets)
+				{
+					bullet->Draw(window);
 				}
 			}
 			break;
@@ -638,6 +1400,11 @@ int main()
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
 				}
+
+				for each (Bullet* bullet in Room2Bullets)
+				{
+					bullet->Draw(window);
+				}
 			}
 			break;
 
@@ -649,6 +1416,11 @@ int main()
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
 				}
+
+				for each (Bullet* bullet in Room3Bullets)
+				{
+					bullet->Draw(window);
+				}
 			}
 			break;
 
@@ -659,6 +1431,11 @@ int main()
 				{
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+				for each (Bullet* bullet in Room4Bullets)
+				{
+					bullet->Draw(window);
 				}
 
 			}
@@ -673,6 +1450,11 @@ int main()
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
 				}
 
+				for each (Bullet* bullet in Room5Bullets)
+				{
+					bullet->Draw(window);
+				}
+
 			}
 			break;
 
@@ -683,6 +1465,11 @@ int main()
 				{
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}
+
+				for each (Bullet* bullet in Room6Bullets)
+				{
+					bullet->Draw(window);
 				}
 
 			}
@@ -697,6 +1484,11 @@ int main()
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
 				}
 
+				for each (Bullet* bullet in Room7Bullets)
+				{
+					bullet->Draw(window);
+				}
+
 			}
 			break;
 
@@ -709,6 +1501,11 @@ int main()
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
 				}
 
+
+				for each (Bullet* bullet in Room8Bullets)
+				{					
+					bullet->Draw(window);
+				}
 			}
 			break;
 
@@ -719,27 +1516,158 @@ int main()
 				{
 					RandomLootManager::GetInstance()->randomChests.at(i)->Draw(window);
 					RandomLootManager::GetInstance()->randomChests.at(i)->Update(frameTime);
+				}			
+
+				for each (Bullet* bullet in Room9Bullets)
+				{
+					bullet->Draw(window);
 				}
 
 			}
 			break;
+			}			
+
+			#pragma endregion CHEST + BULLET DRAW SWITCH STATEMENT
+
+			#pragma region DIFFERENT BULLET UPDATES
+			
+			//Bullets 1
+			for each (Bullet* bullet in Room1Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room1Bullets.erase(std::remove(Room1Bullets.begin(), Room1Bullets.end(), bullet), Room1Bullets.end());
+					delete bullet;
+					std::cout << "Room 1 Bullet Deleted" << std::endl;
+					break;
+
+				}
 			}
 
+			//Bullets 2
+			for each (Bullet* bullet in Room2Bullets)
+			{
+				bullet->Update(frameTime);
 
-			for each (Bullet* bullet in bullets)
+				if (!bullet->Alive())
+				{
+					Room2Bullets.erase(std::remove(Room2Bullets.begin(), Room2Bullets.end(), bullet), Room2Bullets.end());
+					delete bullet;
+					std::cout << " Room 2 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//Bullets 3
+			for each (Bullet* bullet in Room3Bullets)
 			{
 				bullet->Update(frameTime);
 				bullet->Draw(window);
 
 				if (!bullet->Alive())
 				{
-					bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
+					Room3Bullets.erase(std::remove(Room3Bullets.begin(), Room3Bullets.end(), bullet), Room3Bullets.end());
 					delete bullet;
-					std::cout << "Bullet Deleted" << std::endl;
+					std::cout << "Room 3 Bullet Deleted" << std::endl;
 					break;
 
 				}
 			}
+
+			//Bullets 4
+			for each (Bullet* bullet in Room4Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room4Bullets.erase(std::remove(Room4Bullets.begin(), Room4Bullets.end(), bullet), Room4Bullets.end());
+					delete bullet;
+					std::cout << "Room 4 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//Bullets 5
+			for each (Bullet* bullet in Room5Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room5Bullets.erase(std::remove(Room5Bullets.begin(), Room5Bullets.end(), bullet), Room5Bullets.end());
+					delete bullet;
+					std::cout << "Room 5 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//Bullets 6
+			for each (Bullet* bullet in Room6Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room6Bullets.erase(std::remove(Room6Bullets.begin(), Room6Bullets.end(), bullet), Room6Bullets.end());
+					delete bullet;
+					std::cout << "Room 6 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//Bullets 7 
+			for each (Bullet* bullet in Room7Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room7Bullets.erase(std::remove(Room7Bullets.begin(), Room7Bullets.end(), bullet), Room7Bullets.end());
+					delete bullet;
+					std::cout << "Room 7 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//Bullets 8
+			for each (Bullet* bullet in Room8Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room8Bullets.erase(std::remove(Room8Bullets.begin(), Room8Bullets.end(), bullet), Room8Bullets.end());
+					delete bullet;
+					std::cout << "Room 8 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			//BULLETS 9
+			for each (Bullet* bullet in Room9Bullets)
+			{
+				bullet->Update(frameTime);
+
+				if (!bullet->Alive())
+				{
+					Room9Bullets.erase(std::remove(Room9Bullets.begin(), Room9Bullets.end(), bullet), Room9Bullets.end());
+					delete bullet;
+					std::cout << "Room 9 Bullet Deleted" << std::endl;
+					break;
+
+				}
+			}
+
+			#pragma endregion DIFFERENT BULLET UPDATES
 
 			if (room.CheckBoundingCollisions(player.GetShape()))
 			{
@@ -760,10 +1688,6 @@ int main()
 				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
 			}
 
-
-			//chest.Draw(window);
-			//chest.Update(frameTime);
-
 			hud.countDown = player.GetTrapCoolDown();
 
 			player.Draw(window);
@@ -773,6 +1697,7 @@ int main()
 
 		break;
 
+#pragma region LOBBY TEXT NETCODE
 		case sceneManager.LOBBY:
 		{
 			frameTime = frameClock.restart();
@@ -844,6 +1769,7 @@ int main()
 			// Finally, display rendered frame on screen 
 			window.display();
 		}
+#pragma endregion LOBBY TEXT NETCODE
 
 		break;
 		}
