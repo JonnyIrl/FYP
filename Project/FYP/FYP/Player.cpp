@@ -87,6 +87,9 @@ void Player::AssignGunRectangles()
 	trapCDText.setColor(sf::Color::White);
 	trapCDText.setPosition(sf::Vector2f(243, 670));
 
+	m_killingSpree = 0;
+	m_deathsWithoutKill = 0;
+
 }
 
 bool Player::LoadTexture()
@@ -166,6 +169,61 @@ bool Player::LoadTexture()
 	return true;
 }
 
+//This timer should refresh when the player has more than 3 kills, it will start and then announce result
+bool Player::CheckKillSoundEffect()
+{
+	int timer = soundEffectClock.getElapsedTime().asSeconds();
+	if(m_killingSpree >= 3 && timer > 0)
+	{
+		cout << "Killing Spree is " << m_killingSpree << endl;
+		soundEffectCountDown++;
+
+		cout << "Count Down = " << soundEffectCountDown << endl;
+
+		if (soundEffectCountDown >= 3)
+		{
+			cout << "RETURNED TRUE TO PLAY SOUND EFFECT" << endl << endl;
+			soundEffectCountDown = 0;
+			return true;
+		}
+
+		soundEffectClock.restart();
+	}
+
+	return false;
+}
+
+//Checks if the player died more than 3 times without a kill..
+bool Player::CheckDeathStreakOver()
+{
+	if (m_deathsWithoutKill >= 3)
+	{
+		if (m_killingSpree >= 1)
+		{
+			m_deathsWithoutKill = 0;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Player::IncreaseDecreaseKillingSpress(bool state)
+{
+	//If true then increase
+	if (state)
+	{
+		m_killingSpree++;
+		cout << "Increased KS = " << m_killingSpree << endl;
+	}
+
+	else
+	{
+		m_killingSpree--;
+		cout << "Decreased KS = " << m_killingSpree << endl;
+	}
+}
+
 void Player::LoadTextFile(string name)
 {
 	ifstream file(name);
@@ -197,6 +255,7 @@ void Player::Update(sf::Time time)
 		}
 		trapClock.restart();
 	}
+
 
 
 

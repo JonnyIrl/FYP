@@ -12,6 +12,111 @@ SoundManager::SoundManager()
 		newMasterVolume = 0;
 		//CheckAudio(savedCurrentSFXVolume + 4);
 
+		//KILLING SPREE SFXS
+		m_killingSpreeSound.setBuffer(m_killingSpreeBuffer);
+		m_killingFrenzySound.setBuffer(m_killingFrenzyBuffer);
+		m_rampageSound.setBuffer(m_rampageBuffer);
+		m_runningRiotSound.setBuffer(m_runningRiotBuffer);
+		m_invincibleSound.setBuffer(m_invincibleBuffer);
+		m_comebackKillSound.setBuffer(m_comebackKillBuffer);
+
+		//Sniper Shots SFX
+		m_sniperShot1Sound.setBuffer(m_sniperShot1Buffer);
+		m_sniperShot1Sound.setVolume(80.0f);
+		m_sniperShot2Sound.setBuffer(m_sniperShot2Buffer);
+		m_sniperShot2Sound.setVolume(80.0f);
+		m_sniperShot3Sound.setBuffer(m_sniperShot3Buffer);
+		m_sniperShot3Sound.setVolume(80.0f);
+		m_sniperShot4Sound.setBuffer(m_sniperShot4Buffer);
+		m_sniperShot4Sound.setVolume(80.0f);
+
+
+	}
+}
+
+void SoundManager::PlaySniperShotSoundEffect()
+{
+	int num = (rand() % 4) + 1;
+	std::cout << "Random = " << num << std::endl;
+	if (num == 1)
+	{
+		//If its playing then re roll
+		if (m_sniperShot1Sound.getStatus() == sf::SoundSource::Playing)
+		{
+			if (m_sniperShot2Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot3Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot4Sound.getStatus() == sf::SoundSource::Playing)
+			{
+				std::cout << "All sounds playing.." << std::endl;
+			}
+
+			else
+			PlaySniperShotSoundEffect();
+		}
+
+		else
+		m_sniperShot1Sound.play();
+	}
+
+	if (num == 2)
+	{
+		//If its playing then re roll
+		if (m_sniperShot2Sound.getStatus() == sf::SoundSource::Playing)
+		{
+			if (m_sniperShot1Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot3Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot4Sound.getStatus() == sf::SoundSource::Playing)
+			{
+				std::cout << "All sounds playing.." << std::endl;
+			}
+
+			else
+				PlaySniperShotSoundEffect();
+
+		}
+
+		else
+		m_sniperShot2Sound.play();
+	}
+
+	if (num == 3)
+	{
+		//If its playing then re roll
+		if (m_sniperShot3Sound.getStatus() == sf::SoundSource::Playing)
+		{
+			if (m_sniperShot2Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot1Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot4Sound.getStatus() == sf::SoundSource::Playing)
+			{
+				std::cout << "All sounds playing.." << std::endl;
+			}
+
+			else
+				PlaySniperShotSoundEffect();
+		}
+
+		else
+		m_sniperShot3Sound.play();
+	}
+
+	if (num == 4)
+	{
+		//If its playing then re roll
+		if (m_sniperShot4Sound.getStatus() == sf::SoundSource::Playing)
+		{
+			if (m_sniperShot2Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot3Sound.getStatus() == sf::SoundSource::Playing &&
+				m_sniperShot1Sound.getStatus() == sf::SoundSource::Playing)
+			{
+				std::cout << "All sounds playing.." << std::endl;
+			}
+
+			else
+				PlaySniperShotSoundEffect();
+		}
+
+		else
+		m_sniperShot4Sound.play();
 	}
 }
 
@@ -23,7 +128,106 @@ bool SoundManager::LoadSound()
 		return false;
 	}
 
+	if (!m_killingSpreeBuffer.loadFromFile("Assets/Audio/KILLING/KillingSpree.ogg"))
+	{
+		std::cout << "Couldnt load KillingSpree sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_killingFrenzyBuffer.loadFromFile("Assets/Audio/KILLING/KillingFrenzy.ogg"))
+	{
+		std::cout << "Couldnt load KillingFrenzy sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_invincibleBuffer.loadFromFile("Assets/Audio/KILLING/Invincible.ogg"))
+	{
+		std::cout << "Couldnt load Invincible sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_rampageBuffer.loadFromFile("Assets/Audio/KILLING/Rampage.ogg"))
+	{
+		std::cout << "Couldnt load Rampage sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_runningRiotBuffer.loadFromFile("Assets/Audio/KILLING/RunningRiot.ogg"))
+	{
+		std::cout << "Couldnt load RunningRiot sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_comebackKillBuffer.loadFromFile("Assets/Audio/KILLING/Comeback.ogg"))
+	{
+		std::cout << "Couldnt load Comeback sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_sniperShot1Buffer.loadFromFile("Assets/Audio/GUNS/SNIPER/shot1.ogg"))
+	{
+		std::cout << "Couldnt load shot1 sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_sniperShot2Buffer.loadFromFile("Assets/Audio/GUNS/SNIPER/shot2.ogg"))
+	{
+		std::cout << "Couldnt load shot1 sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_sniperShot3Buffer.loadFromFile("Assets/Audio/GUNS/SNIPER/shot3.ogg"))
+	{
+		std::cout << "Couldnt load shot1 sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_sniperShot4Buffer.loadFromFile("Assets/Audio/GUNS/SNIPER/shot4.ogg"))
+	{
+		std::cout << "Couldnt load shot1 sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+
 	return true;
+}
+
+void SoundManager::PlayKillingSpreeSoundEffect(int amountOfKills)
+{
+	//KILLING SPREE SFX
+	if (amountOfKills == 3)
+	{
+		m_killingSpreeSound.play();
+	}
+
+	//RAMPAGE SPREE SFX
+	if (amountOfKills == 4)
+	{
+		m_rampageSound.play();
+	}
+
+	//KILLING FRENZY SFX
+	if (amountOfKills == 5)
+	{
+		m_killingFrenzySound.play();
+	}
+
+	//RUNNING RIOT SFX
+	if (amountOfKills == 6)
+	{
+		m_runningRiotSound.play();
+	}
+
+	//INVINCIBLE
+	if (amountOfKills >= 7)
+	{
+		m_invincibleSound.play();
+	}
+}
+
+void SoundManager::PlayComebackKillSoundEffect()
+{
+	m_comebackKillSound.play();
 }
 
 void SoundManager::PlayMenuMusic()

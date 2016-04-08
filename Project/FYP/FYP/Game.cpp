@@ -222,6 +222,37 @@ int main()
 					break;
 				}
 
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Y))
+				{
+					player.IncreaseDecreaseKillingSpress(true);
+					break;
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::U))
+				{
+					player.IncreaseDecreaseKillingSpress(false);
+					break;
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::I))
+				{
+					player.IncreaseDeathCount();
+					break;
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::O))
+				{
+					soundManager.PlayKillingSpreeSoundEffect(6);
+					break;
+				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::P))
+				{
+					soundManager.PlayKillingSpreeSoundEffect(7);
+					break;
+				}
+
+
 				//Key Presses for each room, creating bullets etc.
 				switch (room.m_currentRoom)
 				{
@@ -250,6 +281,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room1Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -343,6 +377,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room2Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -435,6 +472,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room3Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -527,6 +567,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room4Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -619,6 +662,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room5Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -711,6 +757,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room6Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -803,6 +852,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room7Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -895,6 +947,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room8Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -987,6 +1042,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room9Bullets.push_back(b);
 							}
+
+							//Play SFX
+							soundManager.PlaySniperShotSoundEffect();
 						}
 
 						//MINIGUN
@@ -1565,7 +1623,6 @@ int main()
 			for each (Bullet* bullet in Room3Bullets)
 			{
 				bullet->Update(frameTime);
-				bullet->Draw(window);
 
 				if (!bullet->Alive())
 				{
@@ -1668,6 +1725,20 @@ int main()
 			}
 
 			#pragma endregion DIFFERENT BULLET UPDATES
+
+			//Check which killing spree sound effect to play
+
+			//If true then play the sound for the amount of kills the player had.
+			if (player.CheckKillSoundEffect())
+			{
+				soundManager.PlayKillingSpreeSoundEffect(player.GetKillingSpree());
+				player.ResetKillingSpree();
+			}
+
+			if (player.CheckDeathStreakOver())
+			{
+				soundManager.PlayComebackKillSoundEffect();
+			}
 
 			if (room.CheckBoundingCollisions(player.GetShape()))
 			{

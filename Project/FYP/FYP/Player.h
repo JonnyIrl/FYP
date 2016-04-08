@@ -59,6 +59,12 @@ public:
 	void AddNewTrap(sf::Vector2f position);
 	void SetTrapCoolDown(bool state){ countDownTrap = state; }
 	bool GetTrapCoolDown() { return countDownTrap; }
+	bool CheckKillSoundEffect();
+	bool CheckDeathStreakOver();
+	int GetKillingSpree() { return m_killingSpree; }
+	void ResetKillingSpree() { m_killingSpree = 0; }
+	void IncreaseDecreaseKillingSpress(bool state);
+	void IncreaseDeathCount() { m_deathsWithoutKill++; cout << "Death total = " << m_deathsWithoutKill; }
 
 
 private:
@@ -72,6 +78,8 @@ private:
 	int m_health;
 	int m_energy;
 	int m_dir;
+	int m_killingSpree;
+	int m_deathsWithoutKill;
 	int trapCoolDown;
 	bool countDownTrap;
 	sf::Sprite m_spr;
@@ -104,6 +112,8 @@ private:
 
 	//Clock for count downs
 	sf::Clock trapClock;
+	sf::Clock soundEffectClock;
+	float soundEffectCountDown;
 
 	//Text for count down display
 	sf::Text trapCDText;
