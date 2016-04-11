@@ -28,7 +28,6 @@ Netcode::Netcode()
 		m_personalPort = 5301;
 
 		//PLAYERNAME = playerName;
-
 		cout << "Netcode Constructor Finished" << endl;
 	}
 }
@@ -59,22 +58,27 @@ void Netcode::ConnectToServer(string id)
 	{
 		cout << "Not Connected.. Attempting to connect.." << endl;
 		sf::IpAddress ip = "192.168.0.15";
+		m_ipAddress = "192.168.0.15";
 		sf::Packet packet;
 
+		cout << "BEFORE PACKING = " << "192.168.0.15" << endl;
 		//Send the initial connection details that the server needs
-		packet << INITIAL_CONNECT_DATA << m_ipAddress.toString() << id;
+		packet << INITIAL_CONNECT_DATA << "192.168.0.15" << id;
+
+		cout << "AFTER PACKING = " << "192.168.0.15" << endl;
 
 		//Send that packet to the server with the servers port
 		sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 		if (status == sf::Socket::Done)
 		{
 			cout << "Connection Packet Sent" << endl;
+			cout << "AFTER SENDING = " << "192.168.0.15" << endl;
 		}
 
 		while (!m_receivedReply)
 		{
-			cout << "Waiting for a reply now..." << endl;
-			ReceivePacket();
+			//cout << "Waiting for a reply now..." << endl;
+			//ReceivePacket();
 			m_receivedReply = true;
 			cout << "Got Reply from the server.. \n Now Connected to the server!" << endl << endl;
 		}
@@ -87,22 +91,23 @@ void Netcode::SendPacket()
 	string message = m_currentMessage;
 
 	sf::Packet packet;
-	packet << GENERAL_MSG << m_ipAddress.toString() << message << PLAYERNAME;
+	packet << GENERAL_MSG << "192.168.0.15" << message << PLAYERNAME;
 
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
 	case sf::Socket::Done:
-		PacketType type;
-		packet >> type;
+		cout << "Message Sent" << endl;
+		//PacketType type;
+		//packet >> type;
 		
-		if (type == GENERAL_MSG)
-		{
-			cout << "Message Sent, waiting for a reply now. " << endl;
+		//if (type == GENERAL_MSG)
+		//{
+			//cout << "Message Sent, waiting for a reply now. " << endl;
 			//std::string msg;
 			//packet >> msg >> PLAYERNAME;
 			//packet.clear();
-		}
+		//}
 		break;
 
 	case sf::Socket::Disconnected:
@@ -113,89 +118,95 @@ void Netcode::SendPacket()
 		;
 	}
 
-	while (!m_receivedReply)
+	/*while (!m_receivedReply)
 	{
 		ReceivePacket();
-	}
+	}*/
 }
 
 void Netcode::ReceivePacket()
 {
-	sf::Packet packet;
-	list<string> messages;
-	sf::Socket::Status status = m_socket.receive(packet, m_ipAddress, m_personalPort);
-	retryCount++;
-
-	switch (status)
+	bool quit = false;
+	while (!quit)
 	{
-	case sf::Socket::Done:
-		PacketType type;
-		sf::Uint32 size;
-		//unsigned short port;
-		packet >> type;
+		sf::Packet packet;
+		list<string> messages;
+		//m_ipAddress = "192.168.0.15";
+		sf::Socket::Status status = m_socket.receive(packet, m_ipAddress, m_personalPort);
+		retryCount++;
 
-		//If we get this far then we have got a message from the server so no need to open the packet up and check.
-		if (type == SERVER_REPLY_MSG)
+		switch (status)
 		{
-			m_receivedReply = true;
-			break;
-		}
+		case sf::Socket::Done:
+			PacketType type;
+			sf::Uint32 size;
+			//unsigned short port;
+			packet >> type;
 
-		//If we get this far then we have got a message from the server so no need to open the packet up and check.
-		//if (type == SERVER_REPLY_MSG)
-		//{
-		//	/*std::string msg;
-		//	packet >> msg;
-		//	std::cout << "Server: " << msg << "\n";
-		//	retryCount = 0;*/
-		//	m_receivedReply = true;
-		//	break;
-		//}
-
-		//If we get this far then we have got a message from the server so no need to open the packet up and check.
-		if (type == UPDATE_MSG)
-		{
-			packet >> size;
-
-			for (sf::Uint32 i = 0; i < size; ++i)
+			//If we get this far then we have got a message from the server so no need to open the packet up and check.
+			if (type == SERVER_REPLY_MSG)
 			{
-				string item;
-				packet >> item;
-				messages.push_back(item);
+				m_receivedReply = true;
+				break;
 			}
 
-			//Update the chat window with the text.
-			UpdateChatWindow(messages);
-			m_receivedReply = true;
-			break;
-		}
+			//If we get this far then we have got a message from the server so no need to open the packet up and check.
+			//if (type == SERVER_REPLY_MSG)
+			//{
+			//	/*std::string msg;
+			//	packet >> msg;
+			//	std::cout << "Server: " << msg << "\n";
+			//	retryCount = 0;*/
+			//	m_receivedReply = true;
+			//	break;
+			//}
 
-		if (type == PLAYER_POSITION_UPDATE)
-		{
-			string playerID;
-			float xPos, yPos;
-			packet >> playerID;
-			packet >> xPos;
-			packet >> yPos;
-
-			for (int i = 0; pm.GetPlayers().size(); i++)
+			//If we get this far then we have got a message from the server so no need to open the packet up and check.
+			if (type == UPDATE_MSG)
 			{
-				if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+				cout << "Update Message" << endl;
+				packet >> size;
+				cout << "Size = " << size << endl;
+
+				for (sf::Uint32 i = 0; i < size; ++i)
 				{
-					pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
-					break;
+					string item;
+					packet >> item;
+					messages.push_back(item);
 				}
+
+				cout << "Messages size = " << messages.size();
+				//Update the chat window with the text.
+				UpdateChatWindow(messages);
+				cout << "Updated chat window" << endl;
+				ResetText();
+				cout << "Reset text" << endl;
+				m_receivedReply = true;
+				break;
 			}
 
-			break;
-		}
-	default:
-		;
-	}
+			if (type == PLAYER_POSITION_UPDATE)
+			{
+				string playerID;
+				float xPos, yPos;
+				packet >> playerID;
+				packet >> xPos;
+				packet >> yPos;
 
-	if (retryCount >= 10)
-	{
-		//cout << "YOU HAVE LOST CONNECTION TO THE SERVER!!" << endl;
+				for (int i = 0; pm.GetPlayers().size(); i++)
+				{
+					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+					{
+						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
+						break;
+					}
+				}
+
+				break;
+			}
+		default:
+			;
+		}
 	}
 }
 
@@ -248,6 +259,7 @@ void Netcode::UpdateChatWindow(list<string> messages)
 void Netcode::Update()
 {
 	//ReceiveServerMessageUpdate();
+	//ReceivePacket();
 }
 void Netcode::Draw(sf::RenderWindow& window)
 {

@@ -49,7 +49,10 @@ int main()
 	netcode.PLAYERNAME = player.GetName();
 	window.setFramerateLimit(60);
 
+	sf::Thread thread(&Netcode::ReceivePacket, &netcode);
+
 	RandomLootManager::GetInstance()->GenerateAllRoomsLoot();
+	thread.launch();
 	//Chest chest = Chest(sf::Vector2f(300, 300), 3);
 	// Start game loop 
 	while (window.isOpen())
@@ -1833,7 +1836,7 @@ int main()
 					else if (Event.text.unicode == 13)
 					{
 						netcode.SendPacket();
-						netcode.ResetText();
+						//netcode.ResetText();
 					}
 				}
 
@@ -1864,7 +1867,7 @@ int main()
 
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetConnectRectangle()))
 					{
-						//SEND MESSAGE INTO CHAT WINDOW
+						//SEND MESSAGE INTO CHAT WINDOW						
 						netcode.ConnectToServer(player.GetPlayerID());
 					}
 				}
@@ -1873,7 +1876,7 @@ int main()
 			//prepare frame
 			window.clear();
 
-			netcode.Update();
+			//netcode.Update();
 			sceneManager.Draw(window);
 			netcode.Draw(window);
 
