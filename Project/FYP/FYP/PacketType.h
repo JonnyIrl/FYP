@@ -7,3 +7,4 @@ const PacketType GENERAL_MSG = 1;
 const PacketType SERVER_MSG = 2;
 const PacketType UPDATE_MSG = 3;
 const PacketType SERVER_REPLY_MSG = 4;
+const PacketType PLAYER_POSITION_UPDATE = 5;

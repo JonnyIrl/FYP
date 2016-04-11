@@ -30,8 +30,25 @@ SoundManager::SoundManager()
 		m_sniperShot4Sound.setBuffer(m_sniperShot4Buffer);
 		m_sniperShot4Sound.setVolume(80.0f);
 
+		//AK Shots SFX
+		m_akShotSound.setBuffer(m_akShotBuffer);
+
 
 	}
+}
+
+void SoundManager::PlayAKShotSoundEffect()
+{
+	if (m_akShotSound.getStatus() == sf::SoundSource::Playing)
+	{
+		std::cout << "Playing AK Sound already" << std::endl;
+	}
+
+	else
+	{
+		m_akShotSound.play();
+	}
+
 }
 
 void SoundManager::PlaySniperShotSoundEffect()
@@ -185,6 +202,12 @@ bool SoundManager::LoadSound()
 	if (!m_sniperShot4Buffer.loadFromFile("Assets/Audio/GUNS/SNIPER/shot4.ogg"))
 	{
 		std::cout << "Couldnt load shot1 sound file.. Main Menu" << std::endl;
+		return false;
+	}
+
+	if (!m_akShotBuffer.loadFromFile("Assets/Audio/GUNS/AK/Shot1.ogg"))
+	{
+		std::cout << "Couldnt load AK sound file.. Main Menu" << std::endl;
 		return false;
 	}
 

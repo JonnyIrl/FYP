@@ -35,7 +35,7 @@ Player::Player()
 		m_playerAnimation = AnimatedSprite(sf::seconds(0.15f));
 		m_playerAnimation.setAnimation(m_playerDownAnimation);
 
-		LoadTextFile("Assets/Settings/name.txt");
+		LoadTextFile("Assets/Settings/id.txt");
 		if (m_Name.size() <= 0)
 		{
 			m_Name = "PLAYER1";
@@ -193,6 +193,23 @@ bool Player::CheckKillSoundEffect()
 	return false;
 }
 
+bool Player::CreateAKBullet()
+{
+	int timer = 0;
+	if (m_AKDelay <= 2 && timer > 0)
+	{
+		m_AKCountDown++;
+
+		if (m_AKCountDown >= 3)
+		{
+			m_AKCountDown = 0;
+			return true;
+		}
+	}
+
+	return false;
+}
+
 //Checks if the player died more than 3 times without a kill..
 bool Player::CheckDeathStreakOver()
 {
@@ -231,6 +248,7 @@ void Player::LoadTextFile(string name)
 	while (getline(file, str))
 	{
 		m_Name = str;
+		m_PlayerID = str;
 	}
 }
 

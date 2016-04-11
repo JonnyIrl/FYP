@@ -18,6 +18,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 32), "FYP");
 	sf::Time frameTime;
 	sf::Clock frameClock;
+	sf::Clock akClock;
 	//load a font
 	sf::Font font;
 	font.loadFromFile("C:\\Windows\\Fonts\\GARA.TTF");
@@ -165,6 +166,8 @@ int main()
 			frameTime = frameClock.restart();
 			// Process events 
 			sf::Event Event;
+
+			int timer = akClock.getElapsedTime().asSeconds();
 			while (window.pollEvent(Event))
 			{
 				// Close window : exit 
@@ -260,6 +263,7 @@ int main()
 					//Top Left Room
 				case room.ROOM1:
 				{
+
 					if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 					{
 						// left click...
@@ -339,14 +343,33 @@ int main()
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room1Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+
+
 							}
+						
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;		
+								cout << "BEFORE WHILE = " << timer << endl;
 
-								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-								Room1Bullets.push_back(b);
+									cout << "TIMER++ = " << timer << endl;
+									b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+									Room1Bullets.push_back(b);
+									b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+									Room1Bullets.push_back(b);
+									b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+									Room1Bullets.push_back(b);
+									akClock.restart();								
+							
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -361,7 +384,7 @@ int main()
 						// left click...
 						sf::Vector2i mousepos = sf::Mouse::getPosition(window);
 						sf::Vector2f converted = window.mapPixelToCoords(mousepos);
-
+						 
 						//SNIPER
 						if (player.GetWeapon() == 3)
 						{
@@ -443,6 +466,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room2Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -538,6 +563,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room3Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -633,6 +660,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room4Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -728,6 +757,9 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room5Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
+
 						}
 					}
 				}break;
@@ -823,6 +855,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room6Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -918,6 +952,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room7Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -1013,6 +1049,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room8Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -1108,6 +1146,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room9Bullets.push_back(b);
 							}
+
+							soundManager.PlayAKShotSoundEffect();
 						}
 					}
 				}break;
@@ -1825,7 +1865,7 @@ int main()
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetConnectRectangle()))
 					{
 						//SEND MESSAGE INTO CHAT WINDOW
-						netcode.ConnectToServer();
+						netcode.ConnectToServer(player.GetPlayerID());
 					}
 				}
 			}

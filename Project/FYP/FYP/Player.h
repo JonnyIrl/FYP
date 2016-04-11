@@ -1,3 +1,7 @@
+#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "ExtraIncludes.h"
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
@@ -65,12 +69,16 @@ public:
 	void ResetKillingSpree() { m_killingSpree = 0; }
 	void IncreaseDecreaseKillingSpress(bool state);
 	void IncreaseDeathCount() { m_deathsWithoutKill++; cout << "Death total = " << m_deathsWithoutKill; }
+	bool CreateAKBullet();
+	string GetPlayerID() { return m_PlayerID; }
+	void SetPlayerID(string ID) { m_PlayerID = ID; }
 
 
 private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
 	string m_Name;
+	string m_PlayerID;
 	bool m_alive;
 	bool m_moving;
 	float m_speed;
@@ -108,7 +116,8 @@ private:
 	//Each Gun Variable
 	int currentWeapon = 6;
 	const int M16 = 1;  int DEAGLE = 2; int SNIPER = 3; int MINIGUN = 4; int TRAP = 5; int AK47 = 6; int BOMB = 7;
-	
+	const int m_AKDelay = 2;
+	int m_AKCountDown;
 
 	//Clock for count downs
 	sf::Clock trapClock;
@@ -126,3 +135,5 @@ private:
 	Animation m_playerDownAnimation;
 	AnimatedSprite m_playerAnimation;
 };
+
+#endif

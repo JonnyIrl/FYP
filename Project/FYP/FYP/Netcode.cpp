@@ -23,7 +23,7 @@ Netcode::Netcode()
 		m_connected = false;
 
 
-		m_ServerIPAddress = "192.168.0.50";
+		m_ServerIPAddress = "192.168.0.15";
 		m_serverPort = 5300;
 		m_personalPort = 5301;
 
@@ -53,16 +53,16 @@ void Netcode::ResetText()
 }
 
 //Network code
-void Netcode::ConnectToServer()
+void Netcode::ConnectToServer(string id)
 {
 	if (!m_connected)
 	{
 		cout << "Not Connected.. Attempting to connect.." << endl;
-		sf::IpAddress ip = "192.168.0.50";
+		sf::IpAddress ip = "192.168.0.15";
 		sf::Packet packet;
 
 		//Send the initial connection details that the server needs
-		packet << INITIAL_CONNECT_DATA << m_ipAddress.toString() << PLAYERNAME;
+		packet << INITIAL_CONNECT_DATA << m_ipAddress.toString() << id;
 
 		//Send that packet to the server with the servers port
 		sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
@@ -118,6 +118,7 @@ void Netcode::SendPacket()
 		ReceivePacket();
 	}
 }
+
 void Netcode::ReceivePacket()
 {
 	sf::Packet packet;
@@ -168,6 +169,26 @@ void Netcode::ReceivePacket()
 			m_receivedReply = true;
 			break;
 		}
+
+		if (type == PLAYER_POSITION_UPDATE)
+		{
+			string playerID;
+			float xPos, yPos;
+			packet >> playerID;
+			packet >> xPos;
+			packet >> yPos;
+
+			for (int i = 0; pm.GetPlayers().size(); i++)
+			{
+				if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+				{
+					pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
+					break;
+				}
+			}
+
+			break;
+		}
 	default:
 		;
 	}
@@ -177,6 +198,7 @@ void Netcode::ReceivePacket()
 		//cout << "YOU HAVE LOST CONNECTION TO THE SERVER!!" << endl;
 	}
 }
+
 void Netcode::ReceiveServerMessageUpdate()
 {
 
@@ -210,6 +232,7 @@ void Netcode::ReceiveServerMessageUpdate()
 	//}
 
 }
+
 void Netcode::UpdateChatWindow(list<string> messages)
 {
 	string message = "";

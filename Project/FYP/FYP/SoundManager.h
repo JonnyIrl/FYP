@@ -22,6 +22,7 @@ public:
 	void PlayKillingSpreeSoundEffect(int noOfKills);
 	void PlayComebackKillSoundEffect();
 	void PlaySniperShotSoundEffect();
+	void PlayAKShotSoundEffect();
 
 private:
 	sf::SoundBuffer mainMenuBuffer;
@@ -36,7 +37,9 @@ private:
 	sf::SoundBuffer m_comebackKillBuffer;
 	sf::Sound m_comebackKillSound;
 
-	//Sniper Gun Shots
+	// Gun Shots
 	sf::SoundBuffer m_sniperShot1Buffer, m_sniperShot2Buffer, m_sniperShot3Buffer, m_sniperShot4Buffer;
+	sf::SoundBuffer m_akShotBuffer;
 	sf::Sound m_sniperShot1Sound, m_sniperShot2Sound, m_sniperShot3Sound, m_sniperShot4Sound;
+	sf::Sound m_akShotSound;
 };

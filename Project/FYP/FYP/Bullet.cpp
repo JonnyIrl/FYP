@@ -29,6 +29,11 @@ Bullet::Bullet(sf::Vector2f playerPos, sf::Vector2f mousePos, int currentWeapon)
 	}
 }
 
+void Bullet::ShootAKBullet()
+{
+
+}
+
 bool Bullet::LoadTexture()
 {
 	if (!m_bulletTexture.loadFromFile("Assets/Bullet/assaultRifleBullet.png"))

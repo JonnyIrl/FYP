@@ -13,6 +13,7 @@ public:
 	void CheckDeadBullets();
 	void CheckBoundaryCollisions();
 	void AssignBullets();
+	void ShootAKBullet();
 	bool Alive();
 
 private:

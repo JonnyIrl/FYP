@@ -92,6 +92,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Netcode.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="RandomLootManager.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Netcode.h" />
     <ClInclude Include="PacketType.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="RandomLootManager.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />
