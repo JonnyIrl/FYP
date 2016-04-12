@@ -38,11 +38,13 @@ private:
 	sf::UdpSocket m_socket;
 	bool m_connected;
 	bool m_receivedReply;
-	sf::IpAddress m_ipAddress = "192.168.0.15";
+	sf::IpAddress m_ipAddress = sf::IpAddress::getLocalAddress();
 	unsigned short m_serverPort = 5300;
 	unsigned short m_personalPort = 5301;
 	int retryCount = 0;
+	bool running = true;
 	PlayerManager pm = PlayerManager();
+	sf::UdpSocket listener;
 
 };
 

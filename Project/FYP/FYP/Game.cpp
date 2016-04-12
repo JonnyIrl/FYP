@@ -44,6 +44,7 @@ int main()
 	std::vector<Bullet *> Room9Bullets;
 	SoundManager soundManager = SoundManager();
 
+
 	//Network 
 	Netcode netcode = Netcode();
 	netcode.PLAYERNAME = player.GetName();
@@ -1876,7 +1877,7 @@ int main()
 			//prepare frame
 			window.clear();
 
-			//netcode.Update();
+			netcode.Update();
 			sceneManager.Draw(window);
 			netcode.Draw(window);
 

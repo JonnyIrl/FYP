@@ -2,7 +2,6 @@
 
 Netcode::Netcode()
 {
-
 	if (!m_font.loadFromFile("Assets/Pregame/font.ttf"))
 	{
 		std::cout << "Couldn't load FONT" << std::endl;
@@ -24,8 +23,14 @@ Netcode::Netcode()
 
 
 		m_ServerIPAddress = "192.168.0.15";
+		//m_ipAddress = "192.168.0.15";
 		m_serverPort = 5300;
 		m_personalPort = 5301;
+
+		if (listener.bind(5301) == sf::Socket::Done)
+		{
+			cout << "Socket bound" << endl;
+		}
 
 		//PLAYERNAME = playerName;
 		cout << "Netcode Constructor Finished" << endl;
@@ -127,16 +132,23 @@ void Netcode::SendPacket()
 void Netcode::ReceivePacket()
 {
 	bool quit = false;
+
 	while (!quit)
 	{
 		sf::Packet packet;
 		list<string> messages;
 		//m_ipAddress = "192.168.0.15";
-		sf::Socket::Status status = m_socket.receive(packet, m_ipAddress, m_personalPort);
-		retryCount++;
+		bool replied = false;
+
+		sf::Socket::Status status = listener.receive(packet, m_ipAddress, m_personalPort);
+
+		//retryCount++;
 
 		switch (status)
 		{
+		case sf::Socket::Error:
+
+			break;
 		case sf::Socket::Done:
 			PacketType type;
 			sf::Uint32 size;
@@ -146,6 +158,7 @@ void Netcode::ReceivePacket()
 			//If we get this far then we have got a message from the server so no need to open the packet up and check.
 			if (type == SERVER_REPLY_MSG)
 			{
+				cout << "Got Server reply message!" << endl;
 				m_receivedReply = true;
 				break;
 			}
@@ -259,7 +272,6 @@ void Netcode::UpdateChatWindow(list<string> messages)
 void Netcode::Update()
 {
 	//ReceiveServerMessageUpdate();
-	//ReceivePacket();
 }
 void Netcode::Draw(sf::RenderWindow& window)
 {
