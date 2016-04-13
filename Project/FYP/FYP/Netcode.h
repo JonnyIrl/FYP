@@ -17,9 +17,16 @@ public:
 	void ReceivePacket();
 	void ReceiveServerMessageUpdate();
 	string GetTypedMessage();
-	void SetChatMessage(string message);
+	void AppendChatMessage(string message);
+	void SetName(string name) { m_NameText.setString(name); m_NameString = name; }
+	void AddToName(string letter);
+	string GetName() { return m_NameString; }
+	void RemoveNameLetter() { m_NameString.pop_back(); SetName(m_NameString); }
+	void RemoveChatLetter() { m_currentMessage.pop_back(); m_text.setString(m_currentMessage); }
 	void ResetText();
 	void Draw(sf::RenderWindow &window);
+	bool GetConnected() { return m_connected; }
+	string ConvertStringToCharArray(string name, int typeCommand);
 
 	void ReceivePlayersPosition();
 
@@ -30,8 +37,8 @@ private:
 
 	//Pre Game Lobby Variables
 	sf::Font m_font;
-	sf::Text m_text, m_chatLobbyText;
-	string m_currentMessage;
+	sf::Text m_text, m_chatLobbyText, m_NameText;
+	string m_currentMessage, m_NameString;
 	int m_messagesSent;
 	list<string> m_historyMessages;
 	sf::IpAddress m_ServerIPAddress;
@@ -45,6 +52,7 @@ private:
 	bool running = true;
 	PlayerManager pm = PlayerManager();
 	sf::UdpSocket listener;
+	char playerNameCharArray[1024];
 
 };
 

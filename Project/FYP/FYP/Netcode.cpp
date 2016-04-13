@@ -9,13 +9,17 @@ Netcode::Netcode()
 
 	else
 	{
-		m_text.setPosition(sf::Vector2f(100, 600));
+		m_text.setPosition(sf::Vector2f(20, 666));
 		m_text.setFont(m_font);
 		m_text.setColor(sf::Color::White);
 
-		m_chatLobbyText.setPosition(sf::Vector2f(100, 165));
+		m_chatLobbyText.setPosition(sf::Vector2f(20, 200));
 		m_chatLobbyText.setFont(m_font);
 		m_chatLobbyText.setColor(sf::Color::White);
+
+		m_NameText.setPosition(sf::Vector2f(165, 110));
+		m_NameText.setFont(m_font);
+		m_NameText.setColor(sf::Color::White);
 
 		m_currentMessage = "";
 		m_messagesSent = 0;
@@ -32,18 +36,28 @@ Netcode::Netcode()
 			cout << "Socket bound" << endl;
 		}
 
+		cout << "Personal IP = " << m_ipAddress.toString() << endl;
+
 		//PLAYERNAME = playerName;
 		cout << "Netcode Constructor Finished" << endl;
 	}
+}
+
+string Netcode::ConvertStringToCharArray(string name, int typeCommand)
+{	
+	//Converts the name into a char array so you can remove 1 letter at a time etc.
+	strncpy_s(playerNameCharArray, name.c_str(), sizeof(playerNameCharArray));
+	playerNameCharArray[sizeof(playerNameCharArray) - 1] = 0;
+	string str(playerNameCharArray);
+	return str;
 }
 
 string Netcode::GetTypedMessage()
 {
 	return m_currentMessage;
 }
-void Netcode::SetChatMessage(string message)
+void Netcode::AppendChatMessage(string message)
 {
-	m_messagesSent++;
 	m_currentMessage += message;
 	m_text.setString(m_currentMessage);
 }
@@ -52,7 +66,7 @@ void Netcode::ResetText()
 	m_messagesSent = 0;
 	m_historyMessages.push_back(m_currentMessage);
 	m_currentMessage = "";
-	SetChatMessage("");
+	AppendChatMessage("");
 	m_messagesSent++;
 }
 
@@ -61,31 +75,20 @@ void Netcode::ConnectToServer(string id)
 {
 	if (!m_connected)
 	{
+		m_ipAddress = sf::IpAddress::getLocalAddress();
 		cout << "Not Connected.. Attempting to connect.." << endl;
-		sf::IpAddress ip = "192.168.0.15";
-		m_ipAddress = "192.168.0.15";
+		cout << "Your IP = " << m_ipAddress.toString() << endl;
 		sf::Packet packet;
 
-		cout << "BEFORE PACKING = " << "192.168.0.15" << endl;
 		//Send the initial connection details that the server needs
-		packet << INITIAL_CONNECT_DATA << "192.168.0.15" << id;
-
-		cout << "AFTER PACKING = " << "192.168.0.15" << endl;
+					// PACKET TYPE           //PLAYER IP         //PLAYER NAME
+		packet << INITIAL_CONNECT_DATA << m_ipAddress.toString() << id;
 
 		//Send that packet to the server with the servers port
 		sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 		if (status == sf::Socket::Done)
 		{
 			cout << "Connection Packet Sent" << endl;
-			cout << "AFTER SENDING = " << "192.168.0.15" << endl;
-		}
-
-		while (!m_receivedReply)
-		{
-			//cout << "Waiting for a reply now..." << endl;
-			//ReceivePacket();
-			m_receivedReply = true;
-			cout << "Got Reply from the server.. \n Now Connected to the server!" << endl << endl;
 		}
 	}
 }
@@ -159,20 +162,10 @@ void Netcode::ReceivePacket()
 			if (type == SERVER_REPLY_MSG)
 			{
 				cout << "Got Server reply message!" << endl;
+				m_connected = true;
 				m_receivedReply = true;
 				break;
 			}
-
-			//If we get this far then we have got a message from the server so no need to open the packet up and check.
-			//if (type == SERVER_REPLY_MSG)
-			//{
-			//	/*std::string msg;
-			//	packet >> msg;
-			//	std::cout << "Server: " << msg << "\n";
-			//	retryCount = 0;*/
-			//	m_receivedReply = true;
-			//	break;
-			//}
 
 			//If we get this far then we have got a message from the server so no need to open the packet up and check.
 			if (type == UPDATE_MSG)
@@ -257,6 +250,12 @@ void Netcode::ReceiveServerMessageUpdate()
 
 }
 
+void Netcode::AddToName(string letter)
+{
+	m_NameString += letter;
+	SetName(m_NameString);
+}
+
 void Netcode::UpdateChatWindow(list<string> messages)
 {
 	string message = "";
@@ -276,5 +275,6 @@ void Netcode::Update()
 void Netcode::Draw(sf::RenderWindow& window)
 {
 	window.draw(m_text);
+	window.draw(m_NameText);
 	window.draw(m_chatLobbyText);
 }

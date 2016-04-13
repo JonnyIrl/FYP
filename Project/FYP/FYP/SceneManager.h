@@ -28,6 +28,14 @@ public:
 	sf::RectangleShape GetConfirmRectangle();
 	sf::RectangleShape GetSendRectangle();
 	sf::RectangleShape GetConnectRectangle();
+	bool IsPlayerConnected() { return m_playerConnected; }
+	bool IsPlayerReady() { return m_playerReady; }
+	void SetPlayerReady(bool state) { m_playerReady = state; }
+	void SetPlayerConnected(bool state) { m_playerConnected = state; }
+	bool GetPlayerChangingName() { return m_changeNameSelected; }
+	void SetPlayerChangingName(bool state) { m_changeNameSelected = state; }
+	sf::RectangleShape GetNameRectangle() { return m_NameRectangle; }
+	sf::RectangleShape GetSaveNameRectangle() { return m_SaveNameRectangle; }
 	int currentSfx;
 	int currentMaster;
 
@@ -64,7 +72,7 @@ private:
 	sf::RectangleShape m_gameSettingRect;
 	sf::RectangleShape m_chatLobbyRect;
 	sf::RectangleShape m_sendRect;
-	sf::RectangleShape m_connectRect;
+	sf::RectangleShape m_CollisionConnectRect;
 
 
 	//Volume Indicators
@@ -86,4 +94,12 @@ private:
 	sf::RectangleShape confirmButton;
 
 	bool m_quitGame = false;
+
+
+	//Lobby variables
+	bool m_playerConnected = false;
+	bool m_playerReady = false;
+	bool m_changeNameSelected = false;
+	sf::Texture m_NotReadyScreen, m_ReadyScreen, m_ConnectScreen;
+	sf::RectangleShape m_NotReadyRectangle, m_ReadyRectangle, m_ConnectRectangle, m_NameRectangle, m_SaveNameRectangle;
 };

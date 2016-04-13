@@ -165,6 +165,7 @@ int main()
 		}
 		break;
 
+#pragma region PLAY GAME CASE
 		case sceneManager.PLAY_GAME:
 		{
 			frameTime = frameClock.restart();
@@ -1812,32 +1813,69 @@ int main()
 
 		break;
 
+#pragma endregion PLAY GAME CASE
+
 #pragma region LOBBY TEXT NETCODE
 		case sceneManager.LOBBY:
 		{
 			frameTime = frameClock.restart();
+
 			// Process events 
 			sf::Event Event;
 			while (window.pollEvent(Event))
 			{
-				//Detect when text is entered
-				if (Event.type == sf::Event::TextEntered)
+				if (sceneManager.IsPlayerConnected())
 				{
-					if (Event.text.unicode != 13)
+					//Detect when text is entered
+					if (Event.type == sf::Event::TextEntered)
 					{
-						if (Event.text.unicode < 128)
-						{
-							string charEntered;
-							charEntered = static_cast<char>(Event.text.unicode);
-							netcode.SetChatMessage(charEntered);
-						}
-					}
+						if (Event.text.unicode != 13 && Event.text.unicode != 8)
+						{							
 
-					//If the player presses Enter key
-					else if (Event.text.unicode == 13)
-					{
-						netcode.SendPacket();
-						//netcode.ResetText();
+							if (Event.text.unicode < 128)
+							{
+								string charEntered;
+								charEntered = static_cast<char>(Event.text.unicode);
+
+								if (sceneManager.GetPlayerChangingName())
+								{
+									netcode.AddToName(charEntered);
+								}			
+
+								else
+								{
+									netcode.AppendChatMessage(charEntered);
+								}
+							}
+						}
+
+						//If the player presses Enter key
+						else if (Event.text.unicode == 13)
+						{
+							netcode.SendPacket();
+							//netcode.ResetText();
+						}
+
+						//BACK SPACE
+						else if (Event.text.unicode == 8)
+						{
+							//If the player wants to change thir name
+							if (sceneManager.GetPlayerChangingName())
+							{
+								if (netcode.GetName().size() > 0)
+								{
+									netcode.RemoveNameLetter();
+								}
+							}
+
+							else
+							{
+								if (netcode.GetTypedMessage().size() > 0)
+								{
+									netcode.RemoveChatLetter();
+								}
+							}
+						}
 					}
 				}
 
@@ -1859,23 +1897,53 @@ int main()
 					mouseRect.setSize(sf::Vector2f(1, 1));
 					mouseRect.setPosition(converted);
 
-					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSendRectangle()))
+					//Only check collision with send button if the player is actually connected..
+					if (sceneManager.IsPlayerConnected())
 					{
-						//SEND MESSAGE INTO CHAT WINDOW
-						netcode.SendPacket();
-						netcode.ResetText();
+						if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSendRectangle()))
+						{
+							//SEND MESSAGE INTO CHAT WINDOW
+							netcode.SendPacket();
+							netcode.ResetText();
+						}
 					}
 
 					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetConnectRectangle()))
 					{
 						//SEND MESSAGE INTO CHAT WINDOW						
 						netcode.ConnectToServer(player.GetPlayerID());
+						netcode.SetName(player.GetName());
 					}
+
+					//If a click is anywhere except the save name rectangle then set changing to false;
+					if (!collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetNameRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW						
+						sceneManager.SetPlayerChangingName(false);
+					}
+
+					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetNameRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW						
+						sceneManager.SetPlayerChangingName(true);
+					}
+
+					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetSaveNameRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW						
+						sceneManager.SetPlayerChangingName(false);
+					}
+
 				}
 			}
 
 			//prepare frame
 			window.clear();
+			if (!sceneManager.IsPlayerConnected() && netcode.GetConnected())
+			{
+				sceneManager.SetPlayerConnected(true);
+				cout << "Player has been set to connected!" << endl;
+			}
 
 			netcode.Update();
 			sceneManager.Draw(window);

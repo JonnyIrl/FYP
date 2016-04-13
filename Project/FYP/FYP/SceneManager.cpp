@@ -72,8 +72,8 @@ SceneManager::SceneManager()
 		m_sendRect.setPosition(925, 602);
 		m_sendRect.setSize(sf::Vector2f(260, 35));
 
-		m_connectRect.setPosition(925, 545);
-		m_connectRect.setSize(sf::Vector2f(260, 35));
+		m_CollisionConnectRect.setPosition(420, 220);
+		m_CollisionConnectRect.setSize(sf::Vector2f(350, 250));
 
 		//Main Menu Buttons
 		m_PlayGameButtonRect.setPosition(480, 150);
@@ -112,7 +112,31 @@ SceneManager::SceneManager()
 		//Mouse Rect
 		m_mouseRect.setPosition(0, 0);
 		m_mouseRect.setSize(sf::Vector2f(1, 1));
+
+		//LOBBY
+		//NOT READY SCREEN
+		m_NotReadyRectangle.setSize(sf::Vector2f(1280, 720));
+		m_NotReadyRectangle.setTexture(&m_NotReadyScreen);
+		m_NotReadyRectangle.setPosition(sf::Vector2f(0, 0));
+
+		//READY SCREEN
+		m_ReadyRectangle.setSize(sf::Vector2f(1280, 720));
+		m_ReadyRectangle.setTexture(&m_ReadyScreen);
+		m_ReadyRectangle.setPosition(sf::Vector2f(0, 0));
+
+		//CONNECT SCREEN
+		m_ConnectRectangle.setSize(sf::Vector2f(1280, 720));
+		m_ConnectRectangle.setTexture(&m_ConnectScreen);
+		m_ConnectRectangle.setPosition(sf::Vector2f(0, 0));
+
+		//SAVE RECTANGLE FOR CHANGING NAME
+		m_SaveNameRectangle.setSize(sf::Vector2f(140, 50));
+		m_SaveNameRectangle.setPosition(sf::Vector2f(540, 105));
 		
+		//RECTANGLE FOR CLICKING TO CHANGE NAME
+		m_NameRectangle.setSize(sf::Vector2f(350, 45));
+		m_NameRectangle.setPosition(sf::Vector2f(160, 108));
+
 
 		cout << "SceneManager Constructor Finished" << endl;
 	}
@@ -285,6 +309,25 @@ bool SceneManager::LoadTexture()
 	}*/
 
 
+	//LOBBY TEXTURES
+	if (!m_NotReadyScreen.loadFromFile("Assets/Pregame/NotReady.png"))
+	{
+		std::cout << "Couldn't load not ready lobby png" << std::endl;
+		return false;
+	}
+
+	if (!m_ReadyScreen.loadFromFile("Assets/Pregame/Ready.png"))
+	{
+		std::cout << "Couldn't load ready lobby png" << std::endl;
+		return false;
+	}
+
+	if (!m_ConnectScreen.loadFromFile("Assets/Pregame/connectToLobby.png"))
+	{
+		std::cout << "Couldn't load connectToLobby png" << std::endl;
+		return false;
+	}
+
 	else
 		return true;
 }
@@ -415,8 +458,26 @@ void SceneManager::Draw(sf::RenderWindow &window)
 
 	case LOBBY:
 	{
-		window.draw(m_chatLobbyRect);
-		window.draw(m_connectRect);
+		//If the player isnt connected then show only the connected screen
+		if (m_playerConnected == false)
+		{
+			window.draw(m_ConnectRectangle);
+			//window.draw(m_CollisionConnectRect);
+		}
+
+		else if (m_playerConnected == true && m_playerReady == false)
+		{
+			window.draw(m_NotReadyRectangle);
+			//window.draw(m_SaveNameRectangle);
+			//window.draw(m_NameRectangle);
+		}
+
+		else if (m_playerConnected == true && m_playerReady == true)
+		{
+			window.draw(m_ReadyRectangle);
+		}
+		//window.draw(m_chatLobbyRect);
+		//window.draw(m_connectRect);
 		//Draw Chat String
 	}
 	break;
@@ -472,7 +533,7 @@ sf::RectangleShape SceneManager::GetSendRectangle()
 }
 sf::RectangleShape SceneManager::GetConnectRectangle()
 {
-	return m_connectRect;
+	return m_CollisionConnectRect;
 }
 
 
