@@ -1,6 +1,6 @@
 #pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef MULTIPLAYER_H
+#define MULTIPLAYER_H
 
 #include "ExtraIncludes.h"
 #include "Animation.hpp"
@@ -13,11 +13,11 @@
 
 using namespace std;
 
-class Player
+class MultiPlayer
 {
 public:
-	Player();
-	~Player();
+	MultiPlayer();
+	~MultiPlayer();
 	void Update(sf::Time time);
 	sf::RectangleShape GetShape();
 	sf::Vector2f GetPosition();
@@ -39,7 +39,7 @@ public:
 	AnimatedSprite GetAnimatedSprite() { return m_playerAnimation; }
 	int GetDirection() { return m_dir; }
 	int GetHealth() { return m_health; }
-	void SetHealth(bool increase, int amount) 
+	void SetHealth(bool increase, int amount)
 	{
 		if (increase)
 		{
@@ -74,8 +74,6 @@ public:
 	void SetPlayerID(string ID) { m_PlayerID = ID; }
 	int GetRoom() { return m_currentRoom; }
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
-	bool IsMoving() { return m_moving; }
-	void SetMovingFalse() { m_moving = false; }
 
 
 private:

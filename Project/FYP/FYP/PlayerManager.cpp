@@ -10,12 +10,12 @@ PlayerManager::~PlayerManager()
 
 void PlayerManager::AddNewPlayer(string id)
 {
-	m_Players.push_back(new Player());
+	m_Players.push_back(new MultiPlayer());
 	m_Players.at((m_Players.size() - 1))->SetPlayerID(id);
-	cout << "Added new player, IP = " << id << endl;
+	cout << "Added new multi player, IP = " << id << endl;
 }
 
-Player* PlayerManager::FindWhichPlayerToUpdate(string ip)
+MultiPlayer* PlayerManager::FindWhichPlayerToUpdate(string ip)
 {
 	for (int i = 0; i < m_Players.size(); i++)
 	{

@@ -1476,10 +1476,7 @@ int main()
 			player.Update(frameTime);
 			hud.Draw(window);
 
-			//NETCODE PLAY GAME UPDATE
-			netcode.pm.Draw(window);
 			netcode.pm.Update(frameTime);
-
 
 			#pragma region CHEST + BULLET DRAW SWITCH STATEMENT
 			switch (room.m_currentRoom)
@@ -1809,9 +1806,18 @@ int main()
 				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
 			}
 
+
+			//Check if the player has moved...
+			if (player.IsMoving())
+			{
+				netcode.SendPlayersPosition(player.GetPosition());
+				player.SetMovingFalse();
+			}
+
 			hud.countDown = player.GetTrapCoolDown();
 
 			player.Draw(window);
+			netcode.pm.Draw(window);
 			// Finally, display rendered frame on screen 
 			window.display();
 		}

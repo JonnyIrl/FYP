@@ -1,5 +1,5 @@
 #include "ExtraIncludes.h"
-#include "Player.h"
+#include "MultiPlayer.h"
 #include <vector>
 
 using namespace std;
@@ -13,9 +13,9 @@ public:
 	void Update(sf::Time time);
 	void SetPlayersPosition(string playerID, sf::Vector2f position);
 	void AddNewPlayer(string playerID);
-	Player* FindWhichPlayerToUpdate(string playerIP);
-	vector<Player*> GetPlayers() { return m_Players; }
+	MultiPlayer* FindWhichPlayerToUpdate(string playerIP);
+	vector<MultiPlayer*> GetPlayers() { return m_Players; }
 
 private:
-	vector<Player*> m_Players;
+	vector<MultiPlayer*> m_Players;
 };

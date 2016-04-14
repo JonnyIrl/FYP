@@ -1,7 +1,7 @@
-#include "Player.h"
+#include "MultiPlayer.h"
 
 
-Player::Player()
+MultiPlayer::MultiPlayer()
 {
 	m_position = sf::Vector2f(500, 500);
 	m_rect.setSize(sf::Vector2f(46, 50));
@@ -50,7 +50,7 @@ Player::Player()
 	}
 }
 
-void Player::AssignGunRectangles()
+void MultiPlayer::AssignGunRectangles()
 {
 	//Deagle
 	m_deagleLeftRectangle.setSize(sf::Vector2f(27, 16));
@@ -92,7 +92,7 @@ void Player::AssignGunRectangles()
 
 }
 
-bool Player::LoadTexture()
+bool MultiPlayer::LoadTexture()
 {
 	if (!m_pDownTexture.loadFromFile("Assets/Player/pDown.png"))
 		return false;
@@ -166,14 +166,14 @@ bool Player::LoadTexture()
 	}
 
 	else
-	return true;
+		return true;
 }
 
 //This timer should refresh when the player has more than 3 kills, it will start and then announce result
-bool Player::CheckKillSoundEffect()
+bool MultiPlayer::CheckKillSoundEffect()
 {
 	int timer = soundEffectClock.getElapsedTime().asSeconds();
-	if(m_killingSpree >= 3 && timer > 0)
+	if (m_killingSpree >= 3 && timer > 0)
 	{
 		cout << "Killing Spree is " << m_killingSpree << endl;
 		soundEffectCountDown++;
@@ -193,7 +193,7 @@ bool Player::CheckKillSoundEffect()
 	return false;
 }
 
-bool Player::CreateAKBullet()
+bool MultiPlayer::CreateAKBullet()
 {
 	int timer = 0;
 	if (m_AKDelay <= 2 && timer > 0)
@@ -211,7 +211,7 @@ bool Player::CreateAKBullet()
 }
 
 //Checks if the player died more than 3 times without a kill..
-bool Player::CheckDeathStreakOver()
+bool MultiPlayer::CheckDeathStreakOver()
 {
 	if (m_deathsWithoutKill >= 3)
 	{
@@ -225,7 +225,7 @@ bool Player::CheckDeathStreakOver()
 	return false;
 }
 
-void Player::IncreaseDecreaseKillingSpress(bool state)
+void MultiPlayer::IncreaseDecreaseKillingSpress(bool state)
 {
 	//If true then increase
 	if (state)
@@ -241,7 +241,7 @@ void Player::IncreaseDecreaseKillingSpress(bool state)
 	}
 }
 
-void Player::LoadTextFile(string name)
+void MultiPlayer::LoadTextFile(string name)
 {
 	ifstream file(name);
 	string str;
@@ -252,98 +252,21 @@ void Player::LoadTextFile(string name)
 	}
 }
 
-void Player::AddNewTrap(sf::Vector2f position)
+void MultiPlayer::AddNewTrap(sf::Vector2f position)
 {
 	m_trapRectangle.setPosition(position);
 	m_TrapRectangles.push_back(m_trapRectangle);
 }
 
-void Player::Update(sf::Time time)
-{	
-	int timer = trapClock.getElapsedTime().asSeconds();
-	if (countDownTrap && timer > 0)
-	{
-		trapCoolDown--;
-		trapCDText.setString(std::to_string(trapCoolDown));
-		//If the trap hits Zero, then allow another trap to be placed.
-		if (trapCoolDown <= 0)
-		{
-			trapCoolDown = 10;
-			countDownTrap = false;
-		}
-
-		trapClock.restart();
-	}
-
-
-
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		if (m_playerAnimation.getAnimation() != &m_playerUpAnimation)
-		{
-			m_playerAnimation.setAnimation(m_playerUpAnimation);
-		}
-		m_playerAnimation.update(time);
-		//m_position.y -= 0.05f;
-		m_position.y -= m_speed;
-		m_dir = 1;
-		m_moving = true;
-	}
-	
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		if (m_playerAnimation.getAnimation() != &m_playerDownAnimation)
-		{
-			m_playerAnimation.setAnimation(m_playerDownAnimation);			
-		}
-		m_playerAnimation.update(time);
-		m_position.y += m_speed;
-		m_dir = 2;
-		m_moving = true;
-	}
-
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		if (m_playerAnimation.getAnimation() != &m_playerLeftAnimation)
-		{
-			m_playerAnimation.setAnimation(m_playerLeftAnimation);
-		}
-		m_playerAnimation.update(time);
-		m_position.x -= m_speed;
-		m_dir = 3;
-		m_moving = true;
-	}
-
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		if (m_playerAnimation.getAnimation() != &m_playerRightAnimation)
-		{
-			m_playerAnimation.setAnimation(m_playerRightAnimation);
-		}
-		m_playerAnimation.update(time);
-		m_position.x += m_speed;
-		m_dir = 4;
-		m_moving = true;
-	}
-
-	
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		//m_velocity.x = 0;
-		//m_velocity.y = 0;
-		m_moving = false;
-	}
-
-	//m_position += m_velocity;	
+void MultiPlayer::Update(sf::Time time)
+{
 	m_playerAnimation.setPosition(m_position);
 	m_rect.setPosition(m_position);
-
 }
 
-void Player::Draw(sf::RenderWindow &window)
-{	
-	
+void MultiPlayer::Draw(sf::RenderWindow &window)
+{
+
 	window.draw(m_playerAnimation);
 
 	if (currentWeapon == DEAGLE)
@@ -431,34 +354,34 @@ void Player::Draw(sf::RenderWindow &window)
 	}
 
 	if (countDownTrap)
-	{		
+	{
 		window.draw(trapCDText);
 	}
 
 }
 
-void Player::updateTex(sf::Texture texture)
+void MultiPlayer::updateTex(sf::Texture texture)
 { //creates a copy of your texture you pass
 
 	m_rect.setTexture(&texture); //actually takes the address of your texture 
 }
 
-sf::RectangleShape Player::GetShape()
+sf::RectangleShape MultiPlayer::GetShape()
 {
 	return m_rect;
 }
 
-sf::Vector2f Player::GetPosition()
+sf::Vector2f MultiPlayer::GetPosition()
 {
 	return m_position;
 }
 
-void Player::SetPosition(sf::Vector2f position)
+void MultiPlayer::SetPosition(sf::Vector2f position)
 {
 	m_position = position;
 }
 
 //Destructor
-Player::~Player()
+MultiPlayer::~MultiPlayer()
 {
 }

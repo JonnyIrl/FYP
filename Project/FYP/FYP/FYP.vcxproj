@@ -92,6 +92,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MultiPlayer.cpp" />
     <ClCompile Include="Netcode.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="ExtraIncludes.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="MultiPlayer.h" />
     <ClInclude Include="Netcode.h" />
     <ClInclude Include="PacketType.h" />
     <ClInclude Include="Player.h" />

@@ -176,7 +176,6 @@ void Netcode::ReceivePacket()
 	{
 		sf::Packet packet;
 		list<string> messages;
-		//m_ipAddress = "192.168.0.15";
 		bool replied = false;
 
 		sf::Socket::Status status = listener.receive(packet, m_ipAddress, m_personalPort);
@@ -337,10 +336,12 @@ void Netcode::UpdateChatWindow(list<string> messages)
 	}
 	m_chatLobbyText.setString(message);
 }
+
 void Netcode::Update()
 {
 	//ReceiveServerMessageUpdate();
 }
+
 void Netcode::Draw(sf::RenderWindow& window)
 {
 	window.draw(m_text);
@@ -359,4 +360,25 @@ bool Netcode::CheckPlayersAllReady()
 
 	else
 		return false;
+}
+
+void Netcode::SendPlayersPosition(sf::Vector2f position)
+{
+	sf::Packet packet;
+	packet << PLAYER_POSITION_UPDATE << m_ipAddress.getLocalAddress().toString() << position.x << position.y;
+	cout << "POSITION = " << position.x << " " <<  position.y << endl;
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
 }
