@@ -330,12 +330,9 @@ void Player::Update(sf::Time time)
 	
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		//m_velocity.x = 0;
-		//m_velocity.y = 0;
 		m_moving = false;
 	}
 
-	//m_position += m_velocity;	
 	m_playerAnimation.setPosition(m_position);
 	m_rect.setPosition(m_position);
 

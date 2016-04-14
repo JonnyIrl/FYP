@@ -32,7 +32,7 @@ public:
 	bool GetPlayerReady() { return m_playerReady; }
 	void SetPlayerReady(bool state);
 	void SendPlayerReady();
-	void SendPlayersPosition(sf::Vector2f position);
+	void SendPlayersPosition(sf::Vector2f position, int direction);
 	void SetPlayerAsClient();
 
 	void ReceivePlayersPosition();

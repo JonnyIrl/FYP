@@ -1810,7 +1810,7 @@ int main()
 			//Check if the player has moved...
 			if (player.IsMoving())
 			{
-				netcode.SendPlayersPosition(player.GetPosition());
+				netcode.SendPlayersPosition(player.GetPosition(), player.GetDirection());
 				player.SetMovingFalse();
 			}
 

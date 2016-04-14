@@ -74,6 +74,7 @@ public:
 	void SetPlayerID(string ID) { m_PlayerID = ID; }
 	int GetRoom() { return m_currentRoom; }
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
+	void SetDirection(int direction) { m_dir = direction; }
 
 
 private:
