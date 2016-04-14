@@ -271,13 +271,13 @@ void MultiPlayer::Draw(sf::RenderWindow &window)
 
 	if (currentWeapon == DEAGLE)
 	{
-		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		if (m_dir == 4)
 		{
 			m_deagleRightRectangle.setPosition(sf::Vector2f((m_position.x + 17), m_position.y + 28));
 			window.draw(m_deagleRightRectangle);
 		}
 
-		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		else if (m_dir == 3)
 		{
 			m_deagleLeftRectangle.setPosition(sf::Vector2f((m_position.x), m_position.y + 28));
 			window.draw(m_deagleLeftRectangle);
@@ -286,13 +286,13 @@ void MultiPlayer::Draw(sf::RenderWindow &window)
 
 	else if (currentWeapon == SNIPER)
 	{
-		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		if (m_dir == 4)
 		{
 			m_sniperRightRectangle.setPosition(sf::Vector2f((m_position.x + 17), m_position.y + 28));
 			window.draw(m_sniperRightRectangle);
 		}
 
-		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		else if (m_dir == 3)
 		{
 			m_sniperLeftRectangle.setPosition(sf::Vector2f((m_position.x - 15), m_position.y + 28));
 			window.draw(m_sniperLeftRectangle);
@@ -301,13 +301,13 @@ void MultiPlayer::Draw(sf::RenderWindow &window)
 
 	else if (currentWeapon == MINIGUN)
 	{
-		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		if (m_dir == 4)
 		{
 			m_miniGunRightRectangle.setPosition(sf::Vector2f((m_position.x + 17), m_position.y + 20));
 			window.draw(m_miniGunRightRectangle);
 		}
 
-		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		else if (m_dir == 3)
 		{
 			m_miniGunLeftRectangle.setPosition(sf::Vector2f((m_position.x - 27), m_position.y + 20));
 			window.draw(m_miniGunLeftRectangle);
@@ -316,13 +316,13 @@ void MultiPlayer::Draw(sf::RenderWindow &window)
 
 	else if (currentWeapon == AK47)
 	{
-		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		if (m_dir == 4)
 		{
 			m_AK47RightRectangle.setPosition(sf::Vector2f((m_position.x + 14), m_position.y + 28));
 			window.draw(m_AK47RightRectangle);
 		}
 
-		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		else if (m_dir == 3)
 		{
 			m_AK47LeftRectangle.setPosition(sf::Vector2f((m_position.x - 18), m_position.y + 28));
 			window.draw(m_AK47LeftRectangle);
@@ -331,13 +331,13 @@ void MultiPlayer::Draw(sf::RenderWindow &window)
 
 	else if (currentWeapon == TRAP)
 	{
-		if ((m_playerAnimation.getAnimation() == &m_playerRightAnimation))
+		if (m_dir == 4)
 		{
 			m_trapRectangle.setPosition(sf::Vector2f((m_position.x + 14), m_position.y + 28));
 			window.draw(m_trapRectangle);
 		}
 
-		else if ((m_playerAnimation.getAnimation() == &m_playerLeftAnimation))
+		else if (m_dir == 3)
 		{
 			m_trapRectangle.setPosition(sf::Vector2f((m_position.x - 18), m_position.y + 28));
 			window.draw(m_trapRectangle);

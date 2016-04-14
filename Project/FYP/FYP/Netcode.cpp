@@ -271,10 +271,10 @@ void Netcode::ReceivePacket()
 
 				for (int i = 0; pm.GetPlayers().size(); i++)
 				{
-					cout << "Inside player loop..." << endl;
 					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 					{
 						cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
+						cout << "Setting Direction = " << direction << endl;
 						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
 						pm.GetPlayers().at(i)->SetDirection(direction);
 						break;
@@ -371,7 +371,7 @@ void Netcode::SendPlayersPosition(sf::Vector2f position, int direction)
 {
 	sf::Packet packet;
 	packet << PLAYER_POSITION_UPDATE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << direction;
-	cout << "POSITION = " << position.x << " " <<  position.y << endl;
+	cout << "POSITION = " << position.x << " " <<  position.y << " Direction = " << direction<< endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
