@@ -13,6 +13,7 @@ public:
 	void Update(sf::Time time);
 	void SetPlayersPosition(string playerID, sf::Vector2f position);
 	void AddNewPlayer(string playerID);
+	Player* FindWhichPlayerToUpdate(string playerIP);
 	vector<Player*> GetPlayers() { return m_Players; }
 
 private:

@@ -1476,6 +1476,10 @@ int main()
 			player.Update(frameTime);
 			hud.Draw(window);
 
+			//NETCODE PLAY GAME UPDATE
+			netcode.pm.Draw(window);
+			netcode.pm.Update(frameTime);
+
 
 			#pragma region CHEST + BULLET DRAW SWITCH STATEMENT
 			switch (room.m_currentRoom)
@@ -1963,6 +1967,13 @@ int main()
 			{
 				sceneManager.SetPlayerConnected(true);
 				cout << "Player has been set to connected!" << endl;
+			}
+
+
+			//Check if all the players are ready... then start the game
+			if (netcode.CheckPlayersAllReady())
+			{
+				sceneManager.m_currentScene = sceneManager.PLAY_GAME;
 			}
 
 			netcode.Update();

@@ -241,6 +241,7 @@ void Netcode::ReceivePacket()
 					clients.AddNewClient(playerIP, playerID, clients.Size() + 1);
 					cout << "Added new client " << playerIP << " : " << playerID << endl;
 					AddClientData(playerID);
+					pm.AddNewPlayer(playerIP);
 				}
 				break;
 			}
@@ -347,4 +348,15 @@ void Netcode::Draw(sf::RenderWindow& window)
 	window.draw(m_chatLobbyText);
 	window.draw(m_connectedClientsText);
 	clients.Draw(window);
+}
+
+bool Netcode::CheckPlayersAllReady()
+{
+	if (clients.Size() >= 2 && clients.CheckIfClientsAllReady())
+	{
+		return true;
+	}
+
+	else
+		return false;
 }

@@ -12,7 +12,18 @@ void PlayerManager::AddNewPlayer(string id)
 {
 	m_Players.push_back(new Player());
 	m_Players.at((m_Players.size() - 1))->SetPlayerID(id);
-	cout << "Added new player, ID = " << id << endl;
+	cout << "Added new player, IP = " << id << endl;
+}
+
+Player* PlayerManager::FindWhichPlayerToUpdate(string ip)
+{
+	for (int i = 0; i < m_Players.size(); i++)
+	{
+		if (m_Players.at(i)->GetPlayerID().find(ip) != string::npos)
+		{
+			return m_Players.at(i);
+		}
+	}
 }
 
 void PlayerManager::SetPlayersPosition(string playerID, sf::Vector2f position)

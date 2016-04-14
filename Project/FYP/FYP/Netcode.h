@@ -37,7 +37,9 @@ public:
 	void ReceivePlayersPosition();
 
 	string PLAYERNAME;
-
+	Clients GetClients() { return clients; }
+	bool CheckPlayersAllReady();
+	PlayerManager pm = PlayerManager();
 
 private:
 
@@ -56,10 +58,10 @@ private:
 	unsigned short m_personalPort = 5301;
 	int retryCount = 0;
 	bool running = true;
-	PlayerManager pm = PlayerManager();
 	sf::UdpSocket listener;
 	char playerNameCharArray[1024];
 	Clients clients = Clients();
 	bool m_playerReady = false;
+	bool m_everyoneReady = false;
 };
 

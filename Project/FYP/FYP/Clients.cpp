@@ -51,6 +51,23 @@ int Clients::FindWhatNumberClientsWhoSentReadyIs(string &IP)
 	return -1;
 }
 
+bool Clients::CheckIfClientsAllReady()
+{
+	bool ready = false;
+	for (int i = 0; i < clientList.size(); i++)
+	{
+		if (clientList.at(i)->GetReady())
+		{
+			ready = true;
+		}
+
+		else
+			ready = false;
+	}
+
+	return ready;
+}
+
 void Clients::Draw(sf::RenderWindow &window)
 {
 	for (int i = 0; i < clientList.size(); i++)

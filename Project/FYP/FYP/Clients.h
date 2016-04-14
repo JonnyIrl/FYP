@@ -15,6 +15,7 @@ public:
 	int Size() { return clientList.size(); }
 	void Draw(sf::RenderWindow &window);
 	vector<Client*> GetVector() { return clientList; }
+	bool CheckIfClientsAllReady();
 
 private:
 	vector<Client*> clientList;
