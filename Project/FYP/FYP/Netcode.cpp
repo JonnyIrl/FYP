@@ -73,6 +73,11 @@ void Netcode::ResetText()
 	AppendChatMessage("");
 	m_messagesSent++;
 }
+void Netcode::SetPlayerAsClient()
+{
+	clients.AddNewClient(m_ipAddress.getLocalAddress().toString(), PLAYERNAME, 1);
+	AddClientData(PLAYERNAME);
+}
 
 void Netcode::AddClientData(string name)
 {
@@ -99,6 +104,7 @@ void Netcode::ConnectToServer(string id)
 		if (status == sf::Socket::Done)
 		{
 			cout << "Connection Packet Sent" << endl;
+			SetPlayerAsClient();
 		}
 	}
 }
@@ -113,6 +119,7 @@ void Netcode::SendPlayerReady()
 	switch (status)
 	{
 	case sf::Socket::Done:
+		clients.GetVector().at(0)->SetReady(m_playerReady);
 		cout << "Message Sent" << endl;
 		break;
 
@@ -154,6 +161,12 @@ void Netcode::SendPacket()
 	{
 		ReceivePacket();
 	}*/
+}
+
+void Netcode::SetPlayerReady(bool state) 
+{ 
+	m_playerReady = state; 
+
 }
 
 void Netcode::ReceivePacket()

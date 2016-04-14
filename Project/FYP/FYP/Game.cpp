@@ -48,6 +48,7 @@ int main()
 	//Network 
 	Netcode netcode = Netcode();
 	netcode.PLAYERNAME = player.GetName();
+
 	window.setFramerateLimit(60);
 
 	sf::Thread thread(&Netcode::ReceivePacket, &netcode);

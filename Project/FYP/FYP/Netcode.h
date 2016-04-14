@@ -30,8 +30,9 @@ public:
 	string ConvertStringToCharArray(string name, int typeCommand);
 	void AddClientData(string name);
 	bool GetPlayerReady() { return m_playerReady; }
-	void SetPlayerReady(bool state) { m_playerReady = state; }
+	void SetPlayerReady(bool state);
 	void SendPlayerReady();
+	void SetPlayerAsClient();
 
 	void ReceivePlayersPosition();
 
