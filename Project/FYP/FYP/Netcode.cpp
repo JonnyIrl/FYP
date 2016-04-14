@@ -21,6 +21,10 @@ Netcode::Netcode()
 		m_NameText.setFont(m_font);
 		m_NameText.setColor(sf::Color::White);
 
+		m_connectedClientsText.setPosition(sf::Vector2f(900, 200));
+		m_connectedClientsText.setFont(m_font);
+		m_connectedClientsText.setColor(sf::Color::White);
+
 		m_currentMessage = "";
 		m_messagesSent = 0;
 		m_connected = false;
@@ -70,6 +74,12 @@ void Netcode::ResetText()
 	m_messagesSent++;
 }
 
+void Netcode::AddClientData(string name)
+{
+	m_connectedClientsString += name + "\n";
+	m_connectedClientsText.setString(m_connectedClientsString);
+}
+
 //Network code
 void Netcode::ConnectToServer(string id)
 {
@@ -99,23 +109,14 @@ void Netcode::SendPacket()
 	string message = m_currentMessage;
 
 	sf::Packet packet;
-	packet << GENERAL_MSG << "192.168.0.15" << message << PLAYERNAME;
+	packet << GENERAL_MSG << "192.168.0.15" << message << m_NameString;
+	cout << "NAME = " << m_NameString << endl;
 
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
 	case sf::Socket::Done:
 		cout << "Message Sent" << endl;
-		//PacketType type;
-		//packet >> type;
-		
-		//if (type == GENERAL_MSG)
-		//{
-			//cout << "Message Sent, waiting for a reply now. " << endl;
-			//std::string msg;
-			//packet >> msg >> PLAYERNAME;
-			//packet.clear();
-		//}
 		break;
 
 	case sf::Socket::Disconnected:
@@ -188,6 +189,24 @@ void Netcode::ReceivePacket()
 				ResetText();
 				cout << "Reset text" << endl;
 				m_receivedReply = true;
+				break;
+			}
+
+			if (type == NEW_PLAYER_CONNECTED)
+			{
+				string playerID;
+				string playerIP;
+
+				packet >> playerID >> playerIP;
+				cout << "New Player = " << playerID << " IP = " << playerIP;
+
+				//If the clients doesnt exist then add them..
+				if (!clients.CheckIfClientExists(playerIP))
+				{
+					clients.AddNewClient(playerIP, playerID);
+					cout << "Added new client " << playerIP << " : " << playerID << endl;
+					AddClientData(playerID);
+				}
 				break;
 			}
 
@@ -277,4 +296,5 @@ void Netcode::Draw(sf::RenderWindow& window)
 	window.draw(m_text);
 	window.draw(m_NameText);
 	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
 }

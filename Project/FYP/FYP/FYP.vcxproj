@@ -86,6 +86,8 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Chest.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Clients.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HUD.cpp" />
@@ -104,6 +106,8 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Chest.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Clients.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ExtraIncludes.h" />
     <ClInclude Include="HUD.h" />

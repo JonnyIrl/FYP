@@ -1932,6 +1932,7 @@ int main()
 					{
 						//SEND MESSAGE INTO CHAT WINDOW						
 						sceneManager.SetPlayerChangingName(false);
+						netcode.SetName(netcode.GetName());
 					}
 
 				}

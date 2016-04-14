@@ -2,6 +2,7 @@
 #include "PacketType.h"
 #include "PlayerManager.h"
 #include "SFML\Network.hpp"
+#include "Clients.h"
 #include <iostream>
 #include <list>
 using namespace std;
@@ -27,6 +28,7 @@ public:
 	void Draw(sf::RenderWindow &window);
 	bool GetConnected() { return m_connected; }
 	string ConvertStringToCharArray(string name, int typeCommand);
+	void AddClientData(string name);
 
 	void ReceivePlayersPosition();
 
@@ -37,8 +39,8 @@ private:
 
 	//Pre Game Lobby Variables
 	sf::Font m_font;
-	sf::Text m_text, m_chatLobbyText, m_NameText;
-	string m_currentMessage, m_NameString;
+	sf::Text m_text, m_chatLobbyText, m_NameText, m_connectedClientsText;
+	string m_currentMessage, m_NameString, m_connectedClientsString;
 	int m_messagesSent;
 	list<string> m_historyMessages;
 	sf::IpAddress m_ServerIPAddress;
@@ -53,6 +55,6 @@ private:
 	PlayerManager pm = PlayerManager();
 	sf::UdpSocket listener;
 	char playerNameCharArray[1024];
-
+	Clients clients = Clients();
 };
 
