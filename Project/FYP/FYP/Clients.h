@@ -6,12 +6,17 @@ class Clients
 {
 public:
 	Clients();
-	void AddNewClient(const string &IP, const string &Name);
+	void AddNewClient(const string &IP, const string &Name, int count);
 	vector<sf::IpAddress> BroadcastToAllClients();
 	vector<sf::IpAddress> BroadcastToEveryoneExceptClient(const string &IPAddress);
 	sf::IpAddress FindWhoSentMessage(string &IP);
+	int FindWhatNumberClientsWhoSentReadyIs(string &IP);
 	bool CheckIfClientExists(const string &IPAddress);
+	int Size() { return clientList.size(); }
+	void Draw(sf::RenderWindow &window);
+	vector<Client*> GetVector() { return clientList; }
 
 private:
 	vector<Client*> clientList;
+	
 };

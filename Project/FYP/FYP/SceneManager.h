@@ -28,6 +28,7 @@ public:
 	sf::RectangleShape GetConfirmRectangle();
 	sf::RectangleShape GetSendRectangle();
 	sf::RectangleShape GetConnectRectangle();
+	sf::RectangleShape GetReadyRectangle() { return m_CollisionReadyRectangle; }
 	bool IsPlayerConnected() { return m_playerConnected; }
 	bool IsPlayerReady() { return m_playerReady; }
 	void SetPlayerReady(bool state) { m_playerReady = state; }
@@ -102,4 +103,5 @@ private:
 	bool m_changeNameSelected = false;
 	sf::Texture m_NotReadyScreen, m_ReadyScreen, m_ConnectScreen;
 	sf::RectangleShape m_NotReadyRectangle, m_ReadyRectangle, m_ConnectRectangle, m_NameRectangle, m_SaveNameRectangle;
+	sf::RectangleShape m_CollisionReadyRectangle;
 };

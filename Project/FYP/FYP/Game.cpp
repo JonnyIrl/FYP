@@ -1935,6 +1935,24 @@ int main()
 						netcode.SetName(netcode.GetName());
 					}
 
+					if (collisionManager.CheckRectangleCollision(mouseRect, sceneManager.GetReadyRectangle()))
+					{
+						//SEND MESSAGE INTO CHAT WINDOW						
+						if (netcode.GetPlayerReady())
+						{
+							netcode.SetPlayerReady(false);
+							sceneManager.SetPlayerReady(false);
+							netcode.SendPlayerReady();
+						}
+
+						else
+						{
+							netcode.SetPlayerReady(true);
+							sceneManager.SetPlayerReady(true);
+							netcode.SendPlayerReady();
+						}
+					}
+
 				}
 			}
 

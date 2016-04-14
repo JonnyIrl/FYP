@@ -137,6 +137,9 @@ SceneManager::SceneManager()
 		m_NameRectangle.setSize(sf::Vector2f(350, 45));
 		m_NameRectangle.setPosition(sf::Vector2f(160, 108));
 
+		m_CollisionReadyRectangle.setSize(sf::Vector2f(370, 42));
+		m_CollisionReadyRectangle.setPosition(sf::Vector2f(770, 665));
+
 
 		cout << "SceneManager Constructor Finished" << endl;
 	}
@@ -476,6 +479,8 @@ void SceneManager::Draw(sf::RenderWindow &window)
 		{
 			window.draw(m_ReadyRectangle);
 		}
+
+		//window.draw(m_CollisionReadyRectangle);
 		//window.draw(m_chatLobbyRect);
 		//window.draw(m_connectRect);
 		//Draw Chat String

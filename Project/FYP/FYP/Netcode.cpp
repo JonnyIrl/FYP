@@ -103,13 +103,36 @@ void Netcode::ConnectToServer(string id)
 	}
 }
 
+void Netcode::SendPlayerReady()
+{
+	sf::Packet packet;
+	packet << PLAYER_READY_CHANGED << m_ipAddress.getLocalAddress().toString() << m_playerReady;
+	cout << "READY = " << m_playerReady << endl;
+
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+
+}
+
 void Netcode::SendPacket()
 {
 	m_receivedReply = false;
 	string message = m_currentMessage;
 
 	sf::Packet packet;
-	packet << GENERAL_MSG << "192.168.0.15" << message << m_NameString;
+	packet << GENERAL_MSG << m_ipAddress.getLocalAddress().toString() << message << m_NameString;
 	cout << "NAME = " << m_NameString << endl;
 
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
@@ -203,10 +226,24 @@ void Netcode::ReceivePacket()
 				//If the clients doesnt exist then add them..
 				if (!clients.CheckIfClientExists(playerIP))
 				{
-					clients.AddNewClient(playerIP, playerID);
+					clients.AddNewClient(playerIP, playerID, clients.Size() + 1);
 					cout << "Added new client " << playerIP << " : " << playerID << endl;
 					AddClientData(playerID);
 				}
+				break;
+			}
+
+			if (type == PLAYER_READY_CHANGED)
+			{
+				string playerIP;
+				bool ready;
+
+				packet >> playerIP >> ready;
+				cout << "READY Player = " << playerIP << " Ready = " << ready;
+
+				//Need to change the clients ready to be whatever was sent across
+				//FIND WHICH CLIENT SENT THE READY CHANGED		THEN SET THE READY BOOL TO WHATEVER THEY SENT
+				clients.GetVector().at(clients.FindWhatNumberClientsWhoSentReadyIs(playerIP))->SetReady(ready);
 				break;
 			}
 
@@ -297,4 +334,5 @@ void Netcode::Draw(sf::RenderWindow& window)
 	window.draw(m_NameText);
 	window.draw(m_chatLobbyText);
 	window.draw(m_connectedClientsText);
+	clients.Draw(window);
 }

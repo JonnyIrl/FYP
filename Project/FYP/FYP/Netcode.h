@@ -29,6 +29,9 @@ public:
 	bool GetConnected() { return m_connected; }
 	string ConvertStringToCharArray(string name, int typeCommand);
 	void AddClientData(string name);
+	bool GetPlayerReady() { return m_playerReady; }
+	void SetPlayerReady(bool state) { m_playerReady = state; }
+	void SendPlayerReady();
 
 	void ReceivePlayersPosition();
 
@@ -56,5 +59,6 @@ private:
 	sf::UdpSocket listener;
 	char playerNameCharArray[1024];
 	Clients clients = Clients();
+	bool m_playerReady = false;
 };
 
