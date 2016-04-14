@@ -114,12 +114,11 @@ void Netcode::SendPlayerReady()
 	sf::Packet packet;
 	packet << PLAYER_READY_CHANGED << m_ipAddress.getLocalAddress().toString() << m_playerReady;
 	cout << "READY = " << m_playerReady << endl;
-
+	clients.GetVector().at(0)->SetReady(m_playerReady);
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
 	case sf::Socket::Done:
-		clients.GetVector().at(0)->SetReady(m_playerReady);
 		cout << "Message Sent" << endl;
 		break;
 
