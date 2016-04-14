@@ -62,7 +62,9 @@ bool Clients::CheckIfClientsAllReady()
 		}
 
 		else
-			ready = false;
+		{
+			return ready = false;
+		}
 	}
 
 	return ready;
