@@ -76,6 +76,7 @@ public:
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
 	bool IsMoving() { return m_moving; }
 	void SetMovingFalse() { m_moving = false; }
+	void Respawn();
 
 
 private:
