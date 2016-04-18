@@ -280,6 +280,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -300,6 +301,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -311,12 +313,14 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room1Bullets.push_back(b);
 							}
+
 						}
 
 						//DEAGLE
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -328,6 +332,8 @@ int main()
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room1Bullets.push_back(b);
 							}
+
+
 						}
 
 						//TRAP
@@ -336,6 +342,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -347,6 +354,7 @@ int main()
 							player.SetEnergy(true, 4);
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room1Bullets.push_back(b);
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -361,18 +369,19 @@ int main()
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								int countDown = 0;
-								int timer = 0;		
+								int timer = 0;
 								cout << "BEFORE WHILE = " << timer << endl;
 
-									cout << "TIMER++ = " << timer << endl;
-									b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
-									Room1Bullets.push_back(b);
-									b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
-									Room1Bullets.push_back(b);
-									b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
-									Room1Bullets.push_back(b);
-									akClock.restart();								
-							
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								cout << "TIMER++ = " << timer << endl;
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room1Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
