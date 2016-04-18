@@ -19,6 +19,7 @@ public:
 	void AssignBullets();
 	void ShootAKBullet();
 	bool Alive();
+	void SetAliveFalse() { m_alive = false; }
 	sf::RectangleShape GetShape() { return m_bulletRectangle; }
 	int GetWeapon() { return m_currentWeapon; }
 

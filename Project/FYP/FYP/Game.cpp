@@ -1939,24 +1939,36 @@ int main()
 								if (b->GetWeapon() == 3)
 								{
 									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//AK
 								else if (b->GetWeapon() == 6)
 								{
 									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Deagle
 								else if (b->GetWeapon() == 2)
 								{
 									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Minigun
 								else if (b->GetWeapon() == 4)
 								{
 									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 							}//end if
