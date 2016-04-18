@@ -308,6 +308,31 @@ void Netcode::ReceivePacket()
 
 				break;
 			}
+
+			if (type == RESPAWN_MESSAGE)
+			{
+				string playerID;
+				float xPos, yPos;
+				int room;
+				packet >> playerID;
+				packet >> xPos;
+				packet >> yPos;
+				packet >> room;
+
+				for (int i = 0; pm.GetPlayers().size(); i++)
+				{
+					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+					{
+						cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
+						cout << "Setting Room = " << room << endl;
+						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
+						pm.GetPlayers().at(i)->SetRoom(room);
+						break;
+					}
+				}
+
+				break;
+			}
 		default:
 			;
 		}
@@ -473,6 +498,27 @@ void Netcode::SendNewBullet(sf::Vector2f position, int gun)
 	sf::Packet packet;
 	packet << BULLET_MESSAGE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << gun;
 	cout << "POSITION = " << position.x << " " << position.y << " GUN = " << gun << endl;
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+}
+
+void Netcode::SendRespawnMessage(sf::Vector2f position, int room)
+{
+	sf::Packet packet;
+	packet << RESPAWN_MESSAGE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << room;
+	cout << "RESPAWN POSITION = " << position.x << " " << position.y << " room = " << room << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{

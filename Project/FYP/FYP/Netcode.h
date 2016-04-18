@@ -41,6 +41,7 @@ public:
 	void SendPlayersPosition(sf::Vector2f position, int direction);
 	void SetPlayerAsClient();
 	void SendNewBullet(sf::Vector2f position, int gun);
+	void SendRespawnMessage(sf::Vector2f position, int direction);
 
 	void ReceivePlayersPosition();
 
