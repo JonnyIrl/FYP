@@ -1483,6 +1483,15 @@ int main()
 			//draw frame items			
 			room.Draw(window);
 			player.Update(frameTime);
+
+			if (player.GetHealth() <= 0)
+			{
+				sf::Vector2f newPos = player.Respawn();
+				netcode.SendRespawnMessage(newPos, player.randomRoomNumber);
+				hud.SetHealth(player.GetHealth());
+			}
+
+
 			hud.Draw(window);
 
 			netcode.pm.Update(frameTime);

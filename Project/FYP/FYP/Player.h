@@ -76,8 +76,8 @@ public:
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
 	bool IsMoving() { return m_moving; }
 	void SetMovingFalse() { m_moving = false; }
-	void Respawn();
-
+	sf::Vector2f Respawn();
+	int randomRoomNumber = 0;
 
 private:
 	sf::Vector2f m_position;

@@ -275,11 +275,6 @@ void Player::Update(sf::Time time)
 		trapClock.restart();
 	}
 
-	if (m_health <= 0)
-	{
-		Respawn();
-	}
-
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -458,7 +453,7 @@ void Player::SetPosition(sf::Vector2f position)
 	m_position = position;
 }
 
-void Player::Respawn()
+sf::Vector2f Player::Respawn()
 {
 	int xPos = rand() % ((900 - 100) + 1) + 100;
 	int yPos = rand() % ((600 - 100) + 1) + 100;
@@ -469,6 +464,8 @@ void Player::Respawn()
 	m_energy = 100;
 	m_position = sf::Vector2f(xPos, yPos);
 	m_currentRoom = room;
+	randomRoomNumber = room;
+	return sf::Vector2f(xPos, yPos);
 }
 
 //Destructor
