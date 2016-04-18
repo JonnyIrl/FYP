@@ -106,13 +106,13 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 			SetEnergy(true, 15);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 
 			else if (converted.x < GetPosition().x && converted.y > GetPosition().y || converted.x < GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 
@@ -126,13 +126,13 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 			SetEnergy(true, 2);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 
 			else if (converted.x < GetPosition().x && converted.y > GetPosition().y || converted.x < GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 		}
@@ -143,13 +143,13 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 			SetEnergy(true, 8);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 
 			else if (converted.x < GetPosition().x && converted.y > GetPosition().y || converted.x < GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 		}
@@ -171,11 +171,11 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 			SetEnergy(true, 4);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
 			{
-				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 22, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
-				b = new Bullet(sf::Vector2f(GetPosition().x + 4, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 4, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
-				b = new Bullet(sf::Vector2f(GetPosition().x + 40, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x + 40, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 
 
@@ -189,11 +189,11 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 				cout << "BEFORE WHILE = " << timer << endl;
 
 				cout << "TIMER++ = " << timer << endl;
-				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 20, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
-				b = new Bullet(sf::Vector2f(GetPosition().x - 22, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 22, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
-				b = new Bullet(sf::Vector2f(GetPosition().x - 18, GetPosition().y + 28), converted, GetWeapon());
+				b = new Bullet(sf::Vector2f(GetPosition().x - 18, GetPosition().y + 28), converted, gun);
 				Room1Bullets.push_back(b);
 			}
 
