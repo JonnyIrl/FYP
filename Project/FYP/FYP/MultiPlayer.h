@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include <list>
+#include "Bullet.h"
 
 using namespace std;
 
@@ -84,6 +85,11 @@ public:
 	int FindWhichRoomToUpdate();
 	int GetRoomNumber() { return m_currentRoom; }
 
+	void ShootAKBullet(sf::Vector2f converted);
+	void ShootSNIPERBullet(sf::Vector2f converted);
+	void ShootTRAPBullet(sf::Vector2f converted);
+	void ShootBullet(sf::Vector2f converted, int gun);
+
 
 private:
 	sf::Vector2f m_position;
@@ -146,6 +152,17 @@ private:
 	Animation m_playerUpAnimation;
 	Animation m_playerDownAnimation;
 	AnimatedSprite m_playerAnimation;
+
+	Bullet* b;
+	std::vector<Bullet *> Room1Bullets;
+	std::vector<Bullet *> Room2Bullets;
+	std::vector<Bullet *> Room3Bullets;
+	std::vector<Bullet *> Room4Bullets;
+	std::vector<Bullet *> Room5Bullets;
+	std::vector<Bullet *> Room6Bullets;
+	std::vector<Bullet *> Room7Bullets;
+	std::vector<Bullet *> Room8Bullets;
+	std::vector<Bullet *> Room9Bullets;
 };
 
 #endif
