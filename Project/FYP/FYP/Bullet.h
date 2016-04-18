@@ -1,3 +1,7 @@
+#pragma once
+#ifndef BULLET_H
+#define BULLET_H
+
 #include "AnimatedSprite.hpp"
 #include "Animation.hpp"
 
@@ -34,3 +38,5 @@ private:
 	int m_currentWeapon = 1;
 	const int M16 = 1;  int DEAGLE = 2; int SNIPER = 3; int MINIGUN = 4; int TRAP = 5; int AK = 6; int BOMB = 7;
 };
+
+#endif
