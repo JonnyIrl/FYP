@@ -91,6 +91,16 @@ public:
 	void ShootBullet(sf::Vector2f converted, int gun);
 
 
+	std::vector<Bullet *> Room1Bullets;
+	std::vector<Bullet *> Room2Bullets;
+	std::vector<Bullet *> Room3Bullets;
+	std::vector<Bullet *> Room4Bullets;
+	std::vector<Bullet *> Room5Bullets;
+	std::vector<Bullet *> Room6Bullets;
+	std::vector<Bullet *> Room7Bullets;
+	std::vector<Bullet *> Room8Bullets;
+	std::vector<Bullet *> Room9Bullets;
+
 private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
@@ -154,15 +164,6 @@ private:
 	AnimatedSprite m_playerAnimation;
 
 	Bullet* b;
-	std::vector<Bullet *> Room1Bullets;
-	std::vector<Bullet *> Room2Bullets;
-	std::vector<Bullet *> Room3Bullets;
-	std::vector<Bullet *> Room4Bullets;
-	std::vector<Bullet *> Room5Bullets;
-	std::vector<Bullet *> Room6Bullets;
-	std::vector<Bullet *> Room7Bullets;
-	std::vector<Bullet *> Room8Bullets;
-	std::vector<Bullet *> Room9Bullets;
 };
 
 #endif
