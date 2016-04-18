@@ -101,7 +101,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 	if (m_currentRoom == 1)
 	{
 		//SNIPER
-		if (GetWeapon() == gun)
+		if (gun == 3)
 		{
 			SetEnergy(true, 15);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
@@ -121,7 +121,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 		}
 
 		//MINIGUN
-		if (GetWeapon() == gun)
+		if (gun == 4)
 		{
 			SetEnergy(true, 2);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
@@ -138,7 +138,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 		}
 
 		//DEAGLE
-		if (GetWeapon() == gun)
+		if (gun == 2)
 		{
 			SetEnergy(true, 8);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)
@@ -155,7 +155,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 		}
 
 		//TRAP
-		if (GetWeapon() == gun)
+		if (gun == 5)
 		{
 			//If the trap is not on cool down..
 			if (!GetTrapCoolDown())
@@ -166,7 +166,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 		}
 
 		//AK
-		if (GetWeapon() == gun)
+		if (gun == 6)
 		{
 			SetEnergy(true, 4);
 			if (converted.x > GetPosition().x && converted.y > GetPosition().y || converted.x > GetPosition().x && converted.y < GetPosition().y)

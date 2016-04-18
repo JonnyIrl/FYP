@@ -300,6 +300,7 @@ void Netcode::ReceivePacket()
 					{
 						cout << "Found player.. setting CONVERTED = " << xPos << " " << yPos << endl;
 						cout << "Shooting Bullet" << endl;
+						cout << "Gun = " << gun << endl;
 						pm.GetPlayers().at(i)->ShootBullet(sf::Vector2f(xPos, yPos), gun);
 						break;
 					}
