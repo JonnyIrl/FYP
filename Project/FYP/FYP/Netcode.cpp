@@ -347,7 +347,62 @@ void Netcode::Update()
 	//ReceiveServerMessageUpdate();
 }
 
-void Netcode::Draw(sf::RenderWindow& window)
+void Netcode::Draw1(sf::RenderWindow& window)
+{
+	
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw2(sf::RenderWindow& window)
+{
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw3(sf::RenderWindow& window)
+{
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw4(sf::RenderWindow& window)
+{
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw5(sf::RenderWindow& window)
+{
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw6(sf::RenderWindow& window)
+{
+	window.draw(m_text);
+	window.draw(m_NameText);
+	window.draw(m_chatLobbyText);
+	window.draw(m_connectedClientsText);
+	clients.Draw(window);
+}
+
+void Netcode::Draw7(sf::RenderWindow& window)
 {
 	window.draw(m_text);
 	window.draw(m_NameText);
@@ -358,7 +413,7 @@ void Netcode::Draw(sf::RenderWindow& window)
 
 bool Netcode::CheckPlayersAllReady()
 {
-	if (clients.Size() >= 2 && clients.CheckIfClientsAllReady())
+	if (clients.Size() >= 1 && clients.CheckIfClientsAllReady())
 	{
 		return true;
 	}

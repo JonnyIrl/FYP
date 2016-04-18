@@ -18,7 +18,13 @@ class MultiPlayer
 public:
 	MultiPlayer();
 	~MultiPlayer();
-	void Update(sf::Time time);
+	void UpdateRoom1(sf::Time time);
+	void UpdateRoom2(sf::Time time);
+	void UpdateRoom3(sf::Time time);
+	void UpdateRoom4(sf::Time time);
+	void UpdateRoom5(sf::Time time);
+	void UpdateRoom6(sf::Time time);
+	void UpdateRoom7(sf::Time time);
 	sf::RectangleShape GetShape();
 	sf::Vector2f GetPosition();
 	void SetPosition(sf::Vector2f position);
@@ -75,6 +81,8 @@ public:
 	int GetRoom() { return m_currentRoom; }
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
 	void SetDirection(int direction) { m_dir = direction; }
+	int FindWhichRoomToUpdate();
+	int GetRoomNumber() { return m_currentRoom; }
 
 
 private:

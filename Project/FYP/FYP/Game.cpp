@@ -1494,6 +1494,8 @@ int main()
 				{
 					bullet->Draw(window);
 				}
+
+				netcode.pm.Draw1(window);
 			}
 			break;
 
@@ -1510,6 +1512,8 @@ int main()
 				{
 					bullet->Draw(window);
 				}
+
+				netcode.pm.Draw2(window);
 			}
 			break;
 
@@ -1526,6 +1530,7 @@ int main()
 				{
 					bullet->Draw(window);
 				}
+				netcode.pm.Draw3(window);
 			}
 			break;
 
@@ -1543,6 +1548,7 @@ int main()
 					bullet->Draw(window);
 				}
 
+				netcode.pm.Draw4(window);
 			}
 			break;
 
@@ -1560,6 +1566,7 @@ int main()
 					bullet->Draw(window);
 				}
 
+				netcode.pm.Draw5(window);
 			}
 			break;
 
@@ -1577,6 +1584,8 @@ int main()
 					bullet->Draw(window);
 				}
 
+				netcode.pm.Draw6(window);
+
 			}
 			break;
 
@@ -1593,6 +1602,8 @@ int main()
 				{
 					bullet->Draw(window);
 				}
+
+				netcode.pm.Draw7(window);
 
 			}
 			break;
@@ -1817,7 +1828,6 @@ int main()
 			hud.countDown = player.GetTrapCoolDown();
 
 			player.Draw(window);
-			netcode.pm.Draw(window);
 			// Finally, display rendered frame on screen 
 			window.display();
 		}
@@ -1984,7 +1994,7 @@ int main()
 
 			netcode.Update();
 			sceneManager.Draw(window);
-			netcode.Draw(window);
+			netcode.Draw1(window);
 
 			// Finally, display rendered frame on screen 
 			window.display();

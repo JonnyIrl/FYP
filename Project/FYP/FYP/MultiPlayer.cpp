@@ -258,8 +258,74 @@ void MultiPlayer::AddNewTrap(sf::Vector2f position)
 	m_TrapRectangles.push_back(m_trapRectangle);
 }
 
-void MultiPlayer::Update(sf::Time time)
+int MultiPlayer::FindWhichRoomToUpdate()
 {
+	if (m_currentRoom == 1)
+	{
+		return 1;
+	}
+
+	if (m_currentRoom == 2)
+	{
+		return 2;
+	}
+
+	if (m_currentRoom == 3)
+	{
+		return 3;
+	}
+
+	if (m_currentRoom == 4)
+	{
+		return 4;
+	}
+
+	if (m_currentRoom == 5)
+	{
+		return 5;
+	}
+
+	if (m_currentRoom == 6)
+	{
+		return 6;
+	}
+
+	if (m_currentRoom == 7)
+	{
+		return 7;
+	}
+}
+
+void MultiPlayer::UpdateRoom1(sf::Time time)
+{
+	if (m_dir == 1 && m_playerAnimation.getAnimation() != &m_playerUpAnimation)
+	{
+		m_playerAnimation.setAnimation(m_playerUpAnimation);
+		m_playerAnimation.update(time);
+		m_dir = 1;
+	}
+
+	else if (m_dir == 2 && m_playerAnimation.getAnimation() != &m_playerDownAnimation)
+	{
+		m_playerAnimation.setAnimation(m_playerDownAnimation);
+		m_playerAnimation.update(time);
+		m_dir = 2;
+	}
+
+	else if (m_dir == 3 && m_playerAnimation.getAnimation() != &m_playerLeftAnimation)
+	{
+		m_playerAnimation.setAnimation(m_playerLeftAnimation);
+		m_playerAnimation.update(time);
+		m_dir = 3;
+	}
+
+	else if (m_dir == 4 && m_playerAnimation.getAnimation() != &m_playerRightAnimation)
+	{
+		m_playerAnimation.setAnimation(m_playerRightAnimation);
+		m_playerAnimation.update(time);
+		m_dir = 4;
+	}
+
 	m_playerAnimation.setPosition(m_position);
 	m_rect.setPosition(m_position);
 }
