@@ -19,6 +19,8 @@ public:
 	void AssignBullets();
 	void ShootAKBullet();
 	bool Alive();
+	sf::RectangleShape GetShape() { return m_bulletRectangle; }
+	int GetWeapon() { return m_currentWeapon; }
 
 private:
 	sf::Texture m_bulletTexture;

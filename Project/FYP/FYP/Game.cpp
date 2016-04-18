@@ -1920,6 +1920,207 @@ int main()
 
 			#pragma endregion DIFFERENT BULLET UPDATES
 
+
+#pragma region Colllisions in Room 1
+
+			if (player.GetRoom() == 1)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 1)
+					{
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+			}//end if
+
+#pragma endregion Colllisions in Room 1
+
+#pragma region Colllisions in Room 2
+
+			if (player.GetRoom() == 2)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 2)
+					{
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room2Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+			}//end if
+
+#pragma endregion Colllisions in Room 2
+
+#pragma region Colllisions in Room 3
+
+			if (player.GetRoom() == 3)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 3)
+					{
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room3Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+			}//end if
+
+#pragma endregion Colllisions in Room 3
+
+#pragma region Colllisions in Room 3
+
+			if (player.GetRoom() == 4)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 4)
+					{
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room4Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+			}//end if
+
+#pragma endregion Colllisions in Room 4
+
 			//Check which killing spree sound effect to play
 
 			//If true then play the sound for the amount of kills the player had.
