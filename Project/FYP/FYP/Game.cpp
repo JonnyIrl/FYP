@@ -1929,6 +1929,17 @@ int main()
 				{
 					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 1)
 					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room1Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
 						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
 							//If the player is colliding with the other players bullet..
@@ -1978,6 +1989,8 @@ int main()
 					}//end if
 
 				}//end for
+
+
 
 			}//end if
 
