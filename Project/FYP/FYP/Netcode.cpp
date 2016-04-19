@@ -555,3 +555,24 @@ void Netcode::SendRespawnMessage(sf::Vector2f position, int room)
 		;
 	}
 }
+
+void Netcode::SendRoomUpdate(int room)
+{
+	sf::Packet packet;
+	packet << ROOM_UPDATE << m_ipAddress.getLocalAddress().toString() << room;
+	cout << "ROOM_UPDATE = " << " room = " << room << endl;
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+}

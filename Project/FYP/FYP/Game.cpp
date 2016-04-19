@@ -2766,6 +2766,7 @@ int main()
 					player.SetPosition(room.SetRightDoor());
 				}
 
+				netcode.SendRoomUpdate(player.GetRoom());
 				player.SetRoom(room.m_currentRoom);
 			}
 
