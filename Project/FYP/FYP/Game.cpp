@@ -1554,9 +1554,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room1Bullets)
+					for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room1Bullets.size(); j++)// at(i)->Room3Bullets)
 					{
-						bullet->Draw(window);
+						if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->Alive())
+						netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->Draw(window);
 					}
 				}
 
@@ -1580,10 +1581,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room2Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room2Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+								if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw2(window);
@@ -1606,10 +1611,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room3Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room3Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw3(window);
@@ -1632,10 +1641,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room4Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room4Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw4(window);
@@ -1658,10 +1671,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room5Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw5(window);
@@ -1684,10 +1701,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room6Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw6(window);
@@ -1711,10 +1732,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room7Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw7(window);
@@ -1739,10 +1764,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room8Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw8(window);
@@ -1765,10 +1794,14 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room9Bullets)
+					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 					{
-						bullet->Draw(window);
-					}
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); j++)// at(i)->Room3Bullets)
+						{
+							if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Alive())
+								netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Draw(window);
+							}
+						}
 				}
 
 				netcode.pm.Draw9(window);
