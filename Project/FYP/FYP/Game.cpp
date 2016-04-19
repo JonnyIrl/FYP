@@ -2046,11 +2046,11 @@ int main()
 
 #pragma region Colllisions in Room 1
 
-			if (player.GetRoom() == 1)
+			if (player.GetRoom() == 0)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 1)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 0)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room1Bullets)
@@ -2121,11 +2121,11 @@ int main()
 
 #pragma region Colllisions in Room 2
 
-			if (player.GetRoom() == 2)
+			if (player.GetRoom() == 1)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 2)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 1)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room2Bullets)
@@ -2196,11 +2196,11 @@ int main()
 
 #pragma region Colllisions in Room 3
 
-			if (player.GetRoom() == 3)
+			if (player.GetRoom() == 2)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 3)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 2)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room3Bullets)
@@ -2271,11 +2271,11 @@ int main()
 
 #pragma region Colllisions in Room 4
 
-			if (player.GetRoom() == 4)
+			if (player.GetRoom() == 3)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 4)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 3)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room4Bullets)
@@ -2346,11 +2346,11 @@ int main()
 
 #pragma region Colllisions in Room 5
 
-			if (player.GetRoom() == 5)
+			if (player.GetRoom() == 4)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 5)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 4)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room5Bullets)
@@ -2421,11 +2421,11 @@ int main()
 
 #pragma region Colllisions in Room 6
 
-			if (player.GetRoom() == 6)
+			if (player.GetRoom() == 5)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 6)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 5)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room6Bullets)
@@ -2496,11 +2496,11 @@ int main()
 
 #pragma region Colllisions in Room 7
 
-			if (player.GetRoom() == 7)
+			if (player.GetRoom() == 6)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 7)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 6)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room7Bullets)
@@ -2571,11 +2571,11 @@ int main()
 
 #pragma region Colllisions in Room 8
 
-			if (player.GetRoom() == 8)
+			if (player.GetRoom() == 7)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 8)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 7)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room8Bullets)
@@ -2646,11 +2646,11 @@ int main()
 
 #pragma region Colllisions in Room 9
 
-			if (player.GetRoom() == 9)
+			if (player.GetRoom() == 8)
 			{
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 9)
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 8)
 					{
 						//Check players bullet vs the enemy players
 						for each (Bullet* b in Room9Bullets)
