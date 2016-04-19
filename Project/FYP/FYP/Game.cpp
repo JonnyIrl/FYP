@@ -1919,15 +1919,15 @@ int main()
 			//Multiplayer Bullets 1
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room1Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room1Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room1Bullets.erase(remove(netcode.pm.GetPlayers().at(i)->Room1Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room1Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room1Bullets.end());
-						delete bullet;
-						std::cout << "Room 1 Bullet Deleted" << std::endl;
+						netcode.pm.GetPlayers().at(i)->Room1Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room1Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room1Bullets.end(), netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room1Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
+						std::cout << "Room2Bullets Deleted" << std::endl;
 						break;
 
 					}
@@ -1937,14 +1937,14 @@ int main()
 			//Multiplayer Bullets 2
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room2Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room2Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room2Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room2Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room2Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room2Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room2Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room2Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room2Bullets.end(), netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room2Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room2Bullets Deleted" << std::endl;
 						break;
 
@@ -1955,14 +1955,14 @@ int main()
 			//Multiplayer Bullets 3
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room3Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room3Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room3Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room3Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room3Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room3Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room3Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room3Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room3Bullets.end(), netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room3Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room3Bullets Deleted" << std::endl;
 						break;
 
@@ -1973,15 +1973,15 @@ int main()
 			//Multiplayer Bullets 4
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room4Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room4Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room4Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room4Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room4Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room4Bullets.end());
-						delete bullet;
-						std::cout << "Room4Bullets Deleted" << std::endl;
+						netcode.pm.GetPlayers().at(i)->Room4Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room4Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room4Bullets.end(), netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room4Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
+						std::cout << "Room3Bullets Deleted" << std::endl;
 						break;
 
 					}
@@ -1991,15 +1991,15 @@ int main()
 			//Multiplayer Bullets 5
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room5Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room5Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room5Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room5Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room5Bullets.end());
-						delete bullet;
-						std::cout << "Room5Bullets Deleted" << std::endl;
+						netcode.pm.GetPlayers().at(i)->Room5Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room5Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room5Bullets.end(), netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room5Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
+						std::cout << "Room3Bullets Deleted" << std::endl;
 						break;
 
 					}
@@ -2009,14 +2009,14 @@ int main()
 			//Multiplayer Bullets 6
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room6Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room6Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room6Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room6Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room6Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room6Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room6Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room6Bullets.end(), netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room6Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room6Bullets Deleted" << std::endl;
 						break;
 
@@ -2027,14 +2027,14 @@ int main()
 			//Multiplayer Bullets 7
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room7Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room7Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room7Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room7Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room7Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room7Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room7Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room7Bullets.end(), netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room7Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room7Bullets Deleted" << std::endl;
 						break;
 
@@ -2045,14 +2045,14 @@ int main()
 			//Multiplayer Bullets 8
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room8Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room8Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room8Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room8Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room8Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room8Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room8Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room8Bullets.end(), netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room8Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room8Bullets Deleted" << std::endl;
 						break;
 
@@ -2063,14 +2063,14 @@ int main()
 			//Multiplayer Bullets 9
 			for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 			{
-				for each (Bullet* bullet in netcode.pm.GetPlayers().at(i)->Room9Bullets)
+				for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); j++)// at(i)->Room3Bullets)
 				{
-					bullet->Update(frameTime);
+					netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Update(frameTime);
 
-					if (!bullet->Alive())
+					if (!netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room9Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room9Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room9Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room9Bullets.end());
-						delete bullet;
+						netcode.pm.GetPlayers().at(i)->Room9Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room9Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room9Bullets.end(), netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)), netcode.pm.GetPlayers().at(i)->Room9Bullets.end());
+						//delete netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j);
 						std::cout << "Room9Bullets Deleted" << std::endl;
 						break;
 
