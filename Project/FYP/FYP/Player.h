@@ -96,7 +96,7 @@ private:
 	int m_deathsWithoutKill;
 	int trapCoolDown;
 	bool countDownTrap;
-	int m_currentRoom = 1;
+	int m_currentRoom = 0;
 	sf::Sprite m_spr;
 	sf::RectangleShape m_rect;
 	sf::Texture m_pDownTexture;

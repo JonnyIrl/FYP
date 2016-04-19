@@ -13,12 +13,12 @@ public:
 	void InitCollisionRectangles();
 	bool CheckToGoToNextRoom(sf::RectangleShape playerRectangle);
 	bool CheckBoundingCollisions(sf::RectangleShape playerRectangle);
-	enum CURRENTROOM : byte{ ROOM1, ROOM2, ROOM3, ROOM4, ROOM5, ROOM6, ROOM7, ROOM8, ROOM9 };
+	enum CURRENTROOM : int{ ROOM1, ROOM2, ROOM3, ROOM4, ROOM5, ROOM6, ROOM7, ROOM8, ROOM9 };
 	sf::RectangleShape GetBottomRectangle();
 	sf::RectangleShape GetTopRectangle();
 	sf::RectangleShape GetLeftRectangle();
 	sf::RectangleShape GetRightRectangle();
-	byte m_currentRoom;
+	int m_currentRoom;
 
 
 	int checkDoor;

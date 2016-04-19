@@ -1485,9 +1485,12 @@ int main()
 			if (player.GetHealth() <= 0)
 			{
 				sf::Vector2f newPos = player.Respawn();
-				netcode.SendRespawnMessage(newPos, player.randomRoomNumber);
+				cout << "After Respawn room = " << player.GetRoom() << endl;
+				netcode.SendRespawnMessage(newPos, player.GetRoom());
+				cout << "After Sending Respawn room = " << player.GetRoom() << endl;
 				hud.SetHealth(player.GetHealth());
-				room.m_currentRoom = player.randomRoomNumber;
+				cout << "Before setting room = " << player.GetRoom() << endl;
+				room.m_currentRoom = player.GetRoom();
 			}
 
 
@@ -2739,6 +2742,8 @@ int main()
 				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
 			}
 
+			cout << "Player Room  = " << player.GetRoom() << endl;
+			cout << "Room.. Room  = " << room.m_currentRoom << endl;
 
 #pragma region CheckToGoToNextRoom
 
@@ -2748,25 +2753,23 @@ int main()
 			{
 				if (room.checkDoor == 1)
 				{
-					player.SetPosition(room.SetTopDoor());
-					player.SetRoom(room.m_currentRoom);
+					player.SetPosition(room.SetTopDoor());					
 				}
 				if (room.checkDoor == 2)
 				{
 					player.SetPosition(room.SetBottomDoor());
-					player.SetRoom(room.m_currentRoom);
 				}
 				if (room.checkDoor == 3) 
 				{
 					player.SetPosition(room.SetLeftDoor());
-					player.SetRoom(room.m_currentRoom);
 				}
 
 				if (room.checkDoor == 4)
 				{
 					player.SetPosition(room.SetRightDoor());
-					player.SetRoom(room.m_currentRoom);
 				}
+
+				player.SetRoom(room.m_currentRoom);
 			}
 
 #pragma endregion CheckToGoToNextRoom
