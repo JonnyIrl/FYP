@@ -333,6 +333,27 @@ void Netcode::ReceivePacket()
 
 				break;
 			}
+
+			if (type == ROOM_UPDATE)
+			{
+				string playerID;
+				int room;
+				packet >> playerID;
+				packet >> room;
+
+				for (int i = 0; pm.GetPlayers().size(); i++)
+				{
+					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+					{
+						cout << "Found player.. setting room = " << room << endl;
+						cout << "Setting Room = " << room << endl;
+						pm.GetPlayers().at(i)->SetRoom(room);
+						break;
+					}
+				}
+
+				break;
+			}
 		default:
 			;
 		}

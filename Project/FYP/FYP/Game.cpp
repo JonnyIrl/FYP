@@ -2013,6 +2013,17 @@ int main()
 				{
 					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 2)
 					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room2Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
 						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room2Bullets)
 						{
 							//If the player is colliding with the other players bullet..
@@ -2023,24 +2034,36 @@ int main()
 								if (b->GetWeapon() == 3)
 								{
 									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//AK
 								else if (b->GetWeapon() == 6)
 								{
 									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Deagle
 								else if (b->GetWeapon() == 2)
 								{
 									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Minigun
 								else if (b->GetWeapon() == 4)
 								{
 									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 							}//end if
@@ -2050,6 +2073,8 @@ int main()
 					}//end if
 
 				}//end for
+
+
 
 			}//end if
 
@@ -2063,6 +2088,17 @@ int main()
 				{
 					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 3)
 					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room3Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
 						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room3Bullets)
 						{
 							//If the player is colliding with the other players bullet..
@@ -2073,24 +2109,36 @@ int main()
 								if (b->GetWeapon() == 3)
 								{
 									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//AK
 								else if (b->GetWeapon() == 6)
 								{
 									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Deagle
 								else if (b->GetWeapon() == 2)
 								{
 									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Minigun
 								else if (b->GetWeapon() == 4)
 								{
 									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 							}//end if
@@ -2101,11 +2149,13 @@ int main()
 
 				}//end for
 
+
+
 			}//end if
 
 #pragma endregion Colllisions in Room 3
 
-#pragma region Colllisions in Room 3
+#pragma region Colllisions in Room 4
 
 			if (player.GetRoom() == 4)
 			{
@@ -2113,6 +2163,17 @@ int main()
 				{
 					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 4)
 					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room4Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
 						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room4Bullets)
 						{
 							//If the player is colliding with the other players bullet..
@@ -2123,24 +2184,36 @@ int main()
 								if (b->GetWeapon() == 3)
 								{
 									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//AK
 								else if (b->GetWeapon() == 6)
 								{
 									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Deagle
 								else if (b->GetWeapon() == 2)
 								{
 									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 								//Minigun
 								else if (b->GetWeapon() == 4)
 								{
 									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
 								}
 
 							}//end if
@@ -2151,9 +2224,386 @@ int main()
 
 				}//end for
 
+
+
 			}//end if
 
 #pragma endregion Colllisions in Room 4
+
+#pragma region Colllisions in Room 5
+
+			if (player.GetRoom() == 5)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 5)
+					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room5Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room5Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+
+
+			}//end if
+
+#pragma endregion Colllisions in Room 5
+
+#pragma region Colllisions in Room 6
+
+			if (player.GetRoom() == 6)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 6)
+					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room6Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room6Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+
+
+			}//end if
+
+#pragma endregion Colllisions in Room 6
+
+#pragma region Colllisions in Room 7
+
+			if (player.GetRoom() == 7)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 7)
+					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room7Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room7Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+
+
+			}//end if
+
+#pragma endregion Colllisions in Room 7
+
+#pragma region Colllisions in Room 8
+
+			if (player.GetRoom() == 8)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 8)
+					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room8Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room8Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+
+
+			}//end if
+
+#pragma endregion Colllisions in Room 8
+
+#pragma region Colllisions in Room 9
+
+			if (player.GetRoom() == 9)
+			{
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 9)
+					{
+						//Check players bullet vs the enemy players
+						for each (Bullet* b in Room9Bullets)
+						{
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+							{
+								b->SetAliveFalse();
+								cout << "Hit enemy" << endl;
+								break;
+							}
+						}
+
+						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room9Bullets)
+						{
+							//If the player is colliding with the other players bullet..
+							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							{
+								//Reduce the players health
+								//SNIPER
+								if (b->GetWeapon() == 3)
+								{
+									player.SetHealth(false, 40);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//AK
+								else if (b->GetWeapon() == 6)
+								{
+									player.SetHealth(false, 15);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Deagle
+								else if (b->GetWeapon() == 2)
+								{
+									player.SetHealth(false, 25);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+								//Minigun
+								else if (b->GetWeapon() == 4)
+								{
+									player.SetHealth(false, 10);
+									hud.SetHealth(player.GetHealth());
+									b->SetAliveFalse();
+									break;
+								}
+
+							}//end if
+
+						}//end for
+
+					}//end if
+
+				}//end for
+
+
+
+			}//end if
+
+#pragma endregion Colllisions in Room 9
 
 			//Check which killing spree sound effect to play
 
@@ -2178,16 +2628,37 @@ int main()
 				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
 			}
 
+
+#pragma region CheckToGoToNextRoom
+
 			//1 = top door i.e player walked through the bottom door.
 			//Used to check which room to go into next.
 			if (room.CheckToGoToNextRoom(player.GetShape()))
 			{
-				if (room.checkDoor == 1) player.SetPosition(room.SetTopDoor());
-				if (room.checkDoor == 2) player.SetPosition(room.SetBottomDoor());
-				if (room.checkDoor == 3) player.SetPosition(room.SetLeftDoor());
-				if (room.checkDoor == 4)player.SetPosition(room.SetRightDoor());
+				if (room.checkDoor == 1)
+				{
+					player.SetPosition(room.SetTopDoor());
+					player.SetRoom(room.m_currentRoom);
+				}
+				if (room.checkDoor == 2)
+				{
+					player.SetPosition(room.SetBottomDoor());
+					player.SetRoom(room.m_currentRoom);
+				}
+				if (room.checkDoor == 3) 
+				{
+					player.SetPosition(room.SetLeftDoor());
+					player.SetRoom(room.m_currentRoom);
+				}
+
+				if (room.checkDoor == 4)
+				{
+					player.SetPosition(room.SetRightDoor());
+					player.SetRoom(room.m_currentRoom);
+				}
 			}
 
+#pragma endregion CheckToGoToNextRoom
 
 			//Check if the player has moved...
 			if (player.IsMoving())

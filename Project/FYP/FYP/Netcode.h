@@ -42,6 +42,7 @@ public:
 	void SetPlayerAsClient();
 	void SendNewBullet(sf::Vector2f position, int gun);
 	void SendRespawnMessage(sf::Vector2f position, int direction);
+	void SendRoomUpdate(int room);
 
 	void ReceivePlayersPosition();
 

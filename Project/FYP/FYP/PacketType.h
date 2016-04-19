@@ -12,3 +12,4 @@ const PacketType NEW_PLAYER_CONNECTED = 6;
 const PacketType PLAYER_READY_CHANGED = 7;
 const PacketType BULLET_MESSAGE = 8;
 const PacketType RESPAWN_MESSAGE = 9;
+const PacketType ROOM_UPDATE = 10;
