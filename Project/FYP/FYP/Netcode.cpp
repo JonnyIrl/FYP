@@ -326,7 +326,7 @@ void Netcode::ReceivePacket()
 						cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
 						cout << "Setting Room = " << room << endl;
 						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
-						pm.GetPlayers().at(i)->SetRoom(room + 1);
+						pm.GetPlayers().at(i)->SetRoom(room);
 						break;
 					}
 				}
