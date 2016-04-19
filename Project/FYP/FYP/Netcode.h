@@ -45,6 +45,7 @@ public:
 	void SendRoomUpdate(int room);
 
 	void ReceivePlayersPosition();
+	int playerToUpdate = 0;
 
 	string PLAYERNAME;
 	Clients GetClients() { return clients; }

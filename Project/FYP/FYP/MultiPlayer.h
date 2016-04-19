@@ -101,6 +101,8 @@ public:
 	std::vector<Bullet *> Room8Bullets;
 	std::vector<Bullet *> Room9Bullets;
 
+	bool UpdatePlayerRoom = false;
+
 private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;

@@ -1172,8 +1172,6 @@ int main()
 					//Update visual representation
 					hud.SetEnergy(player.GetEnergy());
 
-				
-
 				#pragma region UPDATE FOR EVERY ROOM
 				switch (room.m_currentRoom)
 				{
@@ -1489,6 +1487,7 @@ int main()
 				sf::Vector2f newPos = player.Respawn();
 				netcode.SendRespawnMessage(newPos, player.randomRoomNumber);
 				hud.SetHealth(player.GetHealth());
+				room.m_currentRoom = player.randomRoomNumber;
 			}
 
 

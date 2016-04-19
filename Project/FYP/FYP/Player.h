@@ -78,6 +78,7 @@ public:
 	void SetMovingFalse() { m_moving = false; }
 	sf::Vector2f Respawn();
 	int randomRoomNumber = 0;
+	bool UpdatePlayerRoom = false;
 
 private:
 	sf::Vector2f m_position;
