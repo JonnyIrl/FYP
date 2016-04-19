@@ -26,6 +26,8 @@ public:
 	void UpdateRoom5(sf::Time time);
 	void UpdateRoom6(sf::Time time);
 	void UpdateRoom7(sf::Time time);
+	void UpdateRoom8(sf::Time time);
+	void UpdateRoom9(sf::Time time);
 	sf::RectangleShape GetShape();
 	sf::Vector2f GetPosition();
 	void SetPosition(sf::Vector2f position);

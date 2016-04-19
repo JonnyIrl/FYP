@@ -107,3 +107,21 @@ void PlayerManager::Draw7(sf::RenderWindow &window)
 			m_Players.at(i)->Draw(window);
 	}
 }
+
+void PlayerManager::Draw8(sf::RenderWindow &window)
+{
+	for (int i = 0; i < m_Players.size(); i++)
+	{
+		if (m_Players.at(i)->GetRoomNumber() == 8)
+			m_Players.at(i)->Draw(window);
+	}
+}
+
+void PlayerManager::Draw9(sf::RenderWindow &window)
+{
+	for (int i = 0; i < m_Players.size(); i++)
+	{
+		if (m_Players.at(i)->GetRoomNumber() == 9)
+			m_Players.at(i)->Draw(window);
+	}
+}
