@@ -404,6 +404,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -424,6 +425,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -441,6 +443,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -460,6 +463,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -469,6 +473,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -501,6 +506,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -521,6 +527,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -538,6 +545,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -557,6 +565,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -566,6 +575,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -598,6 +608,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -618,6 +629,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -635,6 +647,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -654,6 +667,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -663,6 +677,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -695,6 +710,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -715,6 +731,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -732,6 +749,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -760,6 +778,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -793,6 +812,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -813,6 +833,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -830,6 +851,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -858,6 +880,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -890,6 +913,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -910,6 +934,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -927,6 +952,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -955,6 +981,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -987,6 +1014,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1007,6 +1035,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1024,6 +1053,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1043,6 +1073,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -1052,6 +1083,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1084,6 +1116,7 @@ int main()
 						if (player.GetWeapon() == 3)
 						{
 							player.SetEnergy(true, 15);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1104,6 +1137,7 @@ int main()
 						if (player.GetWeapon() == 4)
 						{
 							player.SetEnergy(true, 2);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1121,6 +1155,7 @@ int main()
 						if (player.GetWeapon() == 2)
 						{
 							player.SetEnergy(true, 8);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
@@ -1140,6 +1175,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
@@ -1149,6 +1185,7 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
+							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
