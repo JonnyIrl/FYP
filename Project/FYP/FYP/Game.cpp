@@ -2740,10 +2740,7 @@ int main()
 				if (room.checkWall == 2) player.SetPosition(sf::Vector2f(player.GetPosition().x, room.SetBottomWall().y));
 				if (room.checkWall == 3) player.SetPosition(sf::Vector2f(room.SetLeftWall().x, player.GetPosition().y));
 				if (room.checkWall == 4) player.SetPosition(sf::Vector2f(room.SetRightWall().x, player.GetPosition().y));
-			}
-
-			cout << "Player Room  = " << player.GetRoom() << endl;
-			cout << "Room.. Room  = " << room.m_currentRoom << endl;
+			}	
 
 #pragma region CheckToGoToNextRoom
 
