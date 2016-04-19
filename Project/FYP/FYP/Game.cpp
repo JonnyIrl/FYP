@@ -2193,7 +2193,7 @@ int main()
 										k = 0;
 									}
 
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetShape())) 
 									{
 										//Reduce the players health
 										//SNIPER
@@ -2221,6 +2221,38 @@ int main()
 										else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 4)
 										{
 											netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
+											break;
+										}
+									}
+
+									else if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->GetShape(), netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->GetShape()))
+									{
+										//Reduce the players health
+										//SNIPER
+										if (netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->GetWeapon() == 3)
+										{
+											netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->SetAliveFalse();
+											break;
+										}
+
+										//AK
+										else if (netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->GetWeapon() == 6)
+										{
+											netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->SetAliveFalse();
+											break;
+										}
+
+										//Deagle
+										else if (netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->GetWeapon() == 2)
+										{
+											netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->SetAliveFalse();
+											break;
+										}
+
+										//Minigun
+										else if (netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->GetWeapon() == 4)
+										{
+											netcode.pm.GetPlayers().at(k)->Room1Bullets.at(j)->SetAliveFalse();
 											break;
 										}
 									}
