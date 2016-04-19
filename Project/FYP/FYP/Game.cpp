@@ -1925,7 +1925,7 @@ int main()
 
 					if (!bullet->Alive())
 					{
-						netcode.pm.GetPlayers().at(i)->Room1Bullets.erase(std::remove(netcode.pm.GetPlayers().at(i)->Room1Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room1Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room1Bullets.end());
+						netcode.pm.GetPlayers().at(i)->Room1Bullets.erase(remove(netcode.pm.GetPlayers().at(i)->Room1Bullets.begin(), netcode.pm.GetPlayers().at(i)->Room1Bullets.end(), bullet), netcode.pm.GetPlayers().at(i)->Room1Bullets.end());
 						delete bullet;
 						std::cout << "Room 1 Bullet Deleted" << std::endl;
 						break;
@@ -2100,49 +2100,53 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room1Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
+
+							}//end bullet alive if
 
 						}//end for
 
@@ -2175,49 +2179,53 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room2Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room2Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
+
+							}//end bullet alive
 
 						}//end for
 
@@ -2250,51 +2258,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room3Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room3Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//bullet alive if
 
 					}//end if
 
@@ -2325,51 +2337,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room4Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room4Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 
@@ -2400,51 +2416,56 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room5Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+
+							if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 
@@ -2475,51 +2496,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room6Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 
@@ -2550,51 +2575,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room7Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 
@@ -2625,51 +2654,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room8Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 
@@ -2700,51 +2733,55 @@ int main()
 							}
 						}
 
-						for each (Bullet* b in netcode.pm.GetPlayers().at(i)->Room9Bullets)
+						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); j++)//(Bullet* b in netcode.pm.GetPlayers().at(i)->Room1Bullets)
 						{
-							//If the player is colliding with the other players bullet..
-							if (collisionManager.CheckRectangleCollision(b->GetShape(), player.GetShape()))
+							if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Alive())
 							{
-								//Reduce the players health
-								//SNIPER
-								if (b->GetWeapon() == 3)
+								//If the player is colliding with the other players bullet..
+								if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetShape(), player.GetShape()))
 								{
-									player.SetHealth(false, 40);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Reduce the players health
+									//SNIPER
+									if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 3)
+									{
+										player.SetHealth(false, 40);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//AK
-								else if (b->GetWeapon() == 6)
-								{
-									player.SetHealth(false, 15);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//AK
+									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 6)
+									{
+										player.SetHealth(false, 15);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Deagle
-								else if (b->GetWeapon() == 2)
-								{
-									player.SetHealth(false, 25);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Deagle
+									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 2)
+									{
+										player.SetHealth(false, 25);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-								//Minigun
-								else if (b->GetWeapon() == 4)
-								{
-									player.SetHealth(false, 10);
-									hud.SetHealth(player.GetHealth());
-									b->SetAliveFalse();
-									break;
-								}
+									//Minigun
+									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 4)
+									{
+										player.SetHealth(false, 10);
+										hud.SetHealth(player.GetHealth());
+										b->SetAliveFalse();
+										break;
+									}
 
-							}//end if
+								}//end if
 
-						}//end for
+							}//end for
+
+						}//end bullet if
 
 					}//end if
 

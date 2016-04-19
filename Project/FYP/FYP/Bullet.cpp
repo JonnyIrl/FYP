@@ -234,10 +234,11 @@ void Bullet::CheckBoundaryCollisions()
 
 }
 
-Bullet::~Bullet()
-{
-	//delete &m_bulletRectangle;
-	//delete &m_bulletTexture;
-	//delete &m_alive;
-	//delete &m_position;
-}
+//Bullet::~Bullet()
+//{
+//	//delete this;
+//	//delete &m_bulletRectangle;
+//	//delete &m_bulletTexture;
+//	//delete &m_alive;
+//	//delete &m_position;
+//}

@@ -9,7 +9,7 @@ class Bullet
 {
 public:
 	Bullet();
-	~Bullet();
+	//~Bullet();
 	Bullet(sf::Vector2f PlayerPosition, sf::Vector2f mousePos, int currentWeapon);
 	bool LoadTexture();
 	void Draw(sf::RenderWindow &window);
