@@ -457,7 +457,7 @@ sf::Vector2f Player::Respawn()
 {
 	int xPos = rand() % ((900 - 100) + 1) + 100;
 	int yPos = rand() % ((600 - 100) + 1) + 100;
-	int room = rand() % ((9 - 0) + 0) + 1;
+	int room = rand() % ((8 - 0) + 0) + 1;
 	m_health = 100;
 	m_killingSpree = 0;
 	m_deathsWithoutKill = 0;
