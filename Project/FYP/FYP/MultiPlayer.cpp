@@ -522,7 +522,7 @@ void MultiPlayer::ShootBullet(sf::Vector2f converted, int gun)
 #pragma endregion Current Room == 4
 
 #pragma region Current Room == 5
-	if (m_currentRoom == gun)
+	if (m_currentRoom == 4)
 	{
 		//SNIPER
 		if (gun == 3)
