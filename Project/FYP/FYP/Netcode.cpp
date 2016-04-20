@@ -422,6 +422,12 @@ void Netcode::ReceivePacket()
 				break;
 			}
 
+			if (type == GAME_OVER_MESSAGE)
+			{
+				m_checkGameOver = true;
+				break;
+			}
+
 
 			if (type == KILL_CONFIRMED)
 			{

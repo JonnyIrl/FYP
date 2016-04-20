@@ -68,6 +68,7 @@ public:
 	int chestIndex = 0;
 	bool m_chestOpenUpdate = false;
 	bool m_checkItemTakenUpdate = false;
+	bool m_checkGameOver = false;
 
 private:
 

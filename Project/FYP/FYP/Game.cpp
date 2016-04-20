@@ -4177,6 +4177,12 @@ int main()
 				netcode.m_checkItemTakenUpdate = false;
 			}
 
+			if (netcode.m_checkGameOver)
+			{
+				sceneManager.m_currentScene = sceneManager.GAME_OVER;
+				netcode.m_checkGameOver = false;
+			}
+
 			/*if (player.IsRespawned())
 			{
 				if (player.GetHealth() != 100)
