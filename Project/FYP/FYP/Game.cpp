@@ -2159,52 +2159,6 @@ int main()
 
 							}//end bullet alive if
 
-							else
-							{
-								for (int k = i + 1; i < netcode.pm.GetPlayers().size(); k++)
-								{
-									//Last player checks with first
-									if (i == 7)
-									{
-										k = 0;
-									}
-
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetShape())) 
-									{
-										//Reduce the players health
-										//SNIPER
-										if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 3)
-										{
-											netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
-											break;
-										}
-
-										//AK
-										else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 6)
-										{
-											netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
-											break;
-										}
-
-										//Deagle
-										else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 2)
-										{
-											netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
-											break;
-										}
-
-										//Minigun
-										else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 4)
-										{
-											netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
-											break;
-										}
-									}
-								}
-							}
-
-						}//end for
-
 					}//end if
 
 				}//end for
