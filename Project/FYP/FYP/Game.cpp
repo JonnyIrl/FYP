@@ -4179,19 +4179,11 @@ int main()
 
 			if (netcode.m_checkGameOver)
 			{
+				hud.initScoreBoard = false;
 				sceneManager.m_currentScene = sceneManager.GAME_OVER;
+				hud.initScoreBoard = false;
 				netcode.m_checkGameOver = false;
 			}
-
-			/*if (player.IsRespawned())
-			{
-				if (player.GetHealth() != 100)
-				{
-					player.SetHealth(true, 100);
-				}
-				hud.SetHealth(player.GetHealth());
-				player.SetRespawned(false);
-			}*/
 
 			hud.countDown = player.GetTrapCoolDown();
 
@@ -4380,13 +4372,44 @@ int main()
 			window.display();
 		}
 #pragma endregion LOBBY TEXT NETCODE
-
 		break;
-		}
-
-
 		
-	} //loop back for next frame
 
+		case sceneManager.GAME_OVER:
+		{
+
+			sf::Event Event;
+			while (window.pollEvent(Event))
+			{
+				// Close window : exit 
+				if (Event.type == sf::Event::Closed)
+					window.close();
+
+				// Escape key : exit 
+				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+					window.close();
+
+			}
+
+			if (!hud.initScoreBoard)
+			{
+				vector<pair<string, int>> result = netcode.GetScores();
+				hud.SetScore(result, player.GetName(), player.GetScore());
+				hud.initScoreBoard = true;
+			}
+
+			hud.gameOver = true;
+			//prepare frame
+			window.clear();
+
+			hud.showScore = true;
+			hud.Draw(window);
+
+			// Finally, display rendered frame on screen 
+			window.display();
+		}
+		break;
+	} //loop back for next frame
+	}
 	return EXIT_SUCCESS;
 }

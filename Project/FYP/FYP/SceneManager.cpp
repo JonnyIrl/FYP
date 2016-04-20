@@ -8,7 +8,7 @@ SceneManager::SceneManager()
 {
 	if (LoadTexture())
 	{
-		m_currentScene = LOBBY;
+		m_currentScene = MENU;
 		m_sceneRect.setSize(sf::Vector2f(1280, 720));
 		m_sceneRect.setPosition(sf::Vector2f(0, 0));
 		m_sceneRect.setTexture(&m_mainMenuTexture);		
@@ -158,7 +158,7 @@ void SceneManager::ChangeBackground(sf::Event Event, sf::Time time)
 			//Check Mouse rectangle with the play button
 			if (m_mouseRect.getGlobalBounds().intersects(m_PlayGameButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 			{
-				m_currentScene = PLAY_GAME;
+				m_currentScene = LOBBY;
 			}
 
 

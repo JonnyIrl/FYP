@@ -38,6 +38,10 @@ HUD::HUD()
 		player2.setFont(font);
 		player3.setFont(font);
 
+		m_gameOverRect.setSize(sf::Vector2f(500, 50));
+		m_gameOverRect.setPosition(sf::Vector2f(400, 50));
+		m_gameOverRect.setTexture(&m_gameOverTexture);
+
 	}
 }
 
@@ -95,6 +99,9 @@ bool HUD::LoadTexture()
 		return false;
 
 	if (!m_scoreBoardTexture.loadFromFile("Assets/HUD/scoreBoard.png"))
+		return false;
+
+	if (!m_gameOverTexture.loadFromFile("Assets/HUD/gameover.png"))
 		return false;
 
 	if (!font.loadFromFile("Assets/Font/font.ttf")) {
@@ -282,12 +289,20 @@ void HUD::SetScore(vector<pair<string, int>> players, string playerID, int playe
 
 void HUD::Draw(sf::RenderWindow &window)
 {
-	window.draw(m_healthRectangle);
-	window.draw(m_energyBarRectangle);
-	window.draw(m_hudRectangle);
-	if (countDown)
+	if (gameOver == false)
 	{
-		window.draw(m_blankRectangle);
+		window.draw(m_healthRectangle);
+		window.draw(m_energyBarRectangle);
+		window.draw(m_hudRectangle);
+		if (countDown)
+		{
+			window.draw(m_blankRectangle);
+		}
+	}
+
+	else
+	{
+		window.draw(m_gameOverRect);
 	}
 
 	if (showScore)

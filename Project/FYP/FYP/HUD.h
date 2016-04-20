@@ -17,6 +17,7 @@ public:
 	void SetScore(vector<pair<string, int>> players, string playerID, int playerScore);
 	bool initScoreBoard = false;
 	int FindHighlight(int number);
+	bool gameOver = false;
 
 private:
 	sf::Texture m_hud1Texture;
@@ -48,6 +49,8 @@ private:
 	sf::RectangleShape m_energyBarRectangle;
 	sf::RectangleShape m_blankRectangle;
 	sf::RectangleShape m_scoreRectangle;
+	sf::RectangleShape m_gameOverRect;
+	sf::Texture m_gameOverTexture;
 
 	sf::Font font;
 	sf::Text player0, player1, player2, player3, player4, player5, player6, player7, player8;
