@@ -84,6 +84,9 @@ public:
 	bool IsRespawned() { return m_respawned; }
 	void SetRespawned(bool state) { m_respawned = state; }
 	bool DOUBLE_ENERGY, FAST_MOVEMENT, EXTRA_LIFE;
+	void SetEnergyPowerup(bool state) { DOUBLE_ENERGY = state; }
+	void SetFastMovement(bool state) { FAST_MOVEMENT = state; }
+	void SetExtraLife(bool state) { EXTRA_LIFE = state; }
 
 
 private:

@@ -1434,6 +1434,27 @@ int main()
 
 					if (room.FinishedSummoning())
 					{		
+						int powerup = rand() % 3 + 1;
+
+						//Speed Up
+						if (powerup == 1)
+						{
+							player.FAST_MOVEMENT = true;
+							cout << "SPEED UP " << endl;
+						}
+
+						else if (powerup == 2)
+						{
+							player.DOUBLE_ENERGY = true;
+							cout << "DOUBLE ENERGY " << endl;
+						}
+
+						else if (powerup == 3)
+						{
+							player.EXTRA_LIFE = true;
+							cout << "EXTRA_LIFE " << endl;
+						}
+
 						room.SetSummoning(false);
 						room.SetTimer(4);
 						cout << "COUNTDOWN FINISHED" << endl;
@@ -1604,8 +1625,6 @@ int main()
 				room.m_currentRoom = player.GetRoom();
 			}
 
-
-			hud.Draw(window);
 
 			netcode.pm.Update(frameTime);
 
@@ -1861,6 +1880,8 @@ int main()
 			}			
 
 			#pragma endregion CHEST + BULLET DRAW SWITCH STATEMENT
+
+			hud.Draw(window);
 
 			#pragma region DIFFERENT BULLET UPDATES
 			

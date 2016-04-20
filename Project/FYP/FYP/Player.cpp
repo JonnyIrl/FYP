@@ -275,6 +275,26 @@ void Player::Update(sf::Time time)
 		m_speed = 5;
 	}
 
+	if (DOUBLE_ENERGY)
+	{
+		//Do something with energy
+	}
+
+	else
+	{
+		//Do something else
+	}
+
+	if (EXTRA_LIFE)
+	{
+
+	}
+
+	else
+	{
+
+	}
+
 	if (countDownTrap && timer > 0)
 	{
 		trapCoolDown--;
