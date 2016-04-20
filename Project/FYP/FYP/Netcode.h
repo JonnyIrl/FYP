@@ -51,6 +51,7 @@ public:
 	void SetUpdateScore(bool state) { m_updateScores = state; }
 	bool ChestUpdate() { return m_chestUpdate; }
 	void SetChestUpdate(bool state) { m_chestUpdate = state; }
+	void SendGameStarted();
 	vector<pair<string, int>> GetScores();
 
 	void ReceivePlayersPosition();

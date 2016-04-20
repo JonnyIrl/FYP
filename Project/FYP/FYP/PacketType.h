@@ -17,3 +17,4 @@ const PacketType KILL_CONFIRMED = 11;
 const PacketType CHEST_MESSAGE = 12;
 const PacketType CHEST_OPEN_MESSAGE = 13;
 const PacketType CHEST_ITEM_TAKEN_MESSAGE = 14;
+const PacketType GAME_STARTED_MESSAGE = 15;

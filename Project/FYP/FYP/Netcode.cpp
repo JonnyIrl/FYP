@@ -754,3 +754,23 @@ void Netcode::SendChestItemTakenUpdate(int chestIndex)
 		;
 	}
 }
+
+void Netcode::SendGameStarted()
+{
+	sf::Packet packet;
+	packet << GAME_STARTED_MESSAGE;
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+}
