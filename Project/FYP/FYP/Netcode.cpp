@@ -73,9 +73,9 @@ void Netcode::ResetText()
 	AppendChatMessage("");
 	m_messagesSent++;
 }
-void Netcode::SetPlayerAsClient()
+void Netcode::SetPlayerAsClient(bool ready)
 {
-	clients.AddNewClient(m_ipAddress.getLocalAddress().toString(), PLAYERNAME, 1);
+	clients.AddNewClient(m_ipAddress.getLocalAddress().toString(), PLAYERNAME, 1, ready);
 	AddClientData(PLAYERNAME);
 }
 
@@ -104,7 +104,7 @@ void Netcode::ConnectToServer(string id)
 		if (status == sf::Socket::Done)
 		{
 			cout << "Connection Packet Sent" << endl;
-			SetPlayerAsClient();
+			SetPlayerAsClient(false);
 		}
 	}
 }
@@ -238,7 +238,7 @@ void Netcode::ReceivePacket()
 				//If the clients doesnt exist then add them..
 				if (!clients.CheckIfClientExists(playerIP))
 				{
-					clients.AddNewClient(playerIP, playerID, clients.Size() + 1);
+					clients.AddNewClient(playerIP, playerID, clients.Size() + 1, ready);
 					cout << "Added new client " << playerIP << " : " << playerID << endl;
 					AddClientData(playerID);
 					pm.AddNewPlayer(playerIP);

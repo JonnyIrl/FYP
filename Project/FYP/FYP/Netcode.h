@@ -39,7 +39,7 @@ public:
 	void SetPlayerReady(bool state);
 	void SendPlayerReady();
 	void SendPlayersPosition(sf::Vector2f position, int direction);
-	void SetPlayerAsClient();
+	void SetPlayerAsClient(bool ready);
 	void SendNewBullet(sf::Vector2f position, int gun);
 	void SendRespawnMessage(sf::Vector2f position, int direction);
 	void SendRoomUpdate(int room);
