@@ -239,7 +239,8 @@ void Netcode::ReceivePacket()
 				if (!clients.CheckIfClientExists(playerIP))
 				{
 					clients.AddNewClient(playerIP, playerID, clients.Size() + 1, ready);
-					cout << "Added new client " << playerIP << " : " << playerID << endl;
+					cout << "Added new client " << playerIP << " : " << playerID << " Ready = " << ready << endl;
+					clients.GetVector().at(clients.FindWhatNumberClientsWhoSentReadyIs(playerIP))->SetReady(ready);
 					AddClientData(playerID);
 					pm.AddNewPlayer(playerIP);
 				}
@@ -357,8 +358,7 @@ void Netcode::ReceivePacket()
 			}
 		default:
 			;
-		}
-	}
+		}	}
 }
 
 void Netcode::ReceiveServerMessageUpdate()
