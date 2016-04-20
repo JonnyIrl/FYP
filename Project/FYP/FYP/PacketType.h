@@ -18,3 +18,4 @@ const PacketType CHEST_MESSAGE = 12;
 const PacketType CHEST_OPEN_MESSAGE = 13;
 const PacketType CHEST_ITEM_TAKEN_MESSAGE = 14;
 const PacketType GAME_STARTED_MESSAGE = 15;
+const PacketType GAME_OVER_MESSAGE = 16;

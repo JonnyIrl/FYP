@@ -1270,6 +1270,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1304,6 +1305,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1338,6 +1340,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1372,6 +1375,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1462,6 +1466,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1497,6 +1502,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1533,6 +1539,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1568,6 +1575,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										hud.SetHighlight(player.GetWeapon());
@@ -4354,6 +4362,7 @@ int main()
 			//Check if all the players are ready... then start the game
 			if (netcode.CheckPlayersAllReady())
 			{
+				netcode.SendGameStarted();
 				sceneManager.m_currentScene = sceneManager.PLAY_GAME;
 			}
 
