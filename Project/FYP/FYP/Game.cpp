@@ -2888,7 +2888,91 @@ int main()
 
 				}//end for
 
+				//**************************** MULTIPLAYER COLLISIONS ********************
+				//Collision that checks between the multiplayer and the other multiplayer
+				//CHECK I AGAINST J
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room5Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->SetAliveFalse();
+									}
+								}
 
+							}
+						}
+
+						else
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room5Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+					}
+				}
+
+				//CHECK J AGAINST I
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room5Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(0)->Room5Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(0)->Room5Bullets.at(k)->SetAliveFalse();
+									}
+								}
+							}
+						}
+
+						else
+						{
+
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room5Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(j)->Room5Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(j)->Room5Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+					}
+				}
+				//**********************************************************************************************
 
 			}//end if
 
@@ -2967,7 +3051,91 @@ int main()
 
 				}//end for
 
+				//**************************** MULTIPLAYER COLLISIONS ********************
+				//Collision that checks between the multiplayer and the other multiplayer
+				//CHECK I AGAINST J
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room6Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->SetAliveFalse();
+									}
+								}
 
+							}
+						}
+
+						else
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room6Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+					}
+				}
+
+				//CHECK J AGAINST I
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room6Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(0)->Room6Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(0)->Room6Bullets.at(k)->SetAliveFalse();
+									}
+								}
+							}
+						}
+
+						else
+						{
+
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room6Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(j)->Room6Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(j)->Room6Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+					}
+				}
+				//**********************************************************************************************
 
 			}//end if
 
@@ -3045,7 +3213,92 @@ int main()
 					}//end if
 
 				}//end for
+				
+				//**************************** MULTIPLAYER COLLISIONS ********************
+				//Collision that checks between the multiplayer and the other multiplayer
+				//CHECK I AGAINST J
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room7Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->SetAliveFalse();
+									}
+								}
 
+							}
+						}
+
+						else
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room7Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+					}
+				}
+
+				//CHECK J AGAINST I
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room7Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(0)->Room7Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(0)->Room7Bullets.at(k)->SetAliveFalse();
+									}
+								}
+							}
+						}
+
+						else
+						{
+
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room7Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(j)->Room7Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(j)->Room7Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+					}
+				}
+				//**********************************************************************************************
 
 
 			}//end if
@@ -3125,7 +3378,91 @@ int main()
 
 				}//end for
 
+				//**************************** MULTIPLAYER COLLISIONS ********************
+				//Collision that checks between the multiplayer and the other multiplayer
+				//CHECK I AGAINST J
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room8Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->SetAliveFalse();
+									}
+								}
 
+							}
+						}
+
+						else
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room8Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+					}
+				}
+
+				//CHECK J AGAINST I
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room8Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(0)->Room8Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(0)->Room8Bullets.at(k)->SetAliveFalse();
+									}
+								}
+							}
+						}
+
+						else
+						{
+
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room8Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(j)->Room8Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(j)->Room8Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+					}
+				}
+				//**********************************************************************************************
 
 			}//end if
 
@@ -3204,6 +3541,91 @@ int main()
 
 				}//end for
 
+				//**************************** MULTIPLAYER COLLISIONS ********************
+				//Collision that checks between the multiplayer and the other multiplayer
+				//CHECK I AGAINST J
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room9Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+						else
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(i)->Room9Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+
+					}
+				}
+
+				//CHECK J AGAINST I
+				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
+				{
+					for (int j = 1; j < netcode.pm.GetPlayers().size(); j++)
+					{
+						if (i == netcode.pm.GetPlayers().size() - 1)
+						{
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room9Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(0)->Room9Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(0)->Room9Bullets.at(k)->SetAliveFalse();
+									}
+								}
+							}
+						}
+
+						else
+						{
+
+							for (int k = 0; k < netcode.pm.GetPlayers().at(j)->Room9Bullets.size(); k++)
+							{
+								//Check the bullet is alive first to stop vector issues
+								//Check Player I'S Bullets K's off of player J's body
+								if (netcode.pm.GetPlayers().at(j)->Room9Bullets.size() > 0)
+								{
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									{
+										netcode.pm.GetPlayers().at(j)->Room9Bullets.at(k)->SetAliveFalse();
+									}
+								}
+
+							}
+						}
+					}
+				}
+				//**********************************************************************************************
 
 
 			}//end if
