@@ -43,7 +43,7 @@ public:
 	void SendNewBullet(sf::Vector2f position, int gun);
 	void SendRespawnMessage(sf::Vector2f position, int direction);
 	void SendRoomUpdate(int room);
-	void SendKillConfirmed(string IP);
+	void SendKillConfirmed(string ip);
 	int GetScore() { return m_score; }
 
 	void ReceivePlayersPosition();
