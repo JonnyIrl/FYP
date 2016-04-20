@@ -87,6 +87,8 @@ public:
 	void SetEnergyPowerup(bool state) { DOUBLE_ENERGY = state; }
 	void SetFastMovement(bool state) { FAST_MOVEMENT = state; }
 	void SetExtraLife(bool state) { EXTRA_LIFE = state; }
+	void SetKillingSpree(int num) { m_killingSpree = num; soundEffectCountDown = 0; }
+	void ResetPowerUps();
 
 
 private:

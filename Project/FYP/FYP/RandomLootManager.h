@@ -15,16 +15,16 @@ public:
 	void AddNewChest(Chest* chest);
 	~RandomLootManager();
 
-	void GenerateRoom1Loot();
-	void GenerateRoom2Loot();
-	void GenerateRoom3Loot();
-	void GenerateRoom4Loot();
-	void GenerateRoom5Loot();
-	void GenerateRoom6Loot();
-	void GenerateRoom7Loot();
-	void GenerateRoom8Loot();
-	void GenerateRoom9Loot();
-	void GenerateAllRoomsLoot();
+	void GenerateRoom1Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom2Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom3Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom4Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom5Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom6Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom7Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom8Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateRoom9Loot(vector<float> xPos, vector<float> yPos, vector<float> loot);
+	void GenerateAllRoomsLoot(vector<float> xPos, vector<float> yPos, vector<float> loot);
 	vector<Chest*> randomChests;
 	void Update(sf::Time time);
 	void Draw(sf::RenderWindow &window);

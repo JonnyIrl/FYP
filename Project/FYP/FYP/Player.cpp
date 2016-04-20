@@ -183,7 +183,7 @@ bool Player::CheckKillSoundEffect()
 
 		cout << "Count Down = " << soundEffectCountDown << endl;
 
-		if (soundEffectCountDown >= 3)
+		if (soundEffectCountDown >= 10)
 		{
 			cout << "RETURNED TRUE TO PLAY SOUND EFFECT" << endl << endl;
 			soundEffectCountDown = 0;
@@ -194,6 +194,13 @@ bool Player::CheckKillSoundEffect()
 	}
 
 	return false;
+}
+
+void Player::ResetPowerUps()
+{
+	DOUBLE_ENERGY = false;
+	EXTRA_LIFE = false;
+	FAST_MOVEMENT = false;
 }
 
 bool Player::CreateAKBullet()

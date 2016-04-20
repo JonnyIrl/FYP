@@ -233,6 +233,45 @@ void Netcode::ReceivePacket()
 				break;
 			}
 
+			//If we get this far then we have got a message from the server so no need to open the packet up and check.
+			if (type == CHEST_MESSAGE)
+			{
+				cout << "Chest Message" << endl;
+				packet >> size;
+				cout << "Size = " << size << endl;
+
+				for (sf::Uint32 i = 0; i < size; ++i)
+				{
+					float xPos;
+					packet >> xPos;
+					m_Xpositions.push_back(xPos);
+				}
+
+				packet >> size;
+				cout << "Size = " << size << endl;
+
+				for (sf::Uint32 i = 0; i < size; ++i)
+				{
+					float yPos;
+					packet >> yPos;
+					m_Ypositions.push_back(yPos);
+				}
+
+				packet >> size;
+				cout << "Size = " << size << endl;
+
+				for (sf::Uint32 i = 0; i < size; ++i)
+				{
+					float loot;
+					packet >> loot;
+					m_lootType.push_back(loot);
+				}
+
+				m_chestUpdate = true;
+				cout << "Got Chest Information" << endl;
+				break;
+			}
+
 			if (type == NEW_PLAYER_CONNECTED)
 			{
 				string playerID;
@@ -374,6 +413,7 @@ void Netcode::ReceivePacket()
 				if (playerID == m_ipAddress.getLocalAddress().toString())
 				{
 					m_score++;
+					m_killingspree++;
 					cout << "INCREASED MY SCORE TO " << m_score << endl;
 					m_updateScores = true;
 				}

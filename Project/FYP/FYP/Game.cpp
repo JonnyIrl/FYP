@@ -54,7 +54,6 @@ int main()
 
 	sf::Thread thread(&Netcode::ReceivePacket, &netcode);
 
-	RandomLootManager::GetInstance()->GenerateAllRoomsLoot();
 	thread.launch();
 	//Chest chest = Chest(sf::Vector2f(300, 300), 3);
 	// Start game loop 
@@ -252,38 +251,6 @@ int main()
 					}
 					break;
 				}
-
-
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Y))
-				{
-					player.IncreaseDecreaseKillingSpress(true);
-					break;
-				}
-
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::U))
-				{
-					player.IncreaseDecreaseKillingSpress(false);
-					break;
-				}
-
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::I))
-				{
-					player.IncreaseDeathCount();
-					break;
-				}
-
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::O))
-				{
-					soundManager.PlayKillingSpreeSoundEffect(6);
-					break;
-				}
-
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::P))
-				{
-					soundManager.PlayKillingSpreeSoundEffect(7);
-					break;
-				}
-
 
 				//Key Presses for each room, creating bullets etc.
 				switch (room.m_currentRoom)
@@ -1625,6 +1592,10 @@ int main()
 				{
 					player.SetHealth(true, 100);
 				}
+				player.ResetPowerUps();
+				netcode.m_killingspree = 0;
+				player.ResetKillingSpree();
+				player.IncreaseDeathCount();
 				hud.SetHealth(player.GetHealth());
 				player.SetRespawned(false);
 				cout << "After Respawn room = " << player.GetRoom() << endl;
@@ -2227,7 +2198,15 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 3)
 									{
-										player.SetHealth(false, 40);
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+
+										else
+										{
+											player.SetHealth(false, 40);
+										}
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2240,7 +2219,15 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 6)
 									{
-										player.SetHealth(false, 15);
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+
+										else
+										{
+											player.SetHealth(false, 15);
+										}
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2253,7 +2240,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2266,7 +2259,14 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2409,7 +2409,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2422,7 +2428,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2435,7 +2447,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2448,7 +2466,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2592,7 +2616,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2605,7 +2635,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2618,7 +2654,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2631,7 +2673,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2775,7 +2823,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2788,7 +2842,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2801,7 +2861,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2814,7 +2880,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -2993,7 +3065,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3006,7 +3084,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3019,7 +3103,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3032,7 +3122,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3176,7 +3272,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3189,7 +3291,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3202,7 +3310,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3215,6 +3329,11 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
@@ -3359,7 +3478,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3372,7 +3497,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3385,7 +3516,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3398,7 +3535,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3543,7 +3686,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3556,7 +3705,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3569,7 +3724,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3582,7 +3743,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3726,7 +3893,13 @@ int main()
 									//SNIPER
 									if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 3)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 20);
+										}
+										else
 										player.SetHealth(false, 40);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3739,7 +3912,13 @@ int main()
 									//AK
 									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 6)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 10);
+										}
+										else
 										player.SetHealth(false, 15);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3752,7 +3931,13 @@ int main()
 									//Deagle
 									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 2)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 15);
+										}
+										else
 										player.SetHealth(false, 25);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3765,7 +3950,13 @@ int main()
 									//Minigun
 									else if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->GetWeapon() == 4)
 									{
+										if (player.EXTRA_LIFE)
+										{
+											player.SetHealth(false, 5);
+										}
+										else
 										player.SetHealth(false, 10);
+
 										hud.SetHealth(player.GetHealth());
 										if (player.GetHealth() <= 0)
 										{
@@ -3887,6 +4078,7 @@ int main()
 				vector<pair<string, int>> result = netcode.GetScores();
 				hud.SetScore(result, player.GetName(), player.GetScore());
 				netcode.SetUpdateScore(false);
+				player.SetKillingSpree(netcode.m_killingspree);
 				cout << "Updated Scores!!" << endl;
 			}
 
@@ -4112,6 +4304,13 @@ int main()
 							sceneManager.SetPlayerReady(true);
 							netcode.SendPlayerReady();
 						}
+					}
+
+					//Check if the chest update is true
+					if (netcode.ChestUpdate())
+					{
+						//Pass all 3 vectors to the random loot manager
+						RandomLootManager::GetInstance()->GenerateAllRoomsLoot(netcode.m_Xpositions, netcode.m_Ypositions, netcode.m_lootType);
 					}
 
 				}

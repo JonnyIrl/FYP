@@ -44,115 +44,90 @@ void RandomLootManager::Update(sf::Time time)
 	}
 }
 
-void RandomLootManager::GenerateAllRoomsLoot()
+void RandomLootManager::GenerateAllRoomsLoot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
 	srand(time(NULL));
-	GenerateRoom1Loot();
-	GenerateRoom2Loot();
-	GenerateRoom3Loot();
-	GenerateRoom4Loot();
-	GenerateRoom5Loot();
-	GenerateRoom6Loot();
-	GenerateRoom7Loot();
-	GenerateRoom8Loot();
-	GenerateRoom9Loot();
+	GenerateRoom1Loot(xPos, yPos, loot);
+	GenerateRoom2Loot(xPos, yPos, loot);
+	GenerateRoom3Loot(xPos, yPos, loot);
+	GenerateRoom4Loot(xPos, yPos, loot);
+	GenerateRoom5Loot(xPos, yPos, loot);
+	GenerateRoom6Loot(xPos, yPos, loot);
+	GenerateRoom7Loot(xPos, yPos, loot);
+	GenerateRoom8Loot(xPos, yPos, loot);
+	GenerateRoom9Loot(xPos, yPos, loot);
 }
-void RandomLootManager::GenerateRoom1Loot()
+void RandomLootManager::GenerateRoom1Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 0; i < 2; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 1);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 1);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom2Loot()
+void RandomLootManager::GenerateRoom2Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 2; i < 4; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 2);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 2);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom3Loot()
+void RandomLootManager::GenerateRoom3Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 4; i < 6; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 3);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 3);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom4Loot()
+void RandomLootManager::GenerateRoom4Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 6; i < 8; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 4);
+
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 4);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom5Loot()
+void RandomLootManager::GenerateRoom5Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 8; i < 10; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 5);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 5);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom6Loot()
+void RandomLootManager::GenerateRoom6Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 10; i < 12; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 6);
+
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 6);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom7Loot()
+void RandomLootManager::GenerateRoom7Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 12; i < 14; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 7);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 7);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom8Loot()
+void RandomLootManager::GenerateRoom8Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 14; i < 16; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 8);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 8);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }
-void RandomLootManager::GenerateRoom9Loot()
+void RandomLootManager::GenerateRoom9Loot(vector<float> xPos, vector<float> yPos, vector<float> loot)
 {
-	for (int i = 0; i < (m_amountOfRandoms / 9); i++)
+	for (int i = 16; i < 18; i++)
 	{
-		int xPos = rand() % (maxX - minX) + minX;
-		int yPos = rand() % (maxY - minY) + minY;
-		int loot = rand() % 10 + 1;
-		Chest* chest = new Chest(sf::Vector2f(xPos, yPos), loot, 9);
+		Chest* chest = new Chest(sf::Vector2f(xPos.at(i), yPos.at(i)), loot.at(i), 9);
 		RandomLootManager::GetInstance()->AddNewChest(chest);
 	}
 }

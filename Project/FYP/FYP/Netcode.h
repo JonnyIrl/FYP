@@ -47,17 +47,20 @@ public:
 	int GetScore() { return m_score; }
 	bool UpdateScore() { return m_updateScores; }
 	void SetUpdateScore(bool state) { m_updateScores = state; }
-
+	bool ChestUpdate() { return m_chestUpdate; }
+	void SetChestUpdate(bool state) { m_chestUpdate = state; }
 	vector<pair<string, int>> GetScores();
 
 	void ReceivePlayersPosition();
 	int playerToUpdate = 0;
 
+	int m_killingspree = 0;
+
 	string PLAYERNAME;
 	Clients GetClients() { return clients; }
 	bool CheckPlayersAllReady();
 	PlayerManager pm = PlayerManager();
-
+	vector<float> m_Xpositions, m_Ypositions, m_lootType;
 private:
 
 	//Pre Game Lobby Variables
@@ -82,5 +85,6 @@ private:
 	bool m_playerReady = false;
 	bool m_everyoneReady = false;
 	bool m_updateScores = false;
+	bool m_chestUpdate = false;
 };
 
