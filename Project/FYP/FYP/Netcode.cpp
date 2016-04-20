@@ -104,7 +104,6 @@ void Netcode::ConnectToServer(string id)
 		if (status == sf::Socket::Done)
 		{
 			cout << "Connection Packet Sent" << endl;
-			SetPlayerAsClient(false);
 		}
 	}
 }
@@ -192,6 +191,14 @@ void Netcode::ReceivePacket()
 			sf::Uint32 size;
 			//unsigned short port;
 			packet >> type;
+
+
+			//If we get this far then we have got a message from the server so no need to open the packet up and check.
+			if (type == INITIAL_CONNECT_DATA)
+			{
+				SetPlayerAsClient(false);
+				break;
+			}
 
 			//If we get this far then we have got a message from the server so no need to open the packet up and check.
 			if (type == SERVER_REPLY_MSG)
@@ -467,14 +474,16 @@ vector<pair<string, int>> Netcode::GetScores()
 	return result;
 }
 
-void Netcode::Draw1(sf::RenderWindow& window)
+void Netcode::Draw1(sf::RenderWindow& window, bool connected)
 {
-	
-	window.draw(m_text);
-	window.draw(m_NameText);
-	window.draw(m_chatLobbyText);
-	window.draw(m_connectedClientsText);
-	clients.Draw(window);
+	if (connected)
+	{
+		window.draw(m_text);
+		window.draw(m_NameText);
+		window.draw(m_chatLobbyText);
+		window.draw(m_connectedClientsText);
+		clients.Draw(window);
+	}
 }
 
 void Netcode::Draw2(sf::RenderWindow& window)

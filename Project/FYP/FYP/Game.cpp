@@ -1267,6 +1267,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1299,6 +1300,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1331,6 +1333,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1363,6 +1366,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1395,6 +1399,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1483,6 +1488,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1516,6 +1522,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1550,6 +1557,7 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -1583,6 +1591,8 @@ int main()
 									{
 										//assign the player the new weapon
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
+										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
+										hud.SetHighlight(player.GetWeapon());
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
 										RandomLootManager::GetInstance()->randomChests.at(i)->SetItemTaken(true);
 									}
@@ -2543,7 +2553,7 @@ int main()
 			}//end if
 
 #pragma endregion Colllisions in Room 2
-
+			
 #pragma region Colllisions in Room 3
 
 			if (player.GetRoom() == 2)
@@ -3898,8 +3908,11 @@ int main()
 			//Check if the player has moved...
 			if (player.IsMoving())
 			{
-				netcode.SendPlayersPosition(player.GetPosition(), player.GetDirection());
-				player.SetMovingFalse();
+				if (!room.CheckBoundingCollisions(player.GetShape()))
+				{
+					netcode.SendPlayersPosition(player.GetPosition(), player.GetDirection());
+					player.SetMovingFalse();
+				}
 			}
 
 			/*if (player.IsRespawned())
@@ -4021,7 +4034,10 @@ int main()
 					{
 						//SEND MESSAGE INTO CHAT WINDOW						
 						netcode.ConnectToServer(player.GetPlayerID());
-						netcode.SetName(player.GetName());
+						if (sceneManager.IsPlayerConnected())
+						{
+							netcode.SetName(player.GetName());
+						}
 					}
 
 					//If a click is anywhere except the save name rectangle then set changing to false;
@@ -4082,7 +4098,7 @@ int main()
 
 			netcode.Update();
 			sceneManager.Draw(window);
-			netcode.Draw1(window);
+			netcode.Draw1(window, sceneManager.IsPlayerConnected());
 
 			// Finally, display rendered frame on screen 
 			window.display();

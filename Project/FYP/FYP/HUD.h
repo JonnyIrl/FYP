@@ -16,6 +16,7 @@ public:
 	bool showScore = false;
 	void SetScore(vector<pair<string, int>> players, string playerID, int playerScore);
 	bool initScoreBoard = false;
+	int FindHighlight(int number);
 
 private:
 	sf::Texture m_hud1Texture;

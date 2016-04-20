@@ -25,7 +25,7 @@ public:
 	void RemoveNameLetter() { m_NameString.pop_back(); SetName(m_NameString); }
 	void RemoveChatLetter() { m_currentMessage.pop_back(); m_text.setString(m_currentMessage); }
 	void ResetText();
-	void Draw1(sf::RenderWindow &window);
+	void Draw1(sf::RenderWindow &window, bool connected);
 	void Draw2(sf::RenderWindow &window);
 	void Draw3(sf::RenderWindow &window);
 	void Draw4(sf::RenderWindow &window);

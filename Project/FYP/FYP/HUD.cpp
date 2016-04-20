@@ -108,6 +108,14 @@ bool HUD::LoadTexture()
 	return true;
 }
 
+
+int HUD::FindHighlight(int number)
+{
+	if (number == 6) return 1;
+
+	else return number;
+}
+
 void HUD::SetHighlight(int slotNumber)
 {
 	if (slotNumber == 1)
