@@ -1581,13 +1581,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room2Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 								if (netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1611,13 +1608,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room3Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1641,13 +1635,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room4Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1671,13 +1662,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room5Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1701,13 +1689,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room6Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1732,13 +1717,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room7Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1764,13 +1746,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room8Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->Draw(window);							
 						}
 				}
 
@@ -1794,13 +1773,10 @@ int main()
 
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
-					for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
-					{
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room9Bullets.size(); j++)// at(i)->Room3Bullets)
 						{
 							if (netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Alive())
-								netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Draw(window);
-							}
+								netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->Draw(window);						
 						}
 				}
 
@@ -3700,7 +3676,6 @@ int main()
 			// Finally, display rendered frame on screen 
 			window.display();
 		}
-
 		break;
 
 #pragma endregion PLAY GAME CASE
@@ -3709,6 +3684,7 @@ int main()
 #pragma region LOBBY TEXT NETCODE
 		case sceneManager.LOBBY:
 		{
+
 			frameTime = frameClock.restart();
 
 			// Process events 

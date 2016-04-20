@@ -523,7 +523,7 @@ void Netcode::SendNewBullet(sf::Vector2f position, int gun)
 	switch (status)
 	{
 	case sf::Socket::Done:
-		cout << "Message Sent" << endl;
+		cout << "Bullet Fired packet Sent" << endl;
 		break;
 
 	case sf::Socket::Disconnected:
