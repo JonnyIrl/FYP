@@ -5,9 +5,9 @@ Clients::Clients()
 
 }
 
-void Clients::AddNewClient(const string &IP, const string &Name, int count)
+void Clients::AddNewClient(const string &IP, const string &Name, int count, bool ready)
 {
-	clientList.push_back(new Client(IP, Name, count));
+	clientList.push_back(new Client(IP, Name, count, ready));
 }
 
 bool Clients::CheckIfClientExists(const string &IPAddress)

@@ -6,7 +6,7 @@ class Clients
 {
 public:
 	Clients();
-	void AddNewClient(const string &IP, const string &Name, int count);
+	void AddNewClient(const string &IP, const string &Name, int count, bool ready);
 	vector<sf::IpAddress> BroadcastToAllClients();
 	vector<sf::IpAddress> BroadcastToEveryoneExceptClient(const string &IPAddress);
 	sf::IpAddress FindWhoSentMessage(string &IP);

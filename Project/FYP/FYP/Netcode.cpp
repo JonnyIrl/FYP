@@ -230,9 +230,10 @@ void Netcode::ReceivePacket()
 			{
 				string playerID;
 				string playerIP;
+				bool ready;
 
-				packet >> playerID >> playerIP;
-				cout << "New Player = " << playerID << " IP = " << playerIP;
+				packet >> playerID >> playerIP >> ready;
+				cout << "New Player = " << playerID << " IP = " << playerIP << " Ready = " << ready << endl;
 
 				//If the clients doesnt exist then add them..
 				if (!clients.CheckIfClientExists(playerIP))

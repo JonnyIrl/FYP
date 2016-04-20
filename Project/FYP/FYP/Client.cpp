@@ -1,11 +1,12 @@
 #include "Client.h"
 
-Client::Client(const string &IP, const string &Name, int count)
+Client::Client(const string &IP, const string &Name, int count, bool ready)
 {
 	m_IPAddress = IP;
 	m_Name = Name;
 	m_readySquare.setSize(sf::Vector2f(20, 20));
 	m_readySquare.setFillColor(sf::Color::Red);
+	m_Ready = ready;
 	AssignPosition(count);
 }
 

@@ -7,7 +7,7 @@ using namespace std;
 class Client
 {
 public:
-	Client(const string &IP, const string &Port, int count);
+	Client(const string &IP, const string &Port, int count,  bool ready);
 	sf::IpAddress GetIPAddress(){ return m_IPAddress; }
 	string GetName() { return m_Name; }
 	bool GetConnected() { return m_connected; }
