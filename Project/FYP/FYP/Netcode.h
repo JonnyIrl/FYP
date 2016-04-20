@@ -43,6 +43,7 @@ public:
 	void SendNewBullet(sf::Vector2f position, int gun);
 	void SendRespawnMessage(sf::Vector2f position, int direction);
 	void SendRoomUpdate(int room);
+	void SendChestOpenUpdate(int chestIndex);
 	void SendKillConfirmed(string ip);
 	int GetScore() { return m_score; }
 	bool UpdateScore() { return m_updateScores; }
@@ -61,6 +62,10 @@ public:
 	bool CheckPlayersAllReady();
 	PlayerManager pm = PlayerManager();
 	vector<float> m_Xpositions, m_Ypositions, m_lootType;
+
+	int chestIndex = 0;
+	bool m_chestOpenUpdate = false;
+
 private:
 
 	//Pre Game Lobby Variables

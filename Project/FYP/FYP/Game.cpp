@@ -1225,7 +1225,9 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
+
 								}
 
 								else
@@ -4143,6 +4145,14 @@ int main()
 				}
 			}
 
+
+			if (netcode.m_chestOpenUpdate)
+			{
+				RandomLootManager::GetInstance()->randomChests.at(netcode.chestIndex)->SetActived(true);
+				netcode.chestIndex = 0;
+				netcode.m_chestOpenUpdate = false;
+			}
+
 			/*if (player.IsRespawned())
 			{
 				if (player.GetHealth() != 100)
@@ -4311,7 +4321,7 @@ int main()
 					{
 						//Pass all 3 vectors to the random loot manager
 						RandomLootManager::GetInstance()->GenerateAllRoomsLoot(netcode.m_Xpositions, netcode.m_Ypositions, netcode.m_lootType);
-					}
+					}				
 
 				}
 			}
