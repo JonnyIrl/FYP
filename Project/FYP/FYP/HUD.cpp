@@ -28,10 +28,12 @@ HUD::HUD()
 		m_scoreRectangle.setTexture(&m_scoreBoardTexture);
 		m_scoreRectangle.setPosition(sf::Vector2f(400, 100));
 
-		player1.setPosition(sf::Vector2f(m_scoreRectangle.getPosition().x + 50, m_scoreRectangle.getPosition().y + 50));
+		player0.setPosition(sf::Vector2f(m_scoreRectangle.getPosition().x + 120, m_scoreRectangle.getPosition().y + 80));
+		player1.setPosition(sf::Vector2f(player0.getPosition().x, player0.getPosition().y + 50));
 		player2.setPosition(sf::Vector2f(player1.getPosition().x, player1.getPosition().y + 50));
 		player3.setPosition(sf::Vector2f(player2.getPosition().x, player2.getPosition().y + 50));
 
+		player0.setFont(font);
 		player1.setFont(font);
 		player2.setFont(font);
 		player3.setFont(font);
@@ -220,49 +222,52 @@ void HUD::SetEnergy(int energyAmount)
 	m_energyBarRectangle.setTextureRect(sf::IntRect(m_energyBarRectangle.getPosition().x, m_energyBarRectangle.getPosition().y, (3.3 * energyAmount), 12));
 }
 
-void HUD::SetScore(vector<pair<string, int>> players)
+void HUD::SetScore(vector<pair<string, int>> players, string playerID, int playerScore)
 {
+
+	player0.setString(playerID + " - " + to_string(playerScore));
+
 	for (int i = 0; i < players.size(); i++)
 	{
 		//Populate first box
 		if (i == 0)
 		{
-			player1.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player1.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 1)
 		{
-			player2.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player2.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 2)
 		{
-			player3.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player3.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 3)
 		{
-			player4.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player4.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 4)
 		{
-			player5.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player5.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 5)
 		{
-			player6.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player6.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 6)
 		{
-			player7.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player7.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 
 		if (i == 7)
 		{
-			player8.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+			player8.setString(players.at(i).first + " - " + to_string(players.at(i).second));
 		}
 	}
 }
@@ -280,6 +285,11 @@ void HUD::Draw(sf::RenderWindow &window)
 	if (showScore)
 	{
 		window.draw(m_scoreRectangle);
+		if (player0.getString().getSize() > 0)
+		{
+			window.draw(player0);
+		}
+
 		if (player1.getString().getSize() > 0)
 		{
 			window.draw(player1);

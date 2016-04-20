@@ -14,7 +14,7 @@ public:
 	void SetEnergy(int enermyNumber);
 	bool countDown = false;
 	bool showScore = false;
-	void SetScore(vector<pair<string, int>> players);
+	void SetScore(vector<pair<string, int>> players, string playerID, int playerScore);
 	bool initScoreBoard = false;
 
 private:
@@ -49,5 +49,5 @@ private:
 	sf::RectangleShape m_scoreRectangle;
 
 	sf::Font font;
-	sf::Text player1, player2, player3, player4, player5, player6, player7, player8;
+	sf::Text player0, player1, player2, player3, player4, player5, player6, player7, player8;
 };

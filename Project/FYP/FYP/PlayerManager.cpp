@@ -8,10 +8,11 @@ PlayerManager::~PlayerManager()
 {
 }
 
-void PlayerManager::AddNewPlayer(string id)
+void PlayerManager::AddNewPlayer(string id, string name)
 {
 	m_Players.push_back(new MultiPlayer());
 	m_Players.at((m_Players.size() - 1))->SetPlayerID(id);
+	m_Players.at((m_Players.size() - 1))->SetName(name);
 	cout << "Added new multi player, IP = " << id << endl;
 }
 

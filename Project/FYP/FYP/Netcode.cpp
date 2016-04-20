@@ -242,7 +242,7 @@ void Netcode::ReceivePacket()
 					cout << "Added new client " << playerIP << " : " << playerID << " Ready = " << ready << endl;
 					clients.GetVector().at(clients.FindWhatNumberClientsWhoSentReadyIs(playerIP))->SetReady(ready);
 					AddClientData(playerID);
-					pm.AddNewPlayer(playerIP);
+					pm.AddNewPlayer(playerIP, playerID);
 				}
 				break;
 			}
@@ -367,6 +367,7 @@ void Netcode::ReceivePacket()
 				{
 					m_score++;
 					cout << "INCREASED MY SCORE TO " << m_score << endl;
+					m_updateScores = true;
 				}
 
 				else
@@ -379,6 +380,7 @@ void Netcode::ReceivePacket()
 							cout << "Found player.." << endl;
 							pm.GetPlayers().at(i)->IncreaseScore();
 							cout << "INCREASED SCORE TO " << pm.GetPlayers().at(i)->GetScore() << endl;
+							m_updateScores = true;
 							break;
 						}
 					}
@@ -456,7 +458,7 @@ vector<pair<string, int>> Netcode::GetScores()
 	for (int i = 0; i < pm.GetPlayers().size(); i++)
 	{
 		pair<string, int> pairResult;
-		pairResult.first = pm.GetPlayers().at(i)->GetPlayerID();
+		pairResult.first = pm.GetPlayers().at(i)->GetName();
 		pairResult.second = pm.GetPlayers().at(i)->GetScore();
 		result.push_back(pairResult);
 	}

@@ -20,7 +20,7 @@ public:
 	void Draw9(sf::RenderWindow &window);
 	void Update(sf::Time time);
 	void SetPlayersPosition(string playerID, sf::Vector2f position);
-	void AddNewPlayer(string playerID);
+	void AddNewPlayer(string playerID, string name);
 	MultiPlayer* FindWhichPlayerToUpdate(string playerIP);
 	vector<MultiPlayer*> GetPlayers() { return m_Players; }
 

@@ -79,7 +79,10 @@ public:
 	sf::Vector2f Respawn();
 	int randomRoomNumber = 0;
 	bool UpdatePlayerRoom = false;
-	
+	void SetScore(int num) { m_score = num; }
+	int GetScore() { return m_score; }
+	bool IsRespawned() { return m_respawned; }
+	void SetRespawned(bool state) { m_respawned = state; }
 	bool DOUBLE_ENERGY, FAST_MOVEMENT, EXTRA_LIFE;
 
 
@@ -98,7 +101,9 @@ private:
 	int m_killingSpree;
 	int m_deathsWithoutKill;
 	int trapCoolDown;
+	int m_score = 0;
 	bool countDownTrap;
+	bool m_respawned = false;
 	int m_currentRoom = 0;
 	sf::Sprite m_spr;
 	sf::RectangleShape m_rect;

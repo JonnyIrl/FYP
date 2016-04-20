@@ -173,7 +173,7 @@ int main()
 			if (!hud.initScoreBoard)
 			{
 				vector<pair<string, int>> result = netcode.GetScores();
-				hud.SetScore(result);
+				hud.SetScore(result, player.GetName(), player.GetScore());
 				hud.initScoreBoard = true;
 			}
 
@@ -3734,7 +3734,15 @@ int main()
 
 #pragma endregion Colllisions in Room 9
 
-			//Check which killing spree sound effect to play
+			//Check to update the scores
+			if (netcode.UpdateScore())
+			{
+				player.SetScore(netcode.GetScore());
+				vector<pair<string, int>> result = netcode.GetScores();
+				hud.SetScore(result, player.GetName(), player.GetScore());
+				netcode.SetUpdateScore(false);
+				cout << "Updated Scores!!" << endl;
+			}
 
 			//If true then play the sound for the amount of kills the player had.
 			if (player.CheckKillSoundEffect())
@@ -3792,6 +3800,12 @@ int main()
 			{
 				netcode.SendPlayersPosition(player.GetPosition(), player.GetDirection());
 				player.SetMovingFalse();
+			}
+
+			if (player.IsRespawned())
+			{
+				hud.SetHealth(player.GetHealth());
+				player.SetRespawned(false);
 			}
 
 			hud.countDown = player.GetTrapCoolDown();

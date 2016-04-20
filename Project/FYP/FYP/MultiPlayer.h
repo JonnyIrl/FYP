@@ -80,7 +80,9 @@ public:
 	void IncreaseDeathCount() { m_deathsWithoutKill++; cout << "Death total = " << m_deathsWithoutKill; }
 	bool CreateAKBullet();
 	string GetPlayerID() { return m_PlayerID; }
+	string GetPlayerName() { return m_Name; }
 	void SetPlayerID(string ID) { m_PlayerID = ID; }
+	void SetName(string name) { m_Name = name; }
 	int GetRoom() { return m_currentRoom; }
 	void SetRoom(int roomNum) { m_currentRoom = roomNum; }
 	void SetDirection(int direction) { m_dir = direction; }

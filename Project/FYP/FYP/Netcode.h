@@ -45,6 +45,8 @@ public:
 	void SendRoomUpdate(int room);
 	void SendKillConfirmed(string ip);
 	int GetScore() { return m_score; }
+	bool UpdateScore() { return m_updateScores; }
+	void SetUpdateScore(bool state) { m_updateScores = state; }
 
 	vector<pair<string, int>> GetScores();
 
@@ -79,5 +81,6 @@ private:
 	Clients clients = Clients();
 	bool m_playerReady = false;
 	bool m_everyoneReady = false;
+	bool m_updateScores = false;
 };
 
