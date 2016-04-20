@@ -2705,6 +2705,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2714,6 +2715,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2723,6 +2725,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2732,6 +2735,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2903,6 +2907,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2912,6 +2917,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2921,6 +2927,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2930,6 +2937,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3066,6 +3074,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3075,6 +3084,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3084,6 +3094,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3093,6 +3104,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3229,6 +3241,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3238,6 +3251,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3247,6 +3261,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3256,6 +3271,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3393,6 +3409,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3402,6 +3419,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3411,6 +3429,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3420,6 +3439,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3556,6 +3576,7 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3565,6 +3586,7 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3574,6 +3596,7 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -3583,6 +3606,7 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(j)->SetAliveFalse();
 										break;
 									}
