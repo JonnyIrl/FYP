@@ -2299,7 +2299,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room1Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()) 
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->SetAliveFalse();
 									}
@@ -2316,7 +2317,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room1Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()) 
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(k)->SetAliveFalse();
 									}
@@ -2341,7 +2343,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room1Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room1Bullets.at(k)->SetAliveFalse();
 									}
@@ -2358,7 +2361,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room1Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room1Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room1Bullets.at(k)->SetAliveFalse();
 									}
@@ -2479,7 +2483,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room1Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->SetAliveFalse();
 									}
@@ -2496,7 +2501,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room2Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(k)->SetAliveFalse();
 									}
@@ -2521,7 +2527,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room2Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room2Bullets.at(k)->SetAliveFalse();
 									}
@@ -2538,7 +2545,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room2Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room2Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room2Bullets.at(k)->SetAliveFalse();
 									}
@@ -2658,7 +2666,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room3Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->SetAliveFalse();
 									}
@@ -2675,7 +2684,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room3Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(k)->SetAliveFalse();
 									}
@@ -2700,7 +2710,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room3Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room3Bullets.at(k)->SetAliveFalse();
 									}
@@ -2717,7 +2728,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room3Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room3Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room3Bullets.at(k)->SetAliveFalse();
 									}
@@ -2837,7 +2849,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room4Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->SetAliveFalse();
 									}
@@ -2854,7 +2867,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room4Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room4Bullets.at(k)->SetAliveFalse();
 									}
@@ -2879,7 +2893,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room4Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room4Bullets.at(k)->SetAliveFalse();
 									}
@@ -2896,7 +2911,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room4Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room4Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room4Bullets.at(k)->SetAliveFalse();
 									}
@@ -3051,7 +3067,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room5Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->SetAliveFalse();
 									}
@@ -3068,7 +3085,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room5Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room5Bullets.at(k)->SetAliveFalse();
 									}
@@ -3093,7 +3111,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room5Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room5Bullets.at(k)->SetAliveFalse();
 									}
@@ -3110,7 +3129,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room5Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room5Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room5Bullets.at(k)->SetAliveFalse();
 									}
@@ -3230,7 +3250,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room6Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->SetAliveFalse();
 									}
@@ -3247,7 +3268,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room6Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room6Bullets.at(k)->SetAliveFalse();
 									}
@@ -3272,7 +3294,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room6Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room6Bullets.at(k)->SetAliveFalse();
 									}
@@ -3289,7 +3312,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room6Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room6Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room6Bullets.at(k)->SetAliveFalse();
 									}
@@ -3409,7 +3433,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room7Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->SetAliveFalse();
 									}
@@ -3426,7 +3451,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room7Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room7Bullets.at(k)->SetAliveFalse();
 									}
@@ -3451,7 +3477,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room7Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room7Bullets.at(k)->SetAliveFalse();
 									}
@@ -3468,7 +3495,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room7Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room7Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room7Bullets.at(k)->SetAliveFalse();
 									}
@@ -3589,7 +3617,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room8Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->SetAliveFalse();
 									}
@@ -3606,7 +3635,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room8Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room8Bullets.at(k)->SetAliveFalse();
 									}
@@ -3631,7 +3661,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room8Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room8Bullets.at(k)->SetAliveFalse();
 									}
@@ -3648,7 +3679,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room8Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room8Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room8Bullets.at(k)->SetAliveFalse();
 									}
@@ -3768,7 +3800,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room9Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(0)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->SetAliveFalse();
 									}
@@ -3785,7 +3818,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(i)->Room9Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(j)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(i)->Room9Bullets.at(k)->SetAliveFalse();
 									}
@@ -3810,7 +3844,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(0)->Room9Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(0)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(0)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(0)->Room9Bullets.at(k)->SetAliveFalse();
 									}
@@ -3827,7 +3862,8 @@ int main()
 								//Check Player I'S Bullets K's off of player J's body
 								if (netcode.pm.GetPlayers().at(j)->Room9Bullets.size() > 0)
 								{
-									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape()))
+									if (collisionManager.CheckRectangleCollision(netcode.pm.GetPlayers().at(j)->Room9Bullets.at(k)->GetShape(), netcode.pm.GetPlayers().at(i)->GetShape())
+										&& netcode.pm.GetPlayers().at(j)->GetRoom() == netcode.pm.GetPlayers().at(i)->GetRoom())
 									{
 										netcode.pm.GetPlayers().at(j)->Room9Bullets.at(k)->SetAliveFalse();
 									}
