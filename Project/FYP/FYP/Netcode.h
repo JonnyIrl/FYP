@@ -44,6 +44,7 @@ public:
 	void SendRespawnMessage(sf::Vector2f position, int direction);
 	void SendRoomUpdate(int room);
 	void SendChestOpenUpdate(int chestIndex);
+	void SendChestItemTakenUpdate(int chestIndex);
 	void SendKillConfirmed(string ip);
 	int GetScore() { return m_score; }
 	bool UpdateScore() { return m_updateScores; }
@@ -65,6 +66,7 @@ public:
 
 	int chestIndex = 0;
 	bool m_chestOpenUpdate = false;
+	bool m_checkItemTakenUpdate = false;
 
 private:
 

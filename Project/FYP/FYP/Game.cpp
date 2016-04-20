@@ -1235,6 +1235,7 @@ int main()
 									if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsItemTaken() && RandomLootManager::GetInstance()->randomChests.at(i)->IsOpen())
 									{
 										//assign the player the new weapon
+										netcode.SendChestItemTakenUpdate(i);
 										player.SetWeapon(RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon());
 										hud.SetHighlight(hud.FindHighlight(player.GetWeapon()));
 										cout << "ITEM TAKEN = " << RandomLootManager::GetInstance()->randomChests.at(i)->GetWeapon() << endl;
@@ -1260,6 +1261,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1293,6 +1295,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1326,6 +1329,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1359,6 +1363,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1448,6 +1453,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1482,6 +1488,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1517,6 +1524,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -1551,6 +1559,7 @@ int main()
 							{
 								if (!RandomLootManager::GetInstance()->randomChests.at(i)->IsActivated())
 								{
+									netcode.SendChestOpenUpdate(i);
 									RandomLootManager::GetInstance()->randomChests.at(i)->SetActived(true);
 								}
 
@@ -4151,6 +4160,13 @@ int main()
 				RandomLootManager::GetInstance()->randomChests.at(netcode.chestIndex)->SetActived(true);
 				netcode.chestIndex = 0;
 				netcode.m_chestOpenUpdate = false;
+			}
+
+			if (netcode.m_checkItemTakenUpdate)
+			{
+				RandomLootManager::GetInstance()->randomChests.at(netcode.chestIndex)->SetItemTaken(true);
+				netcode.chestIndex = 0;
+				netcode.m_checkItemTakenUpdate = false;
 			}
 
 			/*if (player.IsRespawned())

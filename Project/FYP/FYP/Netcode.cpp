@@ -413,6 +413,15 @@ void Netcode::ReceivePacket()
 				break;
 			}
 
+			if (type == CHEST_ITEM_TAKEN_MESSAGE)
+			{
+				int index;
+				packet >> index;
+				chestIndex = index;
+				m_checkItemTakenUpdate = true;
+				break;
+			}
+
 
 			if (type == KILL_CONFIRMED)
 			{
@@ -709,6 +718,27 @@ void Netcode::SendChestOpenUpdate(int chestIndex)
 	sf::Packet packet;
 	packet << CHEST_OPEN_MESSAGE << m_ipAddress.getLocalAddress().toString() << chestIndex;
 	cout << "CHEST_OPEN_MESSAGE = " << " Chest = " << chestIndex << endl;
+	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
+	switch (status)
+	{
+	case sf::Socket::Done:
+		cout << "Message Sent" << endl;
+		break;
+
+	case sf::Socket::Disconnected:
+		std::cout << " has been disconnected\n";
+		break;
+
+	default:
+		;
+	}
+}
+
+void Netcode::SendChestItemTakenUpdate(int chestIndex)
+{
+	sf::Packet packet;
+	packet << CHEST_ITEM_TAKEN_MESSAGE << m_ipAddress.getLocalAddress().toString() << chestIndex;
+	cout << "CHEST_ITEM_TAKEN_MESSAGE = " << " Chest = " << chestIndex << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
