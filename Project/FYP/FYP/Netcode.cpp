@@ -329,6 +329,7 @@ void Netcode::ReceivePacket()
 						cout << "Setting Room = " << room << endl;
 						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
 						pm.GetPlayers().at(i)->SetRoom(room);
+						pm.GetPlayers().at(i)->SetHealthFull();
 						break;
 					}
 				}

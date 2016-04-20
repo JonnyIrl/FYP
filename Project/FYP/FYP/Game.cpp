@@ -1590,6 +1590,12 @@ int main()
 			if (player.GetHealth() <= 0)
 			{
 				sf::Vector2f newPos = player.Respawn();
+				if (player.GetHealth() != 100)
+				{
+					player.SetHealth(true, 100);
+				}
+				hud.SetHealth(player.GetHealth());
+				player.SetRespawned(false);
 				cout << "After Respawn room = " << player.GetRoom() << endl;
 				netcode.SendRespawnMessage(newPos, player.GetRoom());
 				cout << "After Sending Respawn room = " << player.GetRoom() << endl;
@@ -3802,11 +3808,15 @@ int main()
 				player.SetMovingFalse();
 			}
 
-			if (player.IsRespawned())
+			/*if (player.IsRespawned())
 			{
+				if (player.GetHealth() != 100)
+				{
+					player.SetHealth(true, 100);
+				}
 				hud.SetHealth(player.GetHealth());
 				player.SetRespawned(false);
-			}
+			}*/
 
 			hud.countDown = player.GetTrapCoolDown();
 

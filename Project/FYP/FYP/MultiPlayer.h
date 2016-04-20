@@ -89,6 +89,7 @@ public:
 	int FindWhichRoomToUpdate();
 	int GetRoomNumber() { return m_currentRoom; }
 	int GetScore() { return m_score; }
+	void SetHealthFull() { m_health = 100; }
 
 	void ShootAKBullet(sf::Vector2f converted);
 	void ShootSNIPERBullet(sf::Vector2f converted);

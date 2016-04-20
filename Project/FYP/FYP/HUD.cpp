@@ -150,7 +150,7 @@ void HUD::SetHighlight(int slotNumber)
 
 void HUD::SetHealth(int health)
 {
-	if (health >= 90 && health < 100)
+	if (health >= 90 && health <= 100)
 	{
 		if (m_healthRectangle.getTexture() != &m_health1Texture)
 			m_healthRectangle.setTexture(&m_health1Texture);
