@@ -2109,7 +2109,7 @@ int main()
 							}
 						}
 
-			
+
 						//Check Players Collision with the multiplayers
 						for (int j = 0; j < netcode.pm.GetPlayers().at(i)->Room1Bullets.size(); j++)
 						{
@@ -2159,8 +2159,8 @@ int main()
 
 							}//end bullet alive if
 
-					}//end if
-
+						}//end if
+					}
 				}//end for
 
 				//**************************** MULTIPLAYER COLLISIONS ********************
