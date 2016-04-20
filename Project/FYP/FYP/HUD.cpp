@@ -1,4 +1,3 @@
-#include "ExtraIncludes.h"
 #include "HUD.h"
 
 
@@ -23,6 +22,19 @@ HUD::HUD()
 		m_blankRectangle.setSize(sf::Vector2f(30, 36));
 		m_blankRectangle.setTexture(&m_blankTexture);
 		m_blankRectangle.setPosition(sf::Vector2f(239, 675));
+
+
+		m_scoreRectangle.setSize(sf::Vector2f(500, 500));
+		m_scoreRectangle.setTexture(&m_scoreBoardTexture);
+		m_scoreRectangle.setPosition(sf::Vector2f(400, 100));
+
+		player1.setPosition(sf::Vector2f(m_scoreRectangle.getPosition().x + 50, m_scoreRectangle.getPosition().y + 50));
+		player2.setPosition(sf::Vector2f(player1.getPosition().x, player1.getPosition().y + 50));
+		player3.setPosition(sf::Vector2f(player2.getPosition().x, player2.getPosition().y + 50));
+
+		player1.setFont(font);
+		player2.setFont(font);
+		player3.setFont(font);
 
 	}
 }
@@ -79,6 +91,13 @@ bool HUD::LoadTexture()
 
 	if (!m_energyBarTexture.loadFromFile("Assets/HUD/energyBar.png"))
 		return false;
+
+	if (!m_scoreBoardTexture.loadFromFile("Assets/HUD/scoreBoard.png"))
+		return false;
+
+	if (!font.loadFromFile("Assets/Font/font.ttf")) {
+		std::cout << "No font file found!" << std::endl;
+	}
 
 	if (!m_blankTexture.loadFromFile("Assets/Guns/Blank/blank.png")) {
 		std::cout << "No blank texture found!" << std::endl;
@@ -201,6 +220,53 @@ void HUD::SetEnergy(int energyAmount)
 	m_energyBarRectangle.setTextureRect(sf::IntRect(m_energyBarRectangle.getPosition().x, m_energyBarRectangle.getPosition().y, (3.3 * energyAmount), 12));
 }
 
+void HUD::SetScore(vector<pair<string, int>> players)
+{
+	for (int i = 0; i < players.size(); i++)
+	{
+		//Populate first box
+		if (i == 0)
+		{
+			player1.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 1)
+		{
+			player2.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 2)
+		{
+			player3.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 3)
+		{
+			player4.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 4)
+		{
+			player5.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 5)
+		{
+			player6.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 6)
+		{
+			player7.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+
+		if (i == 7)
+		{
+			player8.setString(players.at(i).first + " + " + to_string(players.at(i).second));
+		}
+	}
+}
+
 void HUD::Draw(sf::RenderWindow &window)
 {
 	window.draw(m_healthRectangle);
@@ -209,6 +275,50 @@ void HUD::Draw(sf::RenderWindow &window)
 	if (countDown)
 	{
 		window.draw(m_blankRectangle);
+	}
+
+	if (showScore)
+	{
+		window.draw(m_scoreRectangle);
+		if (player1.getString().getSize() > 0)
+		{
+			window.draw(player1);
+		}
+
+		if (player2.getString().getSize() > 0)
+		{
+			window.draw(player2);
+		}
+
+		if (player3.getString().getSize() > 0)
+		{
+			window.draw(player3);
+		}
+
+		if (player4.getString().getSize() > 0)
+		{
+			window.draw(player4);
+		}
+
+		if (player5.getString().getSize() > 0)
+		{
+			window.draw(player5);
+		}
+
+		if (player6.getString().getSize() > 0)
+		{
+			window.draw(player6);
+		}
+
+		if (player7.getString().getSize() > 0)
+		{
+			window.draw(player7);
+		}
+
+		if (player8.getString().getSize() > 0)
+		{
+			window.draw(player8);
+		}
 	}
 
 }

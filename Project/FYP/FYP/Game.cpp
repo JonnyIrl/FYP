@@ -170,6 +170,13 @@ int main()
 #pragma region PLAY GAME CASE
 		case sceneManager.PLAY_GAME:
 		{
+			if (!hud.initScoreBoard)
+			{
+				vector<pair<string, int>> result = netcode.GetScores();
+				hud.SetScore(result);
+				hud.initScoreBoard = true;
+			}
+
 			frameTime = frameClock.restart();
 			// Process events 
 			sf::Event Event;
@@ -231,6 +238,21 @@ int main()
 					hud.SetHealth(player.GetHealth());
 					break;
 				}
+
+				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Tab))
+				{
+					if (!hud.showScore)
+					{
+						hud.showScore = true;
+					}
+
+					else
+					{
+						hud.showScore = false;
+					}
+					break;
+				}
+
 
 				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Y))
 				{

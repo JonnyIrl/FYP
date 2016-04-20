@@ -449,6 +449,21 @@ void Netcode::Update()
 	//ReceiveServerMessageUpdate();
 }
 
+vector<pair<string, int>> Netcode::GetScores()
+{
+	vector<pair<string, int>> result;
+	
+	for (int i = 0; i < pm.GetPlayers().size(); i++)
+	{
+		pair<string, int> pairResult;
+		pairResult.first = pm.GetPlayers().at(i)->GetPlayerID();
+		pairResult.second = pm.GetPlayers().at(i)->GetScore();
+		result.push_back(pairResult);
+	}
+
+	return result;
+}
+
 void Netcode::Draw1(sf::RenderWindow& window)
 {
 	

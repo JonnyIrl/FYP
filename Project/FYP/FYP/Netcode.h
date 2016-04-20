@@ -46,6 +46,8 @@ public:
 	void SendKillConfirmed(string ip);
 	int GetScore() { return m_score; }
 
+	vector<pair<string, int>> GetScores();
+
 	void ReceivePlayersPosition();
 	int playerToUpdate = 0;
 

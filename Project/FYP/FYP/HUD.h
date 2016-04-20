@@ -1,3 +1,8 @@
+#include "ExtraIncludes.h"
+#include <vector>
+
+using namespace std;
+
 class HUD
 {
 public:
@@ -8,6 +13,9 @@ public:
 	void SetHealth(int healthNumber);
 	void SetEnergy(int enermyNumber);
 	bool countDown = false;
+	bool showScore = false;
+	void SetScore(vector<pair<string, int>> players);
+	bool initScoreBoard = false;
 
 private:
 	sf::Texture m_hud1Texture;
@@ -32,8 +40,14 @@ private:
 
 	sf::Texture m_energyBarTexture;
 
+	sf::Texture m_scoreBoardTexture;
+
 	sf::RectangleShape m_healthRectangle;
 	sf::RectangleShape m_hudRectangle;
 	sf::RectangleShape m_energyBarRectangle;
 	sf::RectangleShape m_blankRectangle;
+	sf::RectangleShape m_scoreRectangle;
+
+	sf::Font font;
+	sf::Text player1, player2, player3, player4, player5, player6, player7, player8;
 };
