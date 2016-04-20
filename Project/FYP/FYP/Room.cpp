@@ -13,8 +13,50 @@ Room::Room()
 		checkDoor = 0;
 		m_loadedRoom1 = m_loadedRoom2 = m_loadedRoom3 = m_loadedRoom4 = m_loadedRoom5 = m_loadedRoom6 = m_loadedRoom7 = m_loadedRoom8 = m_loadedRoom9 = false;
 		InitCollisionRectangles();
+
+		m_summonerRockTop.setSize(sf::Vector2f(120, 5));
+		m_summonerRockTop.setPosition(sf::Vector2f(585, 280));
+
+		m_summonerRockBot.setSize(sf::Vector2f(120, 5));
+		m_summonerRockBot.setPosition(sf::Vector2f(585, 425));
+
+		m_summonerRockLeft.setSize(sf::Vector2f(5, 150));
+		m_summonerRockLeft.setPosition(sf::Vector2f(575, 280));
+
+		m_summonerRockRight.setSize(sf::Vector2f(5, 150));
+		m_summonerRockRight.setPosition(sf::Vector2f(705, 280));
+
+		m_interactSummonerRock.setSize(sf::Vector2f(230, 220));
+		m_interactSummonerRock.setPosition(sf::Vector2f(525, 260));
+
+		m_summoningRect.setSize(sf::Vector2f(100, 10));
+
+		//Load animation
+		//m_summoningAnimation.setSpriteSheet(m_summoningTexture);
+		//m_summoningAnimation.addFrame(sf::IntRect(0, 0, 200, 30));
+		//m_summoningAnimation.addFrame(sf::IntRect(200, 0, 200, 30));
+		//m_summoningAnimation.addFrame(sf::IntRect(400, 0, 200, 30));
+		//m_summoningAnimation.addFrame(sf::IntRect(600, 0, 200, 30));
+		//m_summoningAnimation.addFrame(sf::IntRect(800, 0, 200, 30));
+		//m_summoningAnimation.addFrame(sf::IntRect(1000, 0, 200, 30));
+
+		//m_summoningAnimSprite = AnimatedSprite(sf::seconds(0.05f));
+		//m_summoningAnimSprite.setAnimation(m_summoningAnimation);
+
+		//m_summoningRect.setPosition(sf::Vector2f(300, 200));
+		//m_summoningRect.setSize(sf::Vector2f(200, 30));
+
+		//m_summoningAnimSprite.setPosition(m_summoningRect.getPosition());
 		cout << "Finished Room Constructor" << endl;
 	}
+}
+
+void Room::PlayAnimation(sf::Time time)
+{
+
+	//m_summoningAnimSprite.play();
+	m_summoningAnimSprite.update(time);
+	//m_summoningAnimSprite.setPosition(m_summoningRect.getPosition());
 }
 
 bool Room::CheckToGoToNextRoom(sf::RectangleShape playerRect)
@@ -305,6 +347,35 @@ bool Room::CheckToGoToNextRoom(sf::RectangleShape playerRect)
 	return false;
 }
 
+bool Room::CheckStatueCollision(sf::RectangleShape playerRect)
+{
+	if (playerRect.getGlobalBounds().intersects(m_summonerRockTop.getGlobalBounds()))
+	{
+		checkStatue = 1;
+		return true;
+	}
+
+	if (playerRect.getGlobalBounds().intersects(m_summonerRockBot.getGlobalBounds()))
+	{
+		checkStatue = 2;
+		return true;
+	}
+
+	if (playerRect.getGlobalBounds().intersects(m_summonerRockLeft.getGlobalBounds()))
+	{
+		checkStatue = 3;
+		return true;
+	}
+
+	if (playerRect.getGlobalBounds().intersects(m_summonerRockRight.getGlobalBounds()))
+	{
+		checkStatue = 4;
+		return true;
+	}
+
+	return false;
+}
+
 void Room::LoadCollisionRectangles()
 {
 	switch (m_currentRoom)
@@ -451,6 +522,21 @@ bool Room::LoadTextures()
 		return false;
 
 	if (!m_middleRightTexture.loadFromFile("Assets/Room/MiddleRightRoom.png"))
+		return false;
+
+	if (!m_summoningTexture.loadFromFile("Assets/Laser/laserSpriteSheet.png"))
+		return false;
+
+	if (!m_timer1.loadFromFile("Assets/Timer/1.png"))
+		return false;
+
+	if (!m_timer2.loadFromFile("Assets/Timer/2.png"))
+		return false;
+
+	if (!m_timer3.loadFromFile("Assets/Timer/3.png"))
+		return false;
+
+	if (!m_timer4.loadFromFile("Assets/Timer/4.png"))
 		return false;
 
 	return true;
@@ -989,6 +1075,36 @@ void Room::CreateRightRooms()
 	m_bottomRightRect.setTexture(&m_bottomRightTexture);
 }
 
+void Room::SetSummoningRectSize(sf::Vector2f position)
+{
+	m_summoningRect.setPosition(sf::Vector2f(position.x - 25, position.y - 20));
+}
+
+bool Room::FinishedSummoning()
+{
+	if (IsSummoning())
+	{
+		//Start the timer
+		int timer = summonClock.getElapsedTime().asSeconds();
+		if (timer > 0)
+		{
+			ReduceTimer();
+			cout << "Timer = " << GetTimer() << endl;
+			//If the trap hits Zero, then allow another trap to be placed.
+			if (GetTimer() <= 0)
+			{
+				SetSummoning(false);
+				SetTimer(4);
+				return true;
+			}
+
+			summonClock.restart();
+		}
+	}
+
+	return false;
+}
+
 void Room::Draw(sf::RenderWindow &window)
 {
 	switch (m_currentRoom)
@@ -1047,6 +1163,32 @@ void Room::Draw(sf::RenderWindow &window)
 
 			window.draw(m_middleRect);
 
+			//If the player is summoning
+			if (m_summoning)
+			{
+				if (m_summonCount == 4 && m_summoningRect.getTexture() != &m_timer4)
+				{
+					m_summoningRect.setTexture(&m_timer4);
+				}
+
+				else if (m_summonCount == 3 && m_summoningRect.getTexture() != &m_timer3)
+				{
+					m_summoningRect.setTexture(&m_timer3);
+				}
+
+				else if (m_summonCount == 2 && m_summoningRect.getTexture() != &m_timer2)
+				{
+					m_summoningRect.setTexture(&m_timer2);
+				}
+
+				else if (m_summonCount == 1 && m_summoningRect.getTexture() != &m_timer1)
+				{
+					m_summoningRect.setTexture(&m_timer1);
+				}
+
+
+				window.draw(m_summoningRect);
+			}
 		}
 		break;
 

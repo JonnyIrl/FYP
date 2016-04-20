@@ -19,6 +19,7 @@ int main()
 	sf::Time frameTime;
 	sf::Clock frameClock;
 	sf::Clock akClock;
+	sf::Clock summonClock;
 	//load a font
 	sf::Font font;
 	font.loadFromFile("C:\\Windows\\Fonts\\GARA.TTF");
@@ -796,6 +797,7 @@ int main()
 
 						}
 					}
+
 				}break;
 #pragma endregion ROOM 5 KEY PRESS
 
@@ -1209,6 +1211,16 @@ int main()
 					//Update visual representation
 					hud.SetEnergy(player.GetEnergy());
 
+					if (Event.type == sf::Event::KeyPressed)
+					{
+						if (Event.key.code != sf::Keyboard::E && room.IsSummoning())
+						{
+							room.SetSummoning(false);
+							room.SetTimer(4);
+						}
+					}
+
+
 				#pragma region UPDATE FOR EVERY ROOM
 				switch (room.m_currentRoom)
 				{
@@ -1369,6 +1381,40 @@ int main()
 								}
 							}
 						}
+
+						//If the player is pressing "E"
+						if (collisionManager.CheckRectangleCollision(room.GetInteractingRock(), player.GetShape()))
+						{
+
+							//Set the player to summoning a new skill
+							room.SetSummoning(true);
+
+							//Place rectangle above players head
+							room.SetSummoningRectSize(player.GetPosition());
+							cout << "Set new rectangle" << endl;
+						}
+
+						else
+						{
+							room.SetSummoning(false);
+							room.SetTimer(4);
+						}
+
+
+					}
+
+
+					if (player.IsMoving())
+					{
+						room.SetSummoning(false);
+						room.SetTimer(4);
+					}
+
+					if (room.FinishedSummoning())
+					{		
+						room.SetSummoning(false);
+						room.SetTimer(4);
+						cout << "COUNTDOWN FINISHED" << endl;
 					}
 
 				}
@@ -2124,6 +2170,10 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2133,6 +2183,10 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2142,6 +2196,10 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2151,6 +2209,10 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room1Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2286,6 +2348,10 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2295,6 +2361,10 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2304,6 +2374,10 @@ int main()
 									{
 										player.SetHealth(false, 25);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2313,6 +2387,10 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room2Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2449,6 +2527,10 @@ int main()
 									{
 										player.SetHealth(false, 40);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2458,6 +2540,10 @@ int main()
 									{
 										player.SetHealth(false, 15);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2466,7 +2552,10 @@ int main()
 									else if (netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->GetWeapon() == 2)
 									{
 										player.SetHealth(false, 25);
-										hud.SetHealth(player.GetHealth());
+										hud.SetHealth(player.GetHealth());										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2476,6 +2565,10 @@ int main()
 									{
 										player.SetHealth(false, 10);
 										hud.SetHealth(player.GetHealth());
+										if (player.GetHealth() <= 0)
+										{
+											netcode.SendKillConfirmed(netcode.pm.GetPlayers().at(i)->GetPlayerID());
+										}
 										netcode.pm.GetPlayers().at(i)->Room3Bullets.at(j)->SetAliveFalse();
 										break;
 									}
@@ -2745,9 +2838,42 @@ int main()
 #pragma endregion Colllisions in Room 4
 
 #pragma region Colllisions in Room 5
-
+		
 			if (player.GetRoom() == 4)
 			{
+
+				if (room.CheckStatueCollision(player.GetShape()))
+				{
+					//Collided with top rectangle
+					if (room.checkStatue == 1)
+					{
+						player.SetPosition(sf::Vector2f(player.GetPosition().x, room.GetSummonerRectangleTop().getPosition().y - player.GetShape().getGlobalBounds().height));
+						cout << "Collided with the top wall" << endl;
+					}
+
+					//Collided with bot rectangle
+					if (room.checkStatue == 2)
+					{
+						player.SetPosition(sf::Vector2f(player.GetPosition().x, room.GetSummonerRectangleBot().getPosition().y + room.GetSummonerRectangleBot().getGlobalBounds().height));
+						cout << "Collided with the bot wall" << endl;
+					}
+
+					//Collided with left rectangle
+					if (room.checkStatue == 3)
+					{
+						player.SetPosition(sf::Vector2f(room.GetSummonerRectangleLeft().getPosition().x - player.GetShape().getGlobalBounds().width, player.GetPosition().y));
+						cout << "Collided with the left wall" << endl;
+					}
+
+					//Collided with right rectangle
+					if (room.checkStatue == 4)
+					{
+						player.SetPosition(sf::Vector2f(room.GetSummonerRectangleRight().getPosition().x + room.GetSummonerRectangleRight().getGlobalBounds().width, player.GetPosition().y));
+						cout << "Collided with the right wall" << endl;
+					}
+				}
+
+
 				for (int i = 0; i < netcode.pm.GetPlayers().size(); i++)
 				{
 					if (netcode.pm.GetPlayers().at(i)->GetRoomNumber() == 4)
@@ -3561,8 +3687,6 @@ int main()
 			}//end if
 
 #pragma endregion Colllisions in Room 9
-
-
 
 			//Check which killing spree sound effect to play
 

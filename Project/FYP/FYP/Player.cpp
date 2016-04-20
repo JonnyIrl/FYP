@@ -47,6 +47,9 @@ Player::Player()
 
 		countDownTrap = false;
 		trapCoolDown = 10.0f;
+
+		DOUBLE_ENERGY = FAST_MOVEMENT = EXTRA_LIFE = false;
+
 	}
 }
 
@@ -261,6 +264,17 @@ void Player::AddNewTrap(sf::Vector2f position)
 void Player::Update(sf::Time time)
 {	
 	int timer = trapClock.getElapsedTime().asSeconds();
+
+	if (FAST_MOVEMENT)
+	{
+		m_speed = 8;
+	}
+
+	else
+	{
+		m_speed = 5;
+	}
+
 	if (countDownTrap && timer > 0)
 	{
 		trapCoolDown--;

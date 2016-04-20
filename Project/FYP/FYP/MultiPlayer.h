@@ -86,11 +86,13 @@ public:
 	void SetDirection(int direction) { m_dir = direction; }
 	int FindWhichRoomToUpdate();
 	int GetRoomNumber() { return m_currentRoom; }
+	int GetScore() { return m_score; }
 
 	void ShootAKBullet(sf::Vector2f converted);
 	void ShootSNIPERBullet(sf::Vector2f converted);
 	void ShootTRAPBullet(sf::Vector2f converted);
 	void ShootBullet(sf::Vector2f converted, int gun);
+	void IncreaseScore() { m_score++; }
 
 
 	std::vector<Bullet *> Room1Bullets;
@@ -115,6 +117,7 @@ private:
 	float m_speed;
 	float m_bulletDelay;
 	int m_health;
+	int m_score = 0;
 	int m_energy;
 	int m_dir;
 	int m_killingSpree;

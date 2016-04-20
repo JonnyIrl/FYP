@@ -43,6 +43,8 @@ public:
 	void SendNewBullet(sf::Vector2f position, int gun);
 	void SendRespawnMessage(sf::Vector2f position, int direction);
 	void SendRoomUpdate(int room);
+	void SendKillConfirmed(string IP);
+	int GetScore() { return m_score; }
 
 	void ReceivePlayersPosition();
 	int playerToUpdate = 0;
@@ -68,6 +70,7 @@ private:
 	unsigned short m_serverPort = 5300;
 	unsigned short m_personalPort = 5301;
 	int retryCount = 0;
+	int m_score = 0;
 	bool running = true;
 	sf::UdpSocket listener;
 	char playerNameCharArray[1024];

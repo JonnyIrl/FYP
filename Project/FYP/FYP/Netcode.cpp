@@ -356,6 +356,36 @@ void Netcode::ReceivePacket()
 
 				break;
 			}
+
+
+			if (type == KILL_CONFIRMED)
+			{
+				string playerID;
+				packet >> playerID;
+
+				if (playerID == m_ipAddress.getLocalAddress().toString())
+				{
+					m_score++;
+					cout << "INCREASED MY SCORE TO " << m_score << endl;
+				}
+
+				else
+				{
+
+					for (int i = 0; pm.GetPlayers().size(); i++)
+					{
+						if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
+						{
+							cout << "Found player.." << endl;
+							pm.GetPlayers().at(i)->IncreaseScore();
+							cout << "INCREASED SCORE TO " << pm.GetPlayers().at(i)->GetScore() << endl;
+							break;
+						}
+					}
+				}
+				break;
+			}
+
 		default:
 			;
 		}	}

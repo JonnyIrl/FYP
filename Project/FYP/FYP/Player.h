@@ -79,6 +79,9 @@ public:
 	sf::Vector2f Respawn();
 	int randomRoomNumber = 0;
 	bool UpdatePlayerRoom = false;
+	
+	bool DOUBLE_ENERGY, FAST_MOVEMENT, EXTRA_LIFE;
+
 
 private:
 	sf::Vector2f m_position;
