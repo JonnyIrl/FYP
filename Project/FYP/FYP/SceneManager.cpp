@@ -141,6 +141,43 @@ SceneManager::SceneManager()
 		m_CollisionReadyRectangle.setPosition(sf::Vector2f(770, 665));
 
 
+
+		nextRectangle.setPosition(800, 600);
+		nextRectangle.setSize(sf::Vector2f(332, 68));
+		nextRectangle.setTexture(&nextTexture);
+
+		backRectangle.setPosition(200, 600);
+		backRectangle.setSize(sf::Vector2f(332, 68));
+		backRectangle.setTexture(&backTexture);
+
+		tut1Rect.setPosition(0, 0);
+		tut1Rect.setSize(sf::Vector2f(1280, 720));
+		tut1Rect.setTexture(&tut1Text);
+
+		tut2Rect.setPosition(0, 0);
+		tut2Rect.setSize(sf::Vector2f(1280, 720));
+		tut2Rect.setTexture(&tut2Text);
+
+		tut3Rect.setPosition(0, 0);
+		tut3Rect.setSize(sf::Vector2f(1280, 720));
+		tut3Rect.setTexture(&tut3Text);
+
+		tut4Rect.setPosition(0, 0);
+		tut4Rect.setSize(sf::Vector2f(1280, 720));
+		tut4Rect.setTexture(&tut4Text);
+
+		tut5Rect.setPosition(0, 0);
+		tut5Rect.setSize(sf::Vector2f(1280, 720));
+		tut5Rect.setTexture(&tut5Text);
+
+		tut6Rect.setPosition(0, 0);
+		tut6Rect.setSize(sf::Vector2f(1280, 720));
+		tut6Rect.setTexture(&tut6Text);
+
+		tut7Rect.setPosition(0, 0);
+		tut7Rect.setSize(sf::Vector2f(1280, 720));
+		tut7Rect.setTexture(&tut7Text);
+
 		cout << "SceneManager Constructor Finished" << endl;
 	}
 }
@@ -173,7 +210,19 @@ void SceneManager::ChangeBackground(sf::Event Event, sf::Time time)
 			//Check Mouse rectangle with the credits button
 			else if (m_mouseRect.getGlobalBounds().intersects(m_CreditsButtonRect.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
 			{
-				m_currentScene = CREDITS;
+
+				if (tutorialPage == 1 && wasInTut == false)
+				{
+					wasInTut = true;
+					m_currentScene = TUTORIAL;
+				}
+
+				if (tutorialPage > 1 || tutorialPage <= 0)
+				{
+					tutorialPage = 1;
+					wasInTut = false;
+					break;
+				}
 			}
 
 			//Check Mouse rectangle with the quit button
@@ -198,6 +247,26 @@ void SceneManager::ChangeBackground(sf::Event Event, sf::Time time)
 		case PLAY_GAME:
 		{
 
+		}
+		break;
+
+		case TUTORIAL:
+		{
+			/*if (m_mouseRect.getGlobalBounds().intersects(nextRectangle.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				tutorialPage++;
+				if (tutorialPage >= 8)
+					m_currentScene = MENU;
+				break;
+			}
+
+			else if (m_mouseRect.getGlobalBounds().intersects(backRectangle.getGlobalBounds()) && Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+			{
+				tutorialPage--;
+				if (tutorialPage <= 0)
+					m_currentScene = MENU;
+				break;
+			}*/
 		}
 		break;
 
@@ -303,6 +372,73 @@ bool SceneManager::LoadTexture()
 		std::cout << "Couldn't load quit Select png" << std::endl;
 		return false;
 	}
+
+	if (!nextTexture.loadFromFile("Assets/Buttons/next.png"))
+	{
+		std::cout << "Couldn't load next png" << std::endl;
+		return false;
+	}
+
+	if (!selectNextTexture.loadFromFile("Assets/Buttons/selectNext.png"))
+	{
+		std::cout << "Couldn't load selectnext png" << std::endl;
+		return false;
+	}
+
+	if (!backTexture.loadFromFile("Assets/Buttons/back.png"))
+	{
+		std::cout << "Couldn't load back png" << std::endl;
+		return false;
+	}
+
+	if (!selectBackTexture.loadFromFile("Assets/Buttons/selectBack.png"))
+	{
+		std::cout << "Couldn't load back png" << std::endl;
+		return false;
+	}
+
+	if (!tut1Text.loadFromFile("Assets/Tutorial/1.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut2Text.loadFromFile("Assets/Tutorial/2.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut3Text.loadFromFile("Assets/Tutorial/3.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut4Text.loadFromFile("Assets/Tutorial/4.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut5Text.loadFromFile("Assets/Tutorial/5.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut6Text.loadFromFile("Assets/Tutorial/6.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
+	if (!tut7Text.loadFromFile("Assets/Tutorial/7.png"))
+	{
+		std::cout << "Couldn't load Tutorial png" << std::endl;
+		return false;
+	}
+
 
 
 	/*if (!m_chatLobbyTexture.loadFromFile("Assets/Pregame/chatLobby.png"))
@@ -456,6 +592,48 @@ void SceneManager::Draw(sf::RenderWindow &window)
 
 	case PLAY_GAME:
 	{
+	}
+	break;
+
+	case TUTORIAL:
+	{
+			window.draw(nextRectangle);
+			window.draw(backRectangle);
+
+			if (tutorialPage == 1)
+			{
+				window.draw(tut1Rect);
+			}
+
+			if (tutorialPage == 2)
+			{
+				window.draw(tut2Rect);
+			}
+
+			if (tutorialPage == 3)
+			{
+				window.draw(tut3Rect);
+			}
+
+			if (tutorialPage == 4)
+			{
+				window.draw(tut4Rect);
+			}
+
+			if (tutorialPage == 5)
+			{
+				window.draw(tut5Rect);
+			}
+
+			if (tutorialPage == 6)
+			{
+				window.draw(tut6Rect);
+			}
+
+			if (tutorialPage == 7)
+			{
+				window.draw(tut7Rect);
+			}
 	}
 	break;
 

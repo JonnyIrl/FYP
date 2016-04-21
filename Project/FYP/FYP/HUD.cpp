@@ -42,6 +42,10 @@ HUD::HUD()
 		m_gameOverRect.setPosition(sf::Vector2f(400, 50));
 		m_gameOverRect.setTexture(&m_gameOverTexture);
 
+		gameOverTextRectangle.setSize(sf::Vector2f(500, 100));
+		gameOverTextRectangle.setPosition(sf::Vector2f(500, 600));
+		gameOverTextRectangle.setTexture(&gameOverTextTexture);
+
 	}
 }
 
@@ -102,6 +106,9 @@ bool HUD::LoadTexture()
 		return false;
 
 	if (!m_gameOverTexture.loadFromFile("Assets/HUD/gameover.png"))
+		return false;
+
+	if (!gameOverTextTexture.loadFromFile("Assets/Buttons/esc.png"))
 		return false;
 
 	if (!font.loadFromFile("Assets/Font/font.ttf")) {
@@ -303,6 +310,7 @@ void HUD::Draw(sf::RenderWindow &window)
 	else
 	{
 		window.draw(m_gameOverRect);
+		window.draw(gameOverTextRectangle);
 	}
 
 	if (showScore)

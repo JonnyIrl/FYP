@@ -13,7 +13,7 @@ public:
 	SceneManager();
 	byte GetCurrentScene();
 	bool LoadTexture();
-	enum GAMESTATE : byte{ MENU, PLAY_GAME, GAME_OVER, OPTIONS, CREDITS, PLAYEROPTIONS, LOBBY };
+	enum GAMESTATE : byte{ MENU, PLAY_GAME, GAME_OVER, OPTIONS, TUTORIAL, PLAYEROPTIONS, LOBBY };
 	byte m_currentScene;
 	void Draw(sf::RenderWindow& window);
 	void ChangeBackground(sf::Event Event, sf::Time time);
@@ -40,6 +40,18 @@ public:
 	int currentSfx;
 	int currentMaster;
 
+
+	void GoBack() { tutorialPage--; }
+	void GoForward() { tutorialPage++; }
+	sf::RectangleShape nextRectangle;
+	sf::RectangleShape backRectangle;
+	sf::Texture nextTexture, backTexture, selectNextTexture, selectBackTexture;
+
+	sf::Texture tut1Text, tut2Text, tut3Text, tut4Text, tut5Text, tut6Text, tut7Text;
+	sf::RectangleShape tut1Rect, tut2Rect, tut3Rect, tut4Rect, tut5Rect, tut6Rect, tut7Rect;
+	int tutorialPage = 1;
+
+	bool wasInTut = false;
 
 private:
 	sf::Texture m_mainMenuTexture;

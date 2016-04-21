@@ -19,6 +19,9 @@ public:
 	int FindHighlight(int number);
 	bool gameOver = false;
 
+
+	sf::Texture gameOverTextTexture;
+	sf::RectangleShape gameOverTextRectangle;
 private:
 	sf::Texture m_hud1Texture;
 	sf::Texture m_hud2Texture;

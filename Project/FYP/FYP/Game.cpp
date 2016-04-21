@@ -4546,6 +4546,110 @@ int main()
 			window.display();
 		}
 		break;
+
+
+		case sceneManager.TUTORIAL:
+		{
+			frameTime = frameClock.restart();
+			sf::Event Event;
+			while (window.pollEvent(Event))
+			{
+				// Close window : exit 
+				if (Event.type == sf::Event::Closed)
+					window.close();
+
+				// Escape key : exit 
+				if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+					window.close();
+
+				if (Event.type == Event.MouseButtonReleased && Event.mouseButton.button == sf::Mouse::Left)
+				{
+					sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+					sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+					sf::RectangleShape mouseRect;
+					mouseRect.setSize(sf::Vector2f(1, 1));
+					mouseRect.setPosition(converted);
+
+					if (collisionManager.CheckRectangleCollision(sceneManager.backRectangle, mouseRect))
+					{
+						sceneManager.tutorialPage--;
+						std::cout << "CLICKED ON THE back button" << std::endl;
+						
+					}
+
+					if (collisionManager.CheckRectangleCollision(sceneManager.nextRectangle, mouseRect))
+					{
+						sceneManager.tutorialPage++;
+						cout << "Count = " << sceneManager.tutorialPage << endl;
+						std::cout << "CLICKED ON THE next button" << std::endl;
+						break;
+					}
+					
+				}
+
+			}
+
+
+
+			if (sceneManager.tutorialPage >= 8)
+				sceneManager.m_currentScene = sceneManager.MENU;
+
+			if (sceneManager.tutorialPage <= 0)
+				sceneManager.m_currentScene = sceneManager.MENU;
+
+			sf::Vector2i mousepos = sf::Mouse::getPosition(window);
+			sf::Vector2f converted = window.mapPixelToCoords(mousepos);
+			sf::RectangleShape mouseRect;
+			mouseRect.setSize(sf::Vector2f(1, 1));
+			mouseRect.setPosition(converted);
+
+
+
+			//Check Collision with the NEXT RECTANGLE
+			if (collisionManager.CheckRectangleCollision(sceneManager.nextRectangle, mouseRect))
+			{
+				if (sceneManager.nextRectangle.getTexture() != &sceneManager.selectNextTexture)
+				{
+					sceneManager.nextRectangle.setTexture(&sceneManager.selectNextTexture);
+				}
+			}
+
+			else
+			{
+				if (sceneManager.nextRectangle.getTexture() != &sceneManager.nextTexture)
+				{
+					sceneManager.nextRectangle.setTexture(&sceneManager.nextTexture);
+				}
+			}
+
+			if (collisionManager.CheckRectangleCollision(sceneManager.backRectangle, mouseRect))
+			{
+				if (sceneManager.backRectangle.getTexture() != &sceneManager.selectBackTexture)
+				{
+					sceneManager.backRectangle.setTexture(&sceneManager.selectBackTexture);
+				}
+			}
+
+			else
+			{
+				if (sceneManager.backRectangle.getTexture() != &sceneManager.backTexture)
+				{
+					sceneManager.backRectangle.setTexture(&sceneManager.backTexture);
+				}
+			}
+
+			//prepare frame
+			window.clear();
+
+
+			sceneManager.ChangeBackground(Event, frameTime);
+			sceneManager.Draw(window);
+
+			// Finally, display rendered frame on screen 
+			window.display();
+		}
+		break;
+
 	} //loop back for next frame
 	}
 	return EXIT_SUCCESS;
