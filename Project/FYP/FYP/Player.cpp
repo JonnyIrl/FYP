@@ -206,7 +206,7 @@ bool Player::CheckKillSoundEffect()
 
 		cout << "Count Down = " << soundEffectCountDown << endl;
 
-		if (soundEffectCountDown >= 10)
+		if (soundEffectCountDown >= 5)
 		{
 			cout << "RETURNED TRUE TO PLAY SOUND EFFECT" << endl << endl;
 			soundEffectCountDown = 0;
