@@ -30,7 +30,7 @@ Netcode::Netcode()
 		m_connected = false;
 
 
-		m_ServerIPAddress = "192.168.0.15";
+		m_ServerIPAddress = "149.153.102.52";
 		//m_ipAddress = "192.168.0.15";
 		m_serverPort = 5300;
 		m_personalPort = 5301;
