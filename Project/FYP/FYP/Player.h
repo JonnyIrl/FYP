@@ -83,8 +83,7 @@ public:
 	int GetScore() { return m_score; }
 	bool IsRespawned() { return m_respawned; }
 	void SetRespawned(bool state) { m_respawned = state; }
-	bool DOUBLE_ENERGY, FAST_MOVEMENT, EXTRA_LIFE;
-	void SetEnergyPowerup(bool state) { DOUBLE_ENERGY = state; }
+	bool FAST_MOVEMENT, EXTRA_LIFE;
 	void SetFastMovement(bool state) { FAST_MOVEMENT = state; }
 	void SetExtraLife(bool state) { EXTRA_LIFE = state; }
 	void SetKillingSpree(int num) { m_killingSpree = num; soundEffectCountDown = 0; }
@@ -116,6 +115,9 @@ private:
 	sf::Texture m_pUpTexture;
 	sf::Texture m_pLeftTexture;
 	sf::Texture m_pRightTexture;
+
+	sf::Texture m_jugText, m_speedText;
+	sf::RectangleShape m_jugRect, m_speedRect;
 
 	//Guns
 	sf::Texture m_deagleLeftTexture, m_deagleRightTexture;

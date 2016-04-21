@@ -321,8 +321,8 @@ void Netcode::ReceivePacket()
 				{
 					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 					{
-						cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
-						cout << "Setting Direction = " << direction << endl;
+						//cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
+						//cout << "Setting Direction = " << direction << endl;
 						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
 						pm.GetPlayers().at(i)->SetDirection(direction);
 						break;
@@ -346,9 +346,9 @@ void Netcode::ReceivePacket()
 				{
 					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 					{
-						cout << "Found player.. setting CONVERTED = " << xPos << " " << yPos << endl;
-						cout << "Shooting Bullet" << endl;
-						cout << "Gun = " << gun << endl;
+						//cout << "Found player.. setting CONVERTED = " << xPos << " " << yPos << endl;
+						//cout << "Shooting Bullet" << endl;
+						//cout << "Gun = " << gun << endl;
 						pm.GetPlayers().at(i)->ShootBullet(sf::Vector2f(xPos, yPos), gun);
 						break;
 					}
@@ -371,8 +371,8 @@ void Netcode::ReceivePacket()
 				{
 					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 					{
-						cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
-						cout << "Setting Room = " << room << endl;
+						//cout << "Found player.. setting position = " << xPos << " " << yPos << endl;
+						//cout << "Setting Room = " << room << endl;
 						pm.GetPlayers().at(i)->SetPosition(sf::Vector2f(xPos, yPos));
 						pm.GetPlayers().at(i)->SetRoom(room);
 						pm.GetPlayers().at(i)->SetHealthFull();
@@ -394,8 +394,8 @@ void Netcode::ReceivePacket()
 				{
 					if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 					{
-						cout << "Found player.. setting room = " << room << endl;
-						cout << "Setting Room = " << room << endl;
+						//cout << "Found player.. setting room = " << room << endl;
+						//cout << "Setting Room = " << room << endl;
 						pm.GetPlayers().at(i)->SetRoom(room);
 						break;
 					}
@@ -438,7 +438,7 @@ void Netcode::ReceivePacket()
 				{
 					m_score++;
 					m_killingspree++;
-					cout << "INCREASED MY SCORE TO " << m_score << endl;
+					//cout << "INCREASED MY SCORE TO " << m_score << endl;
 					m_updateScores = true;
 				}
 
@@ -449,9 +449,9 @@ void Netcode::ReceivePacket()
 					{
 						if (pm.GetPlayers().at(i)->GetPlayerID() == playerID)
 						{
-							cout << "Found player.." << endl;
+							//cout << "Found player.." << endl;
 							pm.GetPlayers().at(i)->IncreaseScore();
-							cout << "INCREASED SCORE TO " << pm.GetPlayers().at(i)->GetScore() << endl;
+							//cout << "INCREASED SCORE TO " << pm.GetPlayers().at(i)->GetScore() << endl;
 							m_updateScores = true;
 							break;
 						}
@@ -619,12 +619,12 @@ void Netcode::SendPlayersPosition(sf::Vector2f position, int direction)
 {
 	sf::Packet packet;
 	packet << PLAYER_POSITION_UPDATE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << direction;
-	cout << "POSITION = " << position.x << " " <<  position.y << " Direction = " << direction<< endl;
+	//cout << "POSITION = " << position.x << " " <<  position.y << " Direction = " << direction<< endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
 	case sf::Socket::Done:
-		cout << "Message Sent" << endl;
+		//cout << "Message Sent" << endl;
 		break;
 
 	case sf::Socket::Disconnected:
@@ -640,7 +640,7 @@ void Netcode::SendNewBullet(sf::Vector2f position, int gun)
 {
 	sf::Packet packet;
 	packet << BULLET_MESSAGE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << gun;
-	cout << "POSITION = " << position.x << " " << position.y << " GUN = " << gun << endl;
+	//cout << "POSITION = " << position.x << " " << position.y << " GUN = " << gun << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
@@ -661,7 +661,7 @@ void Netcode::SendRespawnMessage(sf::Vector2f position, int room)
 {
 	sf::Packet packet;
 	packet << RESPAWN_MESSAGE << m_ipAddress.getLocalAddress().toString() << position.x << position.y << room;
-	cout << "RESPAWN POSITION = " << position.x << " " << position.y << " room = " << room << endl;
+	//cout << "RESPAWN POSITION = " << position.x << " " << position.y << " room = " << room << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
@@ -702,7 +702,7 @@ void Netcode::SendRoomUpdate(int room)
 {
 	sf::Packet packet;
 	packet << ROOM_UPDATE << m_ipAddress.getLocalAddress().toString() << room;
-	cout << "ROOM_UPDATE = " << " room = " << room << endl;
+	//cout << "ROOM_UPDATE = " << " room = " << room << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
@@ -723,7 +723,7 @@ void Netcode::SendChestOpenUpdate(int chestIndex)
 {
 	sf::Packet packet;
 	packet << CHEST_OPEN_MESSAGE << m_ipAddress.getLocalAddress().toString() << chestIndex;
-	cout << "CHEST_OPEN_MESSAGE = " << " Chest = " << chestIndex << endl;
+	//cout << "CHEST_OPEN_MESSAGE = " << " Chest = " << chestIndex << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
@@ -744,7 +744,7 @@ void Netcode::SendChestItemTakenUpdate(int chestIndex)
 {
 	sf::Packet packet;
 	packet << CHEST_ITEM_TAKEN_MESSAGE << m_ipAddress.getLocalAddress().toString() << chestIndex;
-	cout << "CHEST_ITEM_TAKEN_MESSAGE = " << " Chest = " << chestIndex << endl;
+	//cout << "CHEST_ITEM_TAKEN_MESSAGE = " << " Chest = " << chestIndex << endl;
 	sf::Socket::Status status = m_socket.send(packet, m_ServerIPAddress, m_serverPort);
 	switch (status)
 	{
@@ -769,7 +769,7 @@ void Netcode::SendGameStarted()
 	switch (status)
 	{
 	case sf::Socket::Done:
-		cout << "Message Sent" << endl;
+		//cout << "Message Sent" << endl;
 		break;
 
 	case sf::Socket::Disconnected:

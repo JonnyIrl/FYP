@@ -231,13 +231,6 @@ int main()
 					hud.SetHighlight(6);
 				}
 
-				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Num7))
-				{
-					player.SetHealth(false, 10);
-					hud.SetHealth(player.GetHealth());
-					break;
-				}
-
 				else if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Tab))
 				{
 					if (!hud.showScore)
@@ -332,8 +325,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//netcode.SendNewBullet(converted, player.GetWeapon());
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -453,8 +446,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//netcode.SendNewBullet(converted, player.GetWeapon());
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -463,18 +456,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room2Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room2Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room2Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -555,8 +566,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//netcode.SendNewBullet(converted, player.GetWeapon());
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -565,18 +576,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room3Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room3Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room3Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -657,8 +686,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//netcode.SendNewBullet(converted, player.GetWeapon());
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -667,18 +696,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room4Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room4Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room4Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -759,7 +806,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -768,18 +815,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room5Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room5Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room5Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -862,7 +927,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -871,18 +936,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room6Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room6Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room6Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -963,7 +1046,7 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								//player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -972,18 +1055,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room7Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room7Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room7Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -1064,8 +1165,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								/*netcode.SendNewBullet(converted, player.GetWeapon());
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));*/
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -1074,18 +1175,36 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room8Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+
+
 							}
+
 
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room8Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room8Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -1166,8 +1285,8 @@ int main()
 							//If the trap is not on cool down..
 							if (!player.GetTrapCoolDown())
 							{
-								netcode.SendNewBullet(converted, player.GetWeapon());
-								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));
+								/*netcode.SendNewBullet(converted, player.GetWeapon());
+								player.AddNewTrap(sf::Vector2f(player.GetPosition().x, player.GetPosition().y + 10));*/
 								player.SetTrapCoolDown(true);
 							}
 						}
@@ -1176,18 +1295,34 @@ int main()
 						if (player.GetWeapon() == 6)
 						{
 							player.SetEnergy(true, 4);
-							netcode.SendNewBullet(converted, player.GetWeapon());
 							if (converted.x > player.GetPosition().x && converted.y > player.GetPosition().y || converted.x > player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								netcode.SendNewBullet(converted, player.GetWeapon());
 								b = new Bullet(sf::Vector2f(player.GetPosition().x + 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 4, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x + 40, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room9Bullets.push_back(b);
 							}
 
+
 							else if (converted.x < player.GetPosition().x && converted.y > player.GetPosition().y || converted.x < player.GetPosition().x && converted.y < player.GetPosition().y)
 							{
+								int countDown = 0;
+								int timer = 0;
+								//cout << "BEFORE WHILE = " << timer << endl;
 
+								netcode.SendNewBullet(converted, player.GetWeapon());
+								//cout << "TIMER++ = " << timer << endl;
 								b = new Bullet(sf::Vector2f(player.GetPosition().x - 20, player.GetPosition().y + 28), converted, player.GetWeapon());
 								Room9Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 22, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+								b = new Bullet(sf::Vector2f(player.GetPosition().x - 18, player.GetPosition().y + 28), converted, player.GetWeapon());
+								Room9Bullets.push_back(b);
+								akClock.restart();
+
 							}
 
 							soundManager.PlayAKShotSoundEffect();
@@ -1419,6 +1554,8 @@ int main()
 					{		
 						int powerup = rand() % 3 + 1;
 
+						player.ResetPowerUps();
+
 						//Speed Up
 						if (powerup == 1)
 						{
@@ -1428,8 +1565,8 @@ int main()
 
 						else if (powerup == 2)
 						{
-							player.DOUBLE_ENERGY = true;
-							cout << "DOUBLE ENERGY " << endl;
+							player.FAST_MOVEMENT = true;
+							cout << "SPEED UP " << endl;
 						}
 
 						else if (powerup == 3)

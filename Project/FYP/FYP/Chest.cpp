@@ -93,32 +93,32 @@ bool Chest::AssignRandomItem(int randNumber)
 
 	else if (randNumber == 7 || randNumber == 8)
 	{
-		if (!m_TRAPTexture.loadFromFile("Assets/Chest/trap.png"))
+		if (!m_AK47Texture.loadFromFile("Assets/Chest/ak47.png"))
 		{
-			std::cout << "Failed to load trap sprite" << std::endl;
+			std::cout << "Failed to load ak47 sprite" << std::endl;
 			return false;
 		}
 
 		else
 		{
-			m_itemWeapon = TRAP;
-			m_itemTexture = m_TRAPTexture;
+			m_itemWeapon = AK;
+			m_itemTexture = m_AK47Texture;
 			return true;
 		}
 	}
 
 	else if (randNumber == 8 || randNumber == 9)
 	{
-		if (!m_BOMBTexture.loadFromFile("Assets/Chest/bomb.png"))
+		if (!m_MINIGUNTexture.loadFromFile("Assets/Chest/minigun.png"))
 		{
-			std::cout << "Failed to load bomb sprite" << std::endl;
+			std::cout << "Failed to load minigun sprite" << std::endl;
 			return false;
 		}
 
 		else
 		{
-			m_itemWeapon = BOMB;
-			m_itemTexture = m_BOMBTexture;
+			m_itemWeapon = MINIGUN;
+			m_itemTexture = m_MINIGUNTexture;
 			return true;
 		}
 	}

@@ -7,7 +7,9 @@ Player::Player()
 	m_rect.setSize(sf::Vector2f(46, 50));
 	m_rect.setPosition(m_position);
 	m_moving = false;
-	m_health = 100;
+
+	//Set health = 0; Automatically spawn in a random room
+	m_health = 0;
 
 	//Load in the textures, and assign them to each animation.
 	if (LoadTexture())
@@ -48,7 +50,16 @@ Player::Player()
 		countDownTrap = false;
 		trapCoolDown = 10.0f;
 
-		DOUBLE_ENERGY = FAST_MOVEMENT = EXTRA_LIFE = false;
+		m_jugRect.setSize(sf::Vector2f(53, 53));
+		m_jugRect.setPosition(sf::Vector2f(16, 650));
+		m_jugRect.setTexture(&m_jugText);
+
+		m_speedRect.setSize(sf::Vector2f(53, 53));
+		m_speedRect.setPosition(sf::Vector2f(16, 650));
+		m_speedRect.setTexture(&m_speedText);
+
+		FAST_MOVEMENT = EXTRA_LIFE = false;
+		
 
 	}
 }
@@ -164,6 +175,18 @@ bool Player::LoadTexture()
 		return false;
 	}
 
+	if (!m_jugText.loadFromFile("Assets/Player/jug.png"))
+	{
+		std::cout << "Couldnt load jug Texture" << endl;
+		return false;
+	}
+
+	if (!m_speedText.loadFromFile("Assets/Player/speed.png"))
+	{
+		std::cout << "Couldnt load speed Texture" << endl;
+		return false;
+	}
+
 	if (!trapFont.loadFromFile("Assets/Font/font.ttf")) {
 		std::cout << "No font file found!" << std::endl;
 	}
@@ -198,7 +221,6 @@ bool Player::CheckKillSoundEffect()
 
 void Player::ResetPowerUps()
 {
-	DOUBLE_ENERGY = false;
 	EXTRA_LIFE = false;
 	FAST_MOVEMENT = false;
 }
@@ -280,26 +302,6 @@ void Player::Update(sf::Time time)
 	else
 	{
 		m_speed = 5;
-	}
-
-	if (DOUBLE_ENERGY)
-	{
-		//Do something with energy
-	}
-
-	else
-	{
-		//Do something else
-	}
-
-	if (EXTRA_LIFE)
-	{
-
-	}
-
-	else
-	{
-
 	}
 
 	if (countDownTrap && timer > 0)
@@ -471,6 +473,12 @@ void Player::Draw(sf::RenderWindow &window)
 		window.draw(trapCDText);
 	}
 
+	if (EXTRA_LIFE)
+	window.draw(m_jugRect);
+
+	if (FAST_MOVEMENT)
+		window.draw(m_speedRect);
+
 }
 
 void Player::updateTex(sf::Texture texture)
@@ -499,6 +507,8 @@ sf::Vector2f Player::Respawn()
 	int xPos = rand() % ((900 - 100) + 1) + 100;
 	int yPos = rand() % ((600 - 100) + 1) + 100;
 	int room = rand() % ((8 - 0) + 0) + 1;
+
+	if (room == 4) room = 5;
 	m_health = 100;
 	m_killingSpree = 0;
 	m_deathsWithoutKill = 0;

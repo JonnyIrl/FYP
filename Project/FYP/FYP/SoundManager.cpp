@@ -32,6 +32,7 @@ SoundManager::SoundManager()
 
 		//AK Shots SFX
 		m_akShotSound.setBuffer(m_akShotBuffer);
+		m_akShotSound.setVolume(60.0f);
 
 
 	}
