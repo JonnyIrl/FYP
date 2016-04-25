@@ -31,9 +31,13 @@ Netcode::Netcode()
 
 
 		m_ServerIPAddress = "149.153.102.52";
+		//testIP = m_ServerIPAddress.getLocalAddress().toString();
 		//m_ipAddress = "192.168.0.15";
-		m_serverPort = 5300;
-		m_personalPort = 5301;
+		//m_serverPort = 5300;
+		//m_personalPort = 5301;
+		testIP = "Hello";
+
+		TestIP(&testIP);
 
 		if (listener.bind(5301) == sf::Socket::Done)
 		{
@@ -606,7 +610,7 @@ void Netcode::Draw7(sf::RenderWindow& window)
 
 bool Netcode::CheckPlayersAllReady()
 {
-	if (clients.Size() >= 1 && clients.CheckIfClientsAllReady())
+	if (clients.Size() >= 2 && clients.CheckIfClientsAllReady())
 	{
 		return true;
 	}

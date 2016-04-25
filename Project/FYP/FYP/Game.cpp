@@ -8,9 +8,12 @@
 #include "SoundManager.h"
 #include "Netcode.h"
 #include "RandomLootManager.h"
+#include <assert.h>
 ////////////////////////////////////////////////////////////
 ///Entrypoint of application 
 //////////////////////////////////////////////////////////// 
+void Analyze(char *, int);
+
 
 int main()
 {
@@ -50,7 +53,10 @@ int main()
 	Netcode netcode = Netcode();
 	netcode.PLAYERNAME = player.GetName();
 
+
 	window.setFramerateLimit(60);
+
+
 
 	sf::Thread thread(&Netcode::ReceivePacket, &netcode);
 
@@ -4796,4 +4802,12 @@ int main()
 	} //loop back for next frame
 	}
 	return EXIT_SUCCESS;
+}
+
+
+void Analyze(char *string, int length)
+{
+	assert(string != NULL);     /* cannot be NULL */
+	assert(*string != '\0');    /* cannot be empty */
+	assert(length > 0);         /* must be positive */
 }

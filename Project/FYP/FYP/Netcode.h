@@ -5,6 +5,7 @@
 #include "Clients.h"
 #include <iostream>
 #include <list>
+#include <assert.h>
 using namespace std;
 
 class Netcode
@@ -69,6 +70,16 @@ public:
 	bool m_chestOpenUpdate = false;
 	bool m_checkItemTakenUpdate = false;
 	bool m_checkGameOver = false;
+	string testIP = NULL;
+
+	void TestIP(string* ip)
+	{
+		assert(&ip != NULL);
+		printf("%d\n", ip);
+	}
+
+	int serverPort = NULL;
+	int personalPort = NULL;
 
 private:
 
@@ -83,8 +94,6 @@ private:
 	bool m_connected;
 	bool m_receivedReply;
 	sf::IpAddress m_ipAddress = sf::IpAddress::getLocalAddress();
-	unsigned short m_serverPort = 5300;
-	unsigned short m_personalPort = 5301;
 	int retryCount = 0;
 	int m_score = 0;
 	bool running = true;
@@ -95,5 +104,7 @@ private:
 	bool m_everyoneReady = false;
 	bool m_updateScores = false;
 	bool m_chestUpdate = false;
+	unsigned short m_serverPort = NULL;
+	unsigned short m_personalPort = NULL;
 };
 
