@@ -70,6 +70,9 @@ public:
 	bool m_checkItemTakenUpdate = false;
 	bool m_checkGameOver = false;
 
+	int serverPort = 5300;
+	int personalPort = 5301;
+
 private:
 
 	//Pre Game Lobby Variables
@@ -83,8 +86,6 @@ private:
 	bool m_connected;
 	bool m_receivedReply;
 	sf::IpAddress m_ipAddress = sf::IpAddress::getLocalAddress();
-	unsigned short m_serverPort = 5300;
-	unsigned short m_personalPort = 5301;
 	int retryCount = 0;
 	int m_score = 0;
 	bool running = true;
@@ -95,5 +96,7 @@ private:
 	bool m_everyoneReady = false;
 	bool m_updateScores = false;
 	bool m_chestUpdate = false;
+	unsigned short m_serverPort = NULL;
+	unsigned short m_personalPort = NULL;
 };
 

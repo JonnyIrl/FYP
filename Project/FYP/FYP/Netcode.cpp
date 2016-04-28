@@ -29,11 +29,10 @@ Netcode::Netcode()
 		m_messagesSent = 0;
 		m_connected = false;
 
-
 		m_ServerIPAddress = "192.168.0.15";
 		//m_ipAddress = "192.168.0.15";
-		m_serverPort = 5300;
-		m_personalPort = 5301;
+		//m_serverPort = 5300;
+		//m_personalPort = 5301;
 
 		if (listener.bind(5301) == sf::Socket::Done)
 		{
@@ -606,7 +605,7 @@ void Netcode::Draw7(sf::RenderWindow& window)
 
 bool Netcode::CheckPlayersAllReady()
 {
-	if (clients.Size() >= 1 && clients.CheckIfClientsAllReady())
+	if (clients.Size() >= 2 && clients.CheckIfClientsAllReady())
 	{
 		return true;
 	}
